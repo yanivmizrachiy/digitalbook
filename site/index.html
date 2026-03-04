@@ -13,6 +13,8 @@
   <header class="topbar">
     <div class="brand">📘 ספר דיגיטלי</div>
     <div class="actions">
+      <button id="btnHome" class="btn">בית</button>
+      <button id="btnBack" class="btn">חזרה</button>
       <button id="btnToc" class="btn">תוכן עניינים</button>
       <button id="btnPrevChapter" class="btn">פרק קודם</button>
       <button id="btnNextChapter" class="btn">פרק הבא</button>
@@ -22,7 +24,7 @@
   </header>
 
   <main class="layout">
-    <aside id="sidebar" class="sidebar hidden" aria-label="תוכן עניינים">
+    <aside id="sidebar" class="sidebar" aria-label="תוכן עניינים">
       <div class="sidebarHead">
         <div class="sidebarTitle">תוכן עניינים</div>
         <button id="btnCloseToc" class="btn small">סגור</button>
@@ -30,8 +32,9 @@
       <div class="searchBox">
         <input id="search" type="search" placeholder="חיפוש לפי שם פרק…" />
       </div>
-      <ul id="tocList" class="toc"></ul>
-      <div class="hint">להוסיף פרקים: הוסף PDF ל-<code>pdf/</code> ואז commit+push.</div>
+      <div id="pathbar" class="pathbar">בית</div>
+      <ul id="tree" class="toc"></ul>
+      <div class="hint">מוסיפים PDF לפי המבנה תחת <code>pdf/</code>, ואז commit+push.</div>
     </aside>
 
     <section class="viewer">

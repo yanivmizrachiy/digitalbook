@@ -1,5 +1,6 @@
 /* global pdfjsLib */
-pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.js";
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.js";
 
 const els = {
   sidebar: document.getElementById("sidebar"),
@@ -17,29 +18,29 @@ const els = {
   btnPrevChapter: document.getElementById("btnPrevChapter"),
   btnNextChapter: document.getElementById("btnNextChapter"),
   btnPrev: document.getElementById("btnPrev"),
-  btnNext: document.getElementById("btnNext")
+  btnNext: document.getElementById("btnNext"),
 };
 
 let TOC = null;
 let stack = [];
-let flatChapters = [];
-let currentChapterIndex = -1;
+let flat = [];
+let currentIdx = -1;
 
 let pdfDoc = null;
 let pageNum = 1;
 let rendering = false;
 
-function isLeaf(node){ return node && node.type === "pdf"; }
+function isPdf(n) { return n && n.type === "pdf"; }
 
-function walk(node, cb){
-  cb(node);
-  if (node.children) node.children.forEach(ch => walk(ch, cb));
+function walk(n, cb) {
+  cb(n);
+  (n.children || []).forEach(ch => walk(ch, cb));
 }
 
 function rebuildFlat(){
-  flatChapters = [];
+  flat = [];
   if (!TOC) return;
-  walk(TOC, (n) => { if (isLeaf(n)) flatChapters.push(n); });
+  walk(TOC, (n)=>{ if (isPdf(n)) flat.push(n); });
 }
 
 function setPathbar(){
@@ -52,10 +53,9 @@ function renderTree(node){
   const q = (els.search.value || "").trim().toLowerCase();
   els.tree.innerHTML = "";
 
-  const children = (node.children || []).slice();
-  const visible = children.filter(ch => !q || (ch.title || "").toLowerCase().includes(q));
+  const items = (node.children || []).filter(ch => !q || (ch.title||"").toLowerCase().includes(q));
 
-  if (!visible.length){
+  if (!items.length){
     const li = document.createElement("li");
     li.textContent = "אין תוצאות.";
     li.style.color = "#64748b";
@@ -64,7 +64,7 @@ function renderTree(node){
     return;
   }
 
-  for (const ch of visible){
+  for (const ch of items){
     const li = document.createElement("li");
     const btn = document.createElement("button");
     btn.className = "node";
@@ -114,7 +114,7 @@ async function loadPdf(url){
     const task = pdfjsLib.getDocument({ url });
     pdfDoc = await task.promise;
     await renderPage();
-  }catch(e){
+  } catch(e){
     pdfDoc = null;
     els.pageInfo.textContent = "שגיאה בטעינת PDF";
     console.error(e);
@@ -125,14 +125,14 @@ async function renderPage(){
   if (!pdfDoc || rendering) return;
   rendering = true;
   try{
-    const page = await pdfDoc.getPage(pageNum);
-    const viewport = page.getViewport({ scale: 1.5 });
+    const p = await pdfDoc.getPage(pageNum);
+    const viewport = p.getViewport({ scale: 1.5 });
     const ctx = els.canvas.getContext("2d");
     els.canvas.width = viewport.width;
     els.canvas.height = viewport.height;
-    await page.render({ canvasContext: ctx, viewport }).promise;
+    await p.render({ canvasContext: ctx, viewport }).promise;
     els.pageInfo.textContent = ;
-  } finally{
+  } finally {
     rendering = false;
   }
 }
@@ -142,8 +142,8 @@ function nextPage(){
   if (pageNum < pdfDoc.numPages){
     pageNum++;
     renderPage();
-    const current = flatChapters[currentChapterIndex];
-    if (current) updateHash(current.path, pageNum);
+    const cur = flat[currentIdx];
+    if (cur) updateHash(cur.path, pageNum);
   }
 }
 
@@ -152,27 +152,20 @@ function prevPage(){
   if (pageNum > 1){
     pageNum--;
     renderPage();
-    const current = flatChapters[currentChapterIndex];
-    if (current) updateHash(current.path, pageNum);
+    const cur = flat[currentIdx];
+    if (cur) updateHash(cur.path, pageNum);
   }
 }
 
 function nextChapter(){
-  if (currentChapterIndex < 0) return;
-  if (currentChapterIndex + 1 < flatChapters.length){
-    openChapter(flatChapters[currentChapterIndex + 1]);
-  }
+  if (currentIdx >= 0 && currentIdx + 1 < flat.length) openChapter(flat[currentIdx + 1]);
 }
-
 function prevChapter(){
-  if (currentChapterIndex > 0){
-    openChapter(flatChapters[currentChapterIndex - 1]);
-  }
+  if (currentIdx > 0) openChapter(flat[currentIdx - 1]);
 }
 
 async function openChapter(ch){
-  const idx = flatChapters.findIndex(x => x.path === ch.path);
-  currentChapterIndex = idx;
+  currentIdx = flat.findIndex(x => x.path === ch.path);
   els.chapterTitle.textContent = ch.title || "";
   pageNum = 1;
   await loadPdf(ch.url);
@@ -184,15 +177,12 @@ function home(){
   els.search.value = "";
   renderTree(TOC);
 }
-
 function back(){
   if (stack.length > 1){
     stack.pop();
     els.search.value = "";
     renderTree(stack[stack.length - 1]);
-  } else {
-    home();
-  }
+  } else home();
 }
 
 function toggleToc(show){
@@ -208,7 +198,7 @@ async function loadToc(){
 
   const route = parseHash();
   if (route && route.path){
-    const found = flatChapters.find(n => n.path === route.path);
+    const found = flat.find(n => n.path === route.path);
     if (found){
       await openChapter(found);
       pageNum = route.page || 1;
@@ -222,7 +212,6 @@ els.btnHome.addEventListener("click", () => { toggleToc(true); home(); });
 els.btnBack.addEventListener("click", () => back());
 els.btnToc.addEventListener("click", () => toggleToc(els.sidebar.classList.contains("hidden")));
 els.btnCloseToc.addEventListener("click", () => toggleToc(false));
-
 els.btnNext.addEventListener("click", () => nextPage());
 els.btnPrev.addEventListener("click", () => prevPage());
 els.btnNextChapter.addEventListener("click", () => nextChapter());
@@ -231,11 +220,9 @@ els.btnPrevChapter.addEventListener("click", () => prevChapter());
 window.addEventListener("hashchange", async () => {
   const route = parseHash();
   if (!route) return;
-  const found = flatChapters.find(n => n.path === route.path);
+  const found = flat.find(n => n.path === route.path);
   if (found){
-    if (flatChapters[currentChapterIndex]?.path !== found.path){
-      await openChapter(found);
-    }
+    if (flat[currentIdx]?.path !== found.path) await openChapter(found);
     pageNum = route.page || 1;
     await renderPage();
   }
@@ -245,11 +232,9 @@ if ("serviceWorker" in navigator){
   navigator.serviceWorker.register("./sw.js").catch(()=>{});
 }
 
-let deferredPrompt = null;
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
-  deferredPrompt = e;
-  els.installHint.textContent = "אפשר להתקין את הספר כאפליקציה: בתפריט הדפדפן › התקנה.";
+  els.installHint.textContent = "אפשר להתקין כאפליקציה: בתפריט הדפדפן › התקנה.";
 });
 
 loadToc().catch(err => {

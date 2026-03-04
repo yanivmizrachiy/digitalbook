@@ -1,0 +1,32 @@
+*{box-sizing:border-box}
+:root{--blue:#0c3482;--bg:#f6f7fb;--card:#fff;--muted:#64748b;--border:#e5e7eb}
+html,body{height:100%}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Arial; background:var(--bg); color:#0f172a}
+.topbar{position:sticky;top:0;z-index:10;display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--blue);color:#fff}
+.brand{font-weight:800}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:0;border-radius:12px;padding:8px 10px;background:rgba(255,255,255,.14);color:#fff;font-weight:700}
+.btn:hover{background:rgba(255,255,255,.22)}
+.btn.small{padding:6px 10px;border-radius:10px}
+.layout{display:grid;grid-template-columns:340px 1fr;min-height:calc(100vh - 56px)}
+.sidebar{background:var(--card);border-left:1px solid var(--border);padding:12px;overflow:auto}
+.sidebar.hidden{display:none}
+.sidebarHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.sidebarTitle{font-weight:900}
+.searchBox input{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:12px;outline:none}
+.pathbar{margin:10px 0;color:var(--muted);font-size:13px}
+.toc{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.node{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:14px;background:#fff;text-align:right}
+.node .meta{color:var(--muted);font-size:12px}
+.viewer{padding:14px;display:flex;flex-direction:column;gap:10px}
+.meta{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.chapterTitle{font-size:18px;font-weight:900}
+.pageInfo{color:var(--muted)}
+.canvasWrap{background:#fff;border:1px solid var(--border);border-radius:18px;padding:10px;overflow:auto}
+canvas{max-width:100%;height:auto}
+.hint{margin-top:10px;color:var(--muted);font-size:12px}
+.footer{padding:10px 14px;color:var(--muted);font-size:12px;text-align:center}
+@media (max-width: 900px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:fixed;inset:56px 0 0 0;z-index:20}
+}

@@ -17,19 +17,13 @@ function copyDir(src, dst){
     const s = path.join(src, ent.name);
     const d = path.join(dst, ent.name);
     if (ent.isDirectory()) copyDir(s, d);
-    else if (ent.isFile() && ent.name.toLowerCase().endsWith(".pdf")) {
-      fs.copyFileSync(s, d);
-    }
+    else if (ent.isFile() && ent.name.toLowerCase().endsWith(".pdf")) fs.copyFileSync(s, d);
   }
 }
 copyDir(pdfRoot, pubPdfRoot);
 
 function niceTitle(name){
-  return (name || "")
-    .replace(/\.pdf$/i,"")
-    .replace(/[_-]+/g," ")
-    .replace(/\s+/g," ")
-    .trim() || name;
+  return (name || "").replace(/\.pdf$/i,"").replace(/[_-]+/g," ").replace(/\s+/g," ").trim() || name;
 }
 
 function folderTitle(seg){
@@ -92,6 +86,5 @@ function readTree(absDir, relDir){
 
 const toc = readTree(pdfRoot, "");
 toc.generatedAt = new Date().toISOString();
-
 fs.writeFileSync(outFile, JSON.stringify(toc, null, 2), "utf8");
 console.log("TOC generated:", outFile);
