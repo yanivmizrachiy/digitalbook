@@ -5,22 +5,8 @@ const root = process.cwd();
 const pdfRoot = path.join(root, "pdf");
 const outDir = path.join(root, "site", "generated");
 const outFile = path.join(outDir, "toc.json");
-const pubPdfRoot = path.join(root, "site", "pdf");
 
 fs.mkdirSync(outDir, { recursive: true });
-fs.mkdirSync(pubPdfRoot, { recursive: true });
-
-function copyDir(src, dst){
-  if (!fs.existsSync(src)) return;
-  fs.mkdirSync(dst, { recursive: true });
-  for (const ent of fs.readdirSync(src, { withFileTypes: true })){
-    const s = path.join(src, ent.name);
-    const d = path.join(dst, ent.name);
-    if (ent.isDirectory()) copyDir(s, d);
-    else if (ent.isFile() && ent.name.toLowerCase().endsWith(".pdf")) fs.copyFileSync(s, d);
-  }
-}
-copyDir(pdfRoot, pubPdfRoot);
 
 function niceTitle(name){
   return (name || "").replace(/\.pdf$/i,"").replace(/[_-]+/g," ").replace(/\s+/g," ").trim() || name;
@@ -69,12 +55,12 @@ function readTree(absDir, relDir){
     if (e.isDirectory()){
       node.children.push(readTree(abs, rel));
     } else if (e.isFile() && e.name.toLowerCase().endsWith(".pdf")){
-      const pubUrl = ;
+      const pubUrl = "../pdf/" + encodeURIComponent(rel).replace(/%2F/g,"/");
       node.children.push({
         type:"pdf",
         title: niceTitle(e.name),
         filename: e.name,
-        path: rel.replace(/\/g,"/"),
+        path: rel.replace(/\\/g,"/"),
         url: pubUrl
       });
     }

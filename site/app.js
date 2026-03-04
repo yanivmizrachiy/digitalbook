@@ -30,12 +30,8 @@ let pdfDoc = null;
 let pageNum = 1;
 let rendering = false;
 
-function isPdf(n) { return n && n.type === "pdf"; }
-
-function walk(n, cb) {
-  cb(n);
-  (n.children || []).forEach(ch => walk(ch, cb));
-}
+function isPdf(n){ return n && n.type === "pdf"; }
+function walk(n, cb){ cb(n); (n.children || []).forEach(ch => walk(ch, cb)); }
 
 function rebuildFlat(){
   flat = [];
@@ -52,7 +48,6 @@ function renderTree(node){
   setPathbar();
   const q = (els.search.value || "").trim().toLowerCase();
   els.tree.innerHTML = "";
-
   const items = (node.children || []).filter(ch => !q || (ch.title||"").toLowerCase().includes(q));
 
   if (!items.length){
@@ -96,7 +91,7 @@ function renderTree(node){
 
 function updateHash(path, page){
   const p = encodeURIComponent(path || "");
-  location.hash = ;
+  location.hash = "#/read?path=" + p + "&page=" + (page || 1);
 }
 
 function parseHash(){
@@ -130,8 +125,8 @@ async function renderPage(){
     const ctx = els.canvas.getContext("2d");
     els.canvas.width = viewport.width;
     els.canvas.height = viewport.height;
-    await p.render({ canvasContext: ctx, viewport }).promise;
-    els.pageInfo.textContent = ;
+    await p.render({ canvasContext: ctx, viewport: viewport }).promise;
+    els.pageInfo.textContent = "עמוד " + pageNum + " מתוך " + pdfDoc.numPages;
   } finally {
     rendering = false;
   }
@@ -146,7 +141,6 @@ function nextPage(){
     if (cur) updateHash(cur.path, pageNum);
   }
 }
-
 function prevPage(){
   if (!pdfDoc) return;
   if (pageNum > 1){
@@ -156,13 +150,8 @@ function prevPage(){
     if (cur) updateHash(cur.path, pageNum);
   }
 }
-
-function nextChapter(){
-  if (currentIdx >= 0 && currentIdx + 1 < flat.length) openChapter(flat[currentIdx + 1]);
-}
-function prevChapter(){
-  if (currentIdx > 0) openChapter(flat[currentIdx - 1]);
-}
+function nextChapter(){ if (currentIdx >= 0 && currentIdx + 1 < flat.length) openChapter(flat[currentIdx + 1]); }
+function prevChapter(){ if (currentIdx > 0) openChapter(flat[currentIdx - 1]); }
 
 async function openChapter(ch){
   currentIdx = flat.findIndex(x => x.path === ch.path);
@@ -172,11 +161,7 @@ async function openChapter(ch){
   updateHash(ch.path, pageNum);
 }
 
-function home(){
-  stack = [TOC];
-  els.search.value = "";
-  renderTree(TOC);
-}
+function home(){ stack = [TOC]; els.search.value = ""; renderTree(TOC); }
 function back(){
   if (stack.length > 1){
     stack.pop();
@@ -184,10 +169,7 @@ function back(){
     renderTree(stack[stack.length - 1]);
   } else home();
 }
-
-function toggleToc(show){
-  els.sidebar.classList.toggle("hidden", !show);
-}
+function toggleToc(show){ els.sidebar.classList.toggle("hidden", !show); }
 
 async function loadToc(){
   const res = await fetch("./generated/toc.json", { cache: "no-store" });
@@ -222,15 +204,11 @@ window.addEventListener("hashchange", async () => {
   if (!route) return;
   const found = flat.find(n => n.path === route.path);
   if (found){
-    if (flat[currentIdx]?.path !== found.path) await openChapter(found);
+    if (flat[currentIdx] && flat[currentIdx].path !== found.path) await openChapter(found);
     pageNum = route.page || 1;
     await renderPage();
   }
 });
-
-if ("serviceWorker" in navigator){
-  navigator.serviceWorker.register("./sw.js").catch(()=>{});
-}
 
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
