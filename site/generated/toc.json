@@ -2,6 +2,35 @@
   "type": "folder",
   "title": "בית",
   "path": "",
-  "children": [],
-  "generatedAt": "2026-03-04T16:52:16.346Z"
+  "children": [
+    {
+      "type": "folder",
+      "title": "חטיבת ביניים",
+      "path": "middle",
+      "children": [
+        {
+          "type": "folder",
+          "title": "כיתה ז",
+          "path": "middle/z",
+          "children": [
+            {
+              "type": "folder",
+              "title": "מבחנים",
+              "path": "middle/z/exams",
+              "children": [
+                {
+                  "type": "pdf",
+                  "title": "z exam prep 20260109",
+                  "filename": "z_exam_prep_20260109.pdf",
+                  "path": "middle/z/exams/z_exam_prep_20260109.pdf",
+                  "url": "./pdf/middle/z/exams/z_exam_prep_20260109.pdf"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "generatedAt": "2026-03-04T16:55:12.604Z"
 }
