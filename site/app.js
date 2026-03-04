@@ -53,11 +53,14 @@ function goToRootFolder(key){
     stack = [TOC, folder];
     els.search.value = "";
     renderTree(folder);
+    renderCardsFromFolder(folder);
     toggleToc(true);
   } else {
     // folder not present in toc tree (no PDFs yet)
     stack = [TOC];
     renderTree(TOC);
+  renderCardsFromFolder(TOC);
+    renderCardsFromFolder(TOC);
 
   // Home cards
   const homeGrid = document.getElementById("homeGrid");
@@ -81,6 +84,52 @@ function showHome(){
   const home = document.getElementById("home");
   if (home) home.style.display = "block";
 }
+
+function getChildFolder(node, childPath){
+  const kids = (node && node.children) ? node.children : [];
+  for (const k of kids){
+    if (k.type==="folder" && (k.path||"") === childPath) return k;
+  }
+  return null;
+}
+
+function renderCardsFromFolder(node){
+  // Renders big cards for immediate child folders, and leaves PDFs to the list view
+  const home = document.getElementById("home");
+  const grid = document.getElementById("homeGrid");
+  const title = home ? home.querySelector(".homeTitle") : null;
+  const hint = home ? home.querySelector(".homeHint") : null;
+  if (!home || !grid || !node) return;
+
+  const kids = (node.children || []).filter(x => x.type === "folder");
+  if (!kids.length){
+    // no subfolders -> hide home and show list
+    hideHome();
+    return;
+  }
+
+  // show home cards
+  showHome();
+  if (title) title.textContent = node.title ? ("בחר בתוך: " + node.title) : "בחר";
+  if (hint) hint.textContent = "בחר קטגוריה. פרקים יופיעו אחרי שתוסיף PDFs לתיקיה המתאימה.";
+
+  grid.innerHTML = "";
+  for (const k of kids){
+    const b = document.createElement("button");
+    b.className = "cardBtn";
+    b.textContent = (k.title || "תיקיה");
+    b.addEventListener("click", () => {
+      stack.push(k);
+      els.search.value = "";
+      renderTree(k);
+      // try render next level as cards too
+      renderCardsFromFolder(k);
+      toggleToc(true);
+    });
+    grid.appendChild(b);
+  }
+}
+
 function hideHome(){
   const home = document.getElementById("home");
   if (home) home.style.display = "none";
@@ -228,6 +277,7 @@ function back(){
     stack.pop();
     els.search.value = "";
     renderTree(stack[stack.length - 1]);
+    renderCardsFromFolder(stack[stack.length - 1]);
   } else home();
 }
 function toggleToc(show){
