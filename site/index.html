@@ -1,65 +1,55 @@
 <!doctype html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ספר דיגיטלי</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.js"></script>
-<style>
-body{margin:0;font-family:Arial;background:#f5f6fa}
-header{background:#0c3482;color:white;padding:14px;font-size:20px}
-#viewer{display:flex;justify-content:center;margin-top:10px}
-canvas{max-width:100%}
-.controls{display:flex;gap:10px;padding:10px}
-button{padding:8px 14px;border:0;background:#0c3482;color:white;border-radius:6px}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>ספר דיגיטלי</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#0c3482" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.js"></script>
 </head>
-
 <body>
+  <header class="topbar">
+    <div class="brand">📘 ספר דיגיטלי</div>
+    <div class="actions">
+      <button id="btnToc" class="btn">תוכן עניינים</button>
+      <button id="btnPrevChapter" class="btn">פרק קודם</button>
+      <button id="btnNextChapter" class="btn">פרק הבא</button>
+      <button id="btnPrev" class="btn">עמוד קודם</button>
+      <button id="btnNext" class="btn">עמוד הבא</button>
+    </div>
+  </header>
 
-<header>📘 ספר דיגיטלי</header>
+  <main class="layout">
+    <aside id="sidebar" class="sidebar hidden" aria-label="תוכן עניינים">
+      <div class="sidebarHead">
+        <div class="sidebarTitle">תוכן עניינים</div>
+        <button id="btnCloseToc" class="btn small">סגור</button>
+      </div>
+      <div class="searchBox">
+        <input id="search" type="search" placeholder="חיפוש לפי שם פרק…" />
+      </div>
+      <ul id="tocList" class="toc"></ul>
+      <div class="hint">להוסיף פרקים: הוסף PDF ל-<code>pdf/</code> ואז commit+push.</div>
+    </aside>
 
-<div class="controls">
-<button onclick="prev()">עמוד קודם</button>
-<button onclick="next()">עמוד הבא</button>
-</div>
+    <section class="viewer">
+      <div class="meta">
+        <div id="chapterTitle" class="chapterTitle">בחר פרק מתוכן העניינים</div>
+        <div id="pageInfo" class="pageInfo">—</div>
+      </div>
+      <div class="canvasWrap">
+        <canvas id="pdfCanvas"></canvas>
+      </div>
+    </section>
+  </main>
 
-<div id="viewer">
-<canvas id="pdf"></canvas>
-</div>
+  <footer class="footer">
+    <div>עברית RTL בלבד</div>
+    <div id="installHint"></div>
+  </footer>
 
-<script>
-
-const url="./pdf/book.pdf"
-
-let pdfDoc=null
-let page=1
-
-pdfjsLib.getDocument(url).promise.then(pdf=>{
-pdfDoc=pdf
-render()
-})
-
-function render(){
-pdfDoc.getPage(page).then(p=>{
-let viewport=p.getViewport({scale:1.5})
-let canvas=document.getElementById("pdf")
-let ctx=canvas.getContext("2d")
-canvas.height=viewport.height
-canvas.width=viewport.width
-p.render({canvasContext:ctx,viewport:viewport})
-})
-}
-
-function next(){
-if(page<pdfDoc.numPages){page++;render()}
-}
-
-function prev(){
-if(page>1){page--;render()}
-}
-
-</script>
-
+  <script src="./app.js"></script>
 </body>
 </html>
