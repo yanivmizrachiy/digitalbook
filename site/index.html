@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ספר דיגיטלי</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.js"></script>
+<style>
+body{margin:0;font-family:Arial;background:#f5f6fa}
+header{background:#0c3482;color:white;padding:14px;font-size:20px}
+#viewer{display:flex;justify-content:center;margin-top:10px}
+canvas{max-width:100%}
+.controls{display:flex;gap:10px;padding:10px}
+button{padding:8px 14px;border:0;background:#0c3482;color:white;border-radius:6px}
+</style>
+</head>
+
+<body>
+
+<header>📘 ספר דיגיטלי</header>
+
+<div class="controls">
+<button onclick="prev()">עמוד קודם</button>
+<button onclick="next()">עמוד הבא</button>
+</div>
+
+<div id="viewer">
+<canvas id="pdf"></canvas>
+</div>
+
+<script>
+
+const url="./pdf/book.pdf"
+
+let pdfDoc=null
+let page=1
+
+pdfjsLib.getDocument(url).promise.then(pdf=>{
+pdfDoc=pdf
+render()
+})
+
+function render(){
+pdfDoc.getPage(page).then(p=>{
+let viewport=p.getViewport({scale:1.5})
+let canvas=document.getElementById("pdf")
+let ctx=canvas.getContext("2d")
+canvas.height=viewport.height
+canvas.width=viewport.width
+p.render({canvasContext:ctx,viewport:viewport})
+})
+}
+
+function next(){
+if(page<pdfDoc.numPages){page++;render()}
+}
+
+function prev(){
+if(page>1){page--;render()}
+}
+
+</script>
+
+</body>
+</html>
