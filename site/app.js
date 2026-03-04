@@ -34,6 +34,58 @@ function walk(n, cb){
   cb(n);
   (n.children || []).forEach(ch => walk(ch, cb));
 }
+
+function findFolderByPath(node, want){
+  if (!node) return null;
+  if (node.type === "folder" && (node.path||"") === (want||"")) return node;
+  const kids = node.children || [];
+  for (const k of kids){
+    const r = findFolderByPath(k, want);
+    if (r) return r;
+  }
+  return null;
+}
+
+function goToRootFolder(key){
+  if (!TOC) return;
+  const folder = findFolderByPath(TOC, key);
+  if (folder){
+    stack = [TOC, folder];
+    els.search.value = "";
+    renderTree(folder);
+    toggleToc(true);
+  } else {
+    // folder not present in toc tree (no PDFs yet)
+    stack = [TOC];
+    renderTree(TOC);
+
+  // Home cards
+  const homeGrid = document.getElementById("homeGrid");
+  if (homeGrid){
+    homeGrid.addEventListener("click", (e) => {
+      const btn = e.target && e.target.closest ? e.target.closest("button[data-go]") : null;
+      if (!btn) return;
+      const key = btn.getAttribute("data-go");
+      if (key === "elementary") goToRootFolder("elementary");
+      if (key === "middle") goToRootFolder("middle");
+      if (key === "bagrut") goToRootFolder("bagrut");
+    });
+  }
+  showHome();
+
+    toggleToc(true);
+  }
+}
+
+function showHome(){
+  const home = document.getElementById("home");
+  if (home) home.style.display = "block";
+}
+function hideHome(){
+  const home = document.getElementById("home");
+  if (home) home.style.display = "none";
+}
+
 function rebuildFlat(){
   flat = [];
   if (!TOC) return;
@@ -158,6 +210,7 @@ function prevChapter(){
 }
 
 async function openChapter(ch){
+  hideHome();
   currentIdx = flat.findIndex(x => x.path === ch.path);
   els.chapterTitle.textContent = ch.title || "";
   pageNum = 1;

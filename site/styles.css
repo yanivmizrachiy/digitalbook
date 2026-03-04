@@ -30,3 +30,12 @@ canvas{display:block;max-width:100%;height:auto;margin:auto}
   .layout{grid-template-columns:1fr}
   .sidebar{position:fixed;top:56px;bottom:0;right:0;left:0;z-index:20;border-left:0;border-top:1px solid var(--border)}
 }
+
+/* Home */
+.home{background:#fff;border:1px solid var(--border);border-radius:18px;padding:14px}
+.homeTitle{font-weight:900;font-size:18px;margin-bottom:10px}
+.homeHint{margin-top:10px;color:var(--muted);font-size:13px;line-height:1.4}
+.homeGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.cardBtn{border:1px solid var(--border);background:#fff;border-radius:18px;padding:14px 12px;text-align:right;font-weight:900}
+.cardBtn:hover{border-color:#cbd5e1}
+@media (max-width: 980px){.homeGrid{grid-template-columns:1fr}}
