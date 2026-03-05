@@ -11,12 +11,16 @@ body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Arial;background:va
 .layout{display:grid;grid-template-columns:340px 1fr;min-height:calc(100vh - 56px)}
 .sidebar{background:var(--card);border-left:1px solid var(--border);padding:12px;overflow:auto}
 .sidebar.hidden{display:none}
+.sidebar .btn{background:var(--blue);color:#fff}
+.sidebar .btn:hover{background:#0a2e72}
 .sidebarHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .sidebarTitle{font-weight:900}
 .searchBox input{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:12px;outline:none}
 .pathbar{margin:10px 0;color:var(--muted);font-size:13px}
 .toc{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.toc--compact{gap:6px}
 .node{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:14px;background:#fff;text-align:right}
+.node--compact{padding:8px 10px;border-radius:12px}
 .node .meta{color:var(--muted);font-size:12px}
 .viewer{padding:14px;display:flex;flex-direction:column;gap:10px}
 .meta{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
@@ -26,6 +30,13 @@ body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Arial;background:va
 canvas{display:block;max-width:100%;height:auto;margin:auto}
 .footer{padding:10px 12px;color:var(--muted);display:flex;justify-content:space-between;gap:10px}
 .hint{margin-top:10px;color:var(--muted);font-size:13px}
+
+.sidebarSection{margin-top:14px}
+.sidebarSectionTitle{font-weight:900;margin-bottom:8px}
+.chapterSearch{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+.chapterSearch input{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:12px;outline:none}
+.chapterSearchResults{margin-top:8px;display:flex;flex-direction:column;gap:8px}
+.chapterSearchResults .node{justify-content:flex-start}
 @media (max-width: 900px){
   .layout{grid-template-columns:1fr}
   .sidebar{position:fixed;top:56px;bottom:0;right:0;left:0;z-index:20;border-left:0;border-top:1px solid var(--border)}

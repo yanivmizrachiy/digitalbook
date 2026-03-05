@@ -6,6 +6,8 @@
   <title>ספר דיגיטלי</title>
   <link rel="manifest" href="./manifest.webmanifest" />
   <meta name="theme-color" content="#0c3482" />
+  <link rel="icon" href="./assets/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="./assets/icons/icon-192.png" />
   <link rel="stylesheet" href="./styles.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.js"></script>
 </head>
@@ -34,6 +36,22 @@
       </div>
       <div id="pathbar" class="pathbar">בית</div>
       <ul id="tree" class="toc"></ul>
+
+      <div class="sidebarSection" aria-label="תוכן עניינים פנימי">
+        <div class="sidebarSectionTitle">תוכן עניינים פנימי</div>
+        <ul id="internalToc" class="toc toc--compact"></ul>
+        <div id="internalTocEmpty" class="hint">בחר פרק כדי לראות תוכן עניינים פנימי.</div>
+      </div>
+
+      <div class="sidebarSection" aria-label="חיפוש בתוך הפרק">
+        <div class="sidebarSectionTitle">חיפוש בתוך הפרק</div>
+        <div class="chapterSearch">
+          <input id="chapterSearch" type="search" placeholder="חיפוש בתוך הפרק…" />
+          <button id="btnChapterSearch" class="btn small" type="button">חיפוש</button>
+        </div>
+        <div id="chapterSearchResults" class="chapterSearchResults" aria-live="polite"></div>
+      </div>
+
       <div class="hint">מוסיפים PDF רק ידנית לתוך <code>pdf/</code> (לפי RULES.md), ואז commit+push.</div>
     </aside>
 
