@@ -2,73 +2,57 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Book - מאגר למידה</title>
+    <title>Digital Book | פלטפורמת למידה</title>
     <style>
-        body { font-family: system-ui, sans-serif; background: #f4f7f6; text-align: center; padding: 20px; margin: 0; }
-        h1 { color: #0b5cff; margin-bottom: 5px; }
-        .search-box { margin: 20px auto; max-width: 600px; }
-        .search-box input { width: 100%; padding: 15px; border-radius: 30px; border: 2px solid #0b5cff; font-size: 1.1rem; outline: none; box-shadow: 0 4px 10px rgba(11,92,255,0.1); box-sizing: border-box; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; max-width: 1200px; margin: 20px auto; }
-        .card { background: white; padding: 20px; border-radius: 12px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: right; border-right: 4px solid #0b5cff; transition: transform 0.2s; display: block; }
-        .card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(11, 92, 255, 0.15); }
-        .meta { display: flex; gap: 8px; margin-bottom: 10px; font-size: 0.8rem; font-weight: bold; }
-        .tag-type { background: #e1e8ed; padding: 3px 8px; border-radius: 4px; color: #333; }
-        .tag-grade { background: #d0f0fd; padding: 3px 8px; border-radius: 4px; color: #0b5cff; }
-        .title { font-size: 1.1rem; font-weight: bold; margin-bottom: 8px; color: #1a1a1a; }
-        .author { font-size: 0.9rem; color: #666; }
-        .hidden { display: none !important; }
+        :root {
+            --primary: #0b5cff; --primary-dark: #0041c2; --bg: #f8fafc;
+            --card-bg: #ffffff; --text-main: #1e293b; --text-muted: #64748b;
+            --accent: #e0f2fe;
+        }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text-main); margin: 0; padding: 0; line-height: 1.6; }
+        header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 40px 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        h1 { margin: 0; font-size: 2.5rem; letter-spacing: -1px; }
+        .search-container { max-width: 700px; margin: -30px auto 30px; padding: 0 20px; }
+        #searchInput { width: 100%; padding: 20px 30px; border-radius: 50px; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.05); font-size: 1.1rem; outline: none; transition: 0.3s; }
+        #searchInput:focus { box-shadow: 0 10px 25px rgba(11, 92, 255, 0.2); transform: scale(1.02); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; max-width: 1300px; margin: 0 auto; padding: 20px; }
+        .card { background: var(--card-bg); border-radius: 20px; padding: 25px; cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid rgba(0,0,0,0.03); position: relative; overflow: hidden; display: flex; flex-direction: column; text-align: right; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: var(--primary); }
+        .card::before { content: ""; position: absolute; top: 0; right: 0; width: 6px; height: 100%; background: var(--primary); }
+        .tags { display: flex; gap: 10px; margin-bottom: 15px; }
+        .tag { padding: 4px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; }
+        .tag-pdf { background: #fee2e2; color: #dc2626; }
+        .tag-doc { background: #e0e7ff; color: #4338ca; }
+        .tag-grade { background: var(--accent); color: var(--primary); }
+        .card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
+        .card-author { font-size: 0.9rem; color: var(--text-muted); display: flex; align-items: center; gap: 5px; }
+        .hidden { display: none; }
     </style>
-<link rel="manifest" href="manifest.webmanifest"><script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js");}</script></head>
+</head>
 <body>
-    <h1>📚 מאגר למידה מתקדם</h1>
-    
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="🔍 חפש נושא, כיתה או סוג קובץ..." onkeyup="filterCards()">
-    </div>
-
+    <header><h1>הספר הדיגיטלי</h1><p>מערכת ניהול ידע פדגוגית</p></header>
+    <div class="search-container"><input type="text" id="searchInput" placeholder="חפש נושא, כיתה או סוג קובץ..." onkeyup="filter()"></div>
     <div id="toc" class="grid"></div>
-
     <script>
         async function load() {
-            try {
-                const r = await fetch('generated/chapters.json');
-                const c = await r.json();
-                document.getElementById('toc').innerHTML = c.map(ch => {
-                    const targetUrl = ch.type === 'PDF' ? `reader.html?file=${encodeURIComponent(ch.url)}` : ch.url;
-                    const gradeHe = ch.grade === 'Grade 7' ? 'כיתה ז\'' : ch.grade === 'Grade 8' ? 'כיתה ח\'' : ch.grade === 'Grade 9' ? 'כיתה ט\'' : 'כללי';
-                    return `
-                    <div class="card" data-title="${ch.title}" data-grade="${gradeHe}" data-type="${ch.type}" onclick="window.location.href='${targetUrl}'">
-                        <div class="meta">
-                            <span class="tag-type">${ch.type}</span>
-                            <span class="tag-grade">${gradeHe}</span>
-                        </div>
-                        <div class="title">${ch.id}. ${ch.title}</div>
-                        <div class="author">👤 ${ch.author}</div>
-                    </div>`;
-                }).join('');
-            } catch (e) {
-                document.getElementById('toc').innerHTML = '<p>שגיאה בטעינת הנתונים. אנא הרץ master_sync.sh</p>';
-            }
+            const r = await fetch('generated/chapters.json');
+            const data = await r.json();
+            document.getElementById('toc').innerHTML = data.map(ch => `
+                <div class="card" data-search="${ch.title} ${ch.grade} ${ch.type}" onclick="location.href='${ch.type === 'PDF' ? 'reader.html?file=' + encodeURIComponent(ch.url) : ch.url}'">
+                    <div class="tags">
+                        <span class="tag tag-${ch.type.toLowerCase()}">${ch.type}</span>
+                        <span class="tag tag-grade">${ch.grade}</span>
+                    </div>
+                    <div class="card-title">${ch.title}</div>
+                    <div class="card-author">👤 ${ch.author}</div>
+                </div>`).join('');
         }
-
-        // מנוע חיפוש בזמן אמת
-        function filterCards() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.getElementsByClassName('card');
-            
-            for (let i = 0; i < cards.length; i++) {
-                let title = cards[i].getAttribute('data-title').toLowerCase();
-                let grade = cards[i].getAttribute('data-grade').toLowerCase();
-                let type = cards[i].getAttribute('data-type').toLowerCase();
-                
-                if (title.includes(input) || grade.includes(input) || type.includes(input)) {
-                    cards[i].classList.remove('hidden');
-                } else {
-                    cards[i].classList.add('hidden');
-                }
-            }
+        function filter() {
+            let val = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.card').forEach(c => {
+                c.classList.toggle('hidden', !c.getAttribute('data-search').toLowerCase().includes(val));
+            });
         }
-
         load();
     </script>
 </body>
