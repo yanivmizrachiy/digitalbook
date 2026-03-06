@@ -17,3 +17,8 @@
 - **Sidebar Filtering:** המערכת תומכת בסינון רב-שכבתי (כיתה, נושא, סוג) הפועל בזמן אמת.
 - **Dynamic Counters:** מונה הקבצים מתעדכן אוטומטית לפי תוצאות הסינון.
 - **RTL Integrity:** הממשק שומר על יישור לימין (RTL) מלא גם בתצוגת ה-Sidebar.
+
+## 16. Maximalist UX & Motion Protocol (v10.0)
+- **Glassmorphism:** הממשק חייב להתבסס על שכבות שקופות וטשטוש (Blur).
+- **Physics-Based Motion:** כל אלמנט נכנס לאתר עם אנימציית Stagger המבוססת על Anime.js.
+- **Visual Feedback:** כל לחיצה על כפתור חייבת לכלול תגובה ויזואלית (Scaling/Haptic feel).

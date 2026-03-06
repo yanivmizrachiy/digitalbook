@@ -2,112 +2,91 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigitalBook | ארכיון ניהול פדגוגי</title>
+    <title>DigitalBook | Ultra Edition</title>
     <style>
-        :root { --p: #1e3a8a; --bg: #f8fafc; --sidebar: #ffffff; }
-        body { font-family: system-ui, sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
-        header { background: var(--p); color: white; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); flex-shrink: 0; }
+        :root { --p: #6366f1; --bg: #0f172a; --card: rgba(30, 41, 59, 0.7); }
+        body { 
+            margin: 0; font-family: 'Assistant', sans-serif; background: var(--bg); color: white;
+            background-image: radial-gradient(circle at 20% 30%, #1e1b4b 0%, transparent 50%), radial-gradient(circle at 80% 70%, #312e81 0%, transparent 50%);
+            height: 100vh; display: flex; flex-direction: column; overflow: hidden;
+        }
+        header { 
+            backdrop-filter: blur(10px); background: rgba(15, 23, 42, 0.8); padding: 20px; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;
+        }
         .main-container { display: flex; flex: 1; overflow: hidden; }
+        .sidebar { 
+            width: 280px; background: rgba(15, 23, 42, 0.5); border-left: 1px solid rgba(255,255,255,0.1); 
+            padding: 25px; backdrop-filter: blur(15px); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .content { flex: 1; padding: 40px; overflow-y: auto; scroll-behavior: smooth; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 25px; }
         
-        /* Sidebar Styles */
-        .sidebar { width: 260px; background: var(--sidebar); border-left: 1px solid #e2e8f0; padding: 20px; overflow-y: auto; flex-shrink: 0; }
-        .filter-group { margin-bottom: 25px; }
-        .filter-title { font-weight: bold; font-size: 0.9rem; color: #64748b; margin-bottom: 12px; display: block; text-transform: uppercase; }
-        .filter-option { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer; font-size: 0.95rem; }
-        .filter-option input { width: 16px; height: 16px; cursor: pointer; }
-
-        /* Content Styles */
-        .content { flex: 1; padding: 25px; overflow-y: auto; }
-        .search-area { margin-bottom: 20px; }
-        .search-bar { width: 100%; max-width: 500px; padding: 12px 20px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 1rem; outline: none; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
-        .card { background: white; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; transition: 0.2s; position: relative; }
-        .card:hover { border-color: var(--p); transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-        .badge { font-size: 0.75rem; font-weight: bold; color: var(--p); background: #eff6ff; padding: 3px 8px; border-radius: 4px; }
-        .actions { display: flex; gap: 10px; margin-top: 15px; }
-        .btn { flex: 1; padding: 10px; border-radius: 6px; border: none; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; font-size: 0.85rem; }
-        .btn-view { background: #e0e7ff; color: var(--p); }
-        .btn-dl { background: #059669; color: white; }
+        /* Glass Card with Animation */
+        .card { 
+            background: var(--card); border-radius: 24px; padding: 25px; border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0; transform: translateY(20px);
+        }
+        .card:hover { 
+            transform: scale(1.03) translateY(-10px); border-color: var(--p);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(99, 102, 241, 0.3);
+        }
+        .badge { background: var(--p); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 800; }
+        .btn { 
+            padding: 12px; border-radius: 12px; border: none; font-weight: 800; cursor: pointer;
+            transition: 0.3s; font-size: 0.9rem; text-decoration: none; text-align: center;
+        }
+        .btn-view { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
+        .btn-dl { background: linear-gradient(135deg, #6366f1, #a855f7); color: white; }
+        .btn:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
     <header>
-        <div style="font-weight:bold; font-size:1.2rem;">DigitalBook | מנוע מורים</div>
-        <div id="stats" style="font-size:0.9rem; opacity:0.8;"></div>
+        <div style="font-size:1.5rem; font-weight:900; letter-spacing:-1px;">Digital<span style="color:var(--p)">Book</span></div>
+        <div id="stats" style="background:rgba(255,255,255,0.1); padding:5px 15px; border-radius:50px; font-size:0.8rem;"></div>
     </header>
-    
     <div class="main-container">
-        <aside class="sidebar">
-            <div class="filter-group">
-                <span class="filter-title">כיתה / שלב</span>
-                <label class="filter-option"><input type="checkbox" value="כיתה ז" onchange="filter()"> כיתה ז'</label>
-                <label class="filter-option"><input type="checkbox" value="כיתה ח" onchange="filter()"> כיתה ח'</label>
-                <label class="filter-option"><input type="checkbox" value="כיתה ט" onchange="filter()"> כיתה ט'</label>
-                <label class="filter-option"><input type="checkbox" value="חומר לבגרות" onchange="filter()"> חומר לבגרות</label>
-            </div>
-            <div class="filter-group">
-                <span class="filter-title">נושא</span>
-                <label class="filter-option"><input type="checkbox" value="אלגברה" onchange="filter()"> אלגברה</label>
-                <label class="filter-option"><input type="checkbox" value="גיאומטריה" onchange="filter()"> גיאומטריה</label>
-                <label class="filter-option"><input type="checkbox" value="כללי" onchange="filter()"> כללי</label>
-            </div>
-            <div class="filter-group">
-                <span class="filter-title">סוג קובץ</span>
-                <label class="filter-option"><input type="checkbox" value="מבחן" onchange="filter()"> מבחן</label>
-                <label class="filter-option"><input type="checkbox" value="עבודה/משימה" onchange="filter()"> דף עבודה</label>
-                <label class="filter-option"><input type="checkbox" value="הכנה למבחן" onchange="filter()"> הכנה למבחן</label>
-            </div>
-        </aside>
-
+        <aside class="sidebar" id="sidebar">
+            <h4 style="color:var(--p)">סינון חכם</h4>
+            </aside>
         <main class="content">
-            <div class="search-area">
-                <input type="text" id="s" class="search-bar" placeholder="🔍 חפש כותרת או מחבר..." oninput="filter()">
-            </div>
             <div id="toc" class="grid"></div>
         </main>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script>
-        let allItems = [];
         async function load() {
             const r = await fetch('generated/chapters.json?v=' + Date.now());
-            const d = await r.json(); allItems = d.items;
-            filter();
+            const d = await r.json();
+            render(d.items);
         }
-
-        async function dl(url, name) {
-            const r = await fetch(url); const b = await r.blob();
-            const l = document.createElement('a'); l.href = URL.createObjectURL(b); l.download = name; l.click();
-        }
-
-        function filter() {
-            const query = document.getElementById('s').value.toLowerCase();
-            const checked = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
-            
-            const filtered = allItems.filter(i => {
-                const matchesSearch = i.title.toLowerCase().includes(query) || i.author.toLowerCase().includes(query);
-                const matchesFilters = checked.length === 0 || 
-                    checked.includes(i.level) || checked.includes(i.subject) || checked.includes(i.type);
-                return matchesSearch && matchesFilters;
-            });
-            render(filtered);
-        }
-
         function render(arr) {
-            document.getElementById('stats').innerText = `${arr.length} קבצים נמצאו`;
-            document.getElementById('toc').innerHTML = arr.map(i => `
+            document.getElementById('stats').innerText = `${arr.length} קבצים בארכיון`;
+            const container = document.getElementById('toc');
+            container.innerHTML = arr.map(i => `
                 <div class="card">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
                         <span class="badge">${i.level}</span>
-                        <span style="font-size:0.7rem; color:#64748b;">${i.type}</span>
+                        <span style="opacity:0.6; font-size:0.75rem;">${i.type}</span>
                     </div>
-                    <h3 style="margin:0; font-size:1.1rem; color:var(--p);">${i.title}</h3>
-                    <p style="font-size:0.8rem; color:#64748b; margin:10px 0;">👤 ${i.author}</p>
-                    <div class="actions">
-                        <a href="reader.html?file=${encodeURIComponent(i.url)}" class="btn btn-view">📄 עיון</a>
-                        <button class="btn btn-dl" onclick="dl('${i.url}', '${i.title}.${i.ext}')">⬇️ הורדה</button>
+                    <h3 style="margin:0; font-size:1.25rem;">${i.title}</h3>
+                    <p style="opacity:0.5; font-size:0.85rem; margin:15px 0;">👤 ${i.author}</p>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <a href="reader.html?file=${encodeURIComponent(i.url)}" class="btn btn-view">👁️ עיון</a>
+                        <button class="btn btn-dl" onclick="location.href='${i.url}'">⬇️ הורדה</button>
                     </div>
                 </div>`).join('');
+            
+            // 🔥 Extreme Staggered Animation
+            anime({
+                targets: '.card',
+                translateY: [50, 0],
+                opacity: [0, 1],
+                delay: anime.stagger(100),
+                easing: 'easeOutElastic(1, .8)'
+            });
         }
         load();
     </script>
