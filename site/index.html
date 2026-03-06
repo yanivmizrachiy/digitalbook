@@ -2,56 +2,53 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Book | פלטפורמת למידה</title>
+    <title>Digital Mathematics Book | ספרייה אקדמית</title>
     <style>
-        :root {
-            --primary: #0b5cff; --primary-dark: #0041c2; --bg: #f8fafc;
-            --card-bg: #ffffff; --text-main: #1e293b; --text-muted: #64748b;
-            --accent: #e0f2fe;
-        }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text-main); margin: 0; padding: 0; line-height: 1.6; }
-        header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 40px 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin-bottom: 30px; }
-        h1 { margin: 0; font-size: 2.5rem; letter-spacing: -1px; }
-        .search-container { max-width: 700px; margin: -30px auto 30px; padding: 0 20px; }
-        #searchInput { width: 100%; padding: 20px 30px; border-radius: 50px; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.05); font-size: 1.1rem; outline: none; transition: 0.3s; }
-        #searchInput:focus { box-shadow: 0 10px 25px rgba(11, 92, 255, 0.2); transform: scale(1.02); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; max-width: 1300px; margin: 0 auto; padding: 20px; }
-        .card { background: var(--card-bg); border-radius: 20px; padding: 25px; cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid rgba(0,0,0,0.03); position: relative; overflow: hidden; display: flex; flex-direction: column; text-align: right; }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: var(--primary); }
-        .card::before { content: ""; position: absolute; top: 0; right: 0; width: 6px; height: 100%; background: var(--primary); }
-        .tags { display: flex; gap: 10px; margin-bottom: 15px; }
-        .tag { padding: 4px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; }
-        .tag-pdf { background: #fee2e2; color: #dc2626; }
-        .tag-doc { background: #e0e7ff; color: #4338ca; }
-        .tag-grade { background: var(--accent); color: var(--primary); }
-        .card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
-        .card-author { font-size: 0.9rem; color: var(--text-muted); display: flex; align-items: center; gap: 5px; }
-        .hidden { display: none; }
+        :root { --primary: #0b5cff; --dark: #1e293b; --bg: #f1f5f9; }
+        body { font-family: system-ui, sans-serif; background: var(--bg); margin: 0; padding: 20px; }
+        header { text-align: center; padding: 40px; background: white; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 30px; }
+        .nav-filters { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .filter-btn { padding: 10px 20px; border-radius: 30px; border: 2px solid var(--primary); background: transparent; color: var(--primary); cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 25px; border-radius: 15px; border-top: 5px solid var(--primary); box-shadow: 0 2px 10px rgba(0,0,0,0.05); cursor: pointer; }
+        .card-meta { font-size: 0.8rem; font-weight: bold; color: var(--primary); margin-bottom: 10px; display: flex; gap: 10px; }
+        .card-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; }
+        .card-footer { font-size: 0.85rem; color: #64748b; border-top: 1px solid #eee; pt: 10px; margin-top: 10px; }
+        .tag-type { background: #e2e8f0; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; }
     </style>
 </head>
 <body>
-    <header><h1>הספר הדיגיטלי</h1><p>מערכת ניהול ידע פדגוגית</p></header>
-    <div class="search-container"><input type="text" id="searchInput" placeholder="חפש נושא, כיתה או סוג קובץ..." onkeyup="filter()"></div>
+    <header><h1>📚 הספר הדיגיטלי למתמטיקה</h1><p>מאגר ידע אקדמי מסווג</p></header>
+    <div class="nav-filters" id="gradeFilters">
+        <button class="filter-btn active" onclick="filterGrade('all')">הכל</button>
+        <button class="filter-btn" onclick="filterGrade('Grade 7')">כיתה ז'</button>
+        <button class="filter-btn" onclick="filterGrade('Grade 8')">כיתה ח'</button>
+        <button class="filter-btn" onclick="filterGrade('Grade 9')">כיתה ט'</button>
+    </div>
     <div id="toc" class="grid"></div>
     <script>
+        let allData = [];
         async function load() {
             const r = await fetch('generated/chapters.json');
-            const data = await r.json();
-            document.getElementById('toc').innerHTML = data.map(ch => `
-                <div class="card" data-search="${ch.title} ${ch.grade} ${ch.type}" onclick="location.href='${ch.type === 'PDF' ? 'reader.html?file=' + encodeURIComponent(ch.url) : ch.url}'">
-                    <div class="tags">
-                        <span class="tag tag-${ch.type.toLowerCase()}">${ch.type}</span>
-                        <span class="tag tag-grade">${ch.grade}</span>
+            allData = await r.json();
+            render(allData);
+        }
+        function render(items) {
+            document.getElementById('toc').innerHTML = items.map(ch => `
+                <div class="card" onclick="location.href='${ch.file_ext === 'PDF' ? 'reader.html?file=' + encodeURIComponent(ch.url) : ch.url}'">
+                    <div class="card-meta">
+                        <span>${ch.grade}</span> | <span>${ch.subject}</span>
+                        <span class="tag-type">${ch.type}</span>
                     </div>
                     <div class="card-title">${ch.title}</div>
-                    <div class="card-author">👤 ${ch.author}</div>
+                    <div class="card-footer">👤 מחבר: ${ch.author} | 📄 סוג: ${ch.file_ext}</div>
                 </div>`).join('');
         }
-        function filter() {
-            let val = document.getElementById('searchInput').value.toLowerCase();
-            document.querySelectorAll('.card').forEach(c => {
-                c.classList.toggle('hidden', !c.getAttribute('data-search').toLowerCase().includes(val));
-            });
+        function filterGrade(grade) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            render(grade === 'all' ? allData : allData.filter(d => d.grade === grade));
         }
         load();
     </script>
