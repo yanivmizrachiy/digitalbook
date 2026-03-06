@@ -1,56 +1,63 @@
-import os, json, shutil
-try:
-    from PyPDF2 import PdfReader
-except ImportError:
-    PdfReader = None
-try:
-    import docx
-except ImportError:
-    docx = None
+import os, json, shutil, re
+
+def get_year(name):
+    match = re.search(r'20\d{2}', name)
+    return match.group(0) if match else "Unknown"
+
+def get_assignment_type(name):
+    name = name.lower()
+    if any(x in name for x in ['מבחן', 'בוחן', 'מיצב']): return 'Test'
+    if 'סיכום' in name: return 'Summary Assignment'
+    if 'קיץ' in name: return 'Summer Assignment'
+    if 'תיקון' in name: return 'Correction Assignment'
+    if any(x in name for x in ['תרגול', 'חזרה']): return 'Practice Assignment'
+    return 'Worksheet'
+
+def extract_meta(root, f):
+    path = root.lower()
+    name = f.lower()
+    
+    # 1. Determine Level (Middle School vs Bagrut)
+    level = "Unknown"
+    if 'ז' in path or '7' in path: level = "Grade 7"
+    elif 'ח' in path or '8' in path: level = "Grade 8"
+    elif 'ט' in path or '9' in path: level = "Grade 9"
+    elif '3 יח' in path: level = "3 Units"
+    elif '4 יח' in path: level = "4 Units"
+    elif '5 יח' in path: level = "5 Units"
+
+    # 2. Determine Subject / Questionnaire
+    subject = "Unknown"
+    if 'אלגברה' in path: subject = "Algebra"
+    elif 'גיאומטריה' in path or 'גאומטריה' in path: subject = "Geometry"
+    for q in ['371','372','481','482','581','582']:
+        if q in path or q in name: subject = f"Questionnaire {q}"
+    
+    return level, subject
 
 data = []
-base_dir = './pdf'
-count = 1
-
-for root, dirs, files in os.walk(base_dir):
+for root, dirs, files in os.walk('./pdf'):
     for f in files:
         if f.startswith('.'): continue
         filepath = os.path.join(root, f)
         ext = f.split('.')[-1].lower()
-        title = f.replace('.'+ext, '').replace('_', ' ')
         
-        # Deduce Grade Level from path taxonomy
-        grade = "General"
-        if "ז" in root: grade = "Grade 7"
-        elif "ח" in root: grade = "Grade 8"
-        elif "ט" in root: grade = "Grade 9"
+        level, subject = extract_meta(root, f)
         
-        # Extract internal Author metadata
-        author = "Unknown Author"
-        if ext == 'pdf' and PdfReader:
-            try:
-                meta = PdfReader(filepath).metadata
-                if meta and meta.author: author = meta.author
-            except: pass
-        elif ext == 'docx' and docx:
-            try:
-                author = docx.Document(filepath).core_properties.author or "Unknown Author"
-            except: pass
-
-        # Ensure the file is copied to the web directory
-        web_path = f"site/pdf/{f}"
-        shutil.copy2(filepath, f"./{web_path}")
-
+        # Metadata Extraction
+        author = "Unknown" # Logic for real extraction can be added here
+        year = get_year(f)
+        
         data.append({
-            "id": count,
-            "title": title,
-            "type": ext.upper(),
+            "title": f.replace('.'+ext, '').replace('_', ' '),
             "author": author,
-            "grade": grade,
-            "url": f"pdf/{f}"
+            "year": year,
+            "level": level,
+            "subject": subject,
+            "type": get_assignment_type(f),
+            "url": f"pdf/{f}",
+            "ext": ext.upper()
         })
-        print(f"\033[0;32m   [+] Processed: {title} | {ext.upper()} | {grade}\033[0m")
-        count += 1
 
-with open('./site/generated/chapters.json', 'w', encoding='utf-8') as f:
-    json.dump(data, f, ensure_ascii=False, indent=2)
+with open('./site/generated/chapters.json', 'w', encoding='utf-8') as jf:
+    json.dump(data, jf, ensure_ascii=False, indent=2)

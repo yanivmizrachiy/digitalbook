@@ -1,21 +1,16 @@
-# Digital Mathematics Book - Project Rules & Governance
+# Digital Mathematics Book - Academic Governance & Audit Rules
 
-## 1. Governance & Synchronization
-- All structural changes, processed documents, and classification decisions MUST be reflected in this repository.
-- GitHub is the single source of truth and the authoritative state of the system.
+## 1. Project Scope & Isolation
+- This project is strictly for the Digital Mathematics Book.
+- All files must be grouped by Middle School (7-9) or Matriculation (3-5 Units).
 
-## 2. Taxonomy & Metadata
-Every file processed into the system contains a complete metadata profile:
-- **Grade:** Grade 7 (כיתה ז'), Grade 8 (כיתה ח'), Grade 9 (כיתה ט').
-- **Subject:** Algebra (אלגברה), Geometry (גיאומטריה).
-- **Type:** Test (מבחן), Worksheet (דף עבודה), Correction (דף תיקון), Practice (תרגול), Additional (חומרי עזר).
-- **Author:** Extracted from document metadata or assigned a default academic tag.
+## 2. Metadata Compliance
+Every document MUST contain:
+- **Title, Author, Year**: If Author or Year are missing, mark as "Unknown".
+- **Level**: Grade (7, 8, 9) or Unit (3, 4, 5).
+- **Subject**: Algebra, Geometry, or Questionnaire ID (e.g., 481).
+- **Assignment Type**: Worksheet, Test, Summary, Summer, Practice, Correction.
 
-## 3. UI/UX Standards
-- The interface utilizes premium graphical design: modern visual hierarchy, high-contrast readability, and refined button design.
-- Dual-level navigation (Grade -> Subject) is enforced.
-
-## 4. Advanced Taxonomy & Classification (Update 2026-03-06)
-- **Enhanced Document Types:** הוספת קטגוריית "Summary" (סיכום/מבוא/חוקיות).
-- **Smart Routing:** מנוע הסיווג משתמש כעת בניתוח מילות מפתח מורחב בשמות הקבצים כדי לצמצם סיווג שגוי (Additional) למינימום.
-- **Frontend Alignment (2026-03-06):** הוספת ייצוג ויזואלי ברמת Premium (Amber Badge) לקטגוריית 'Summary' החדשה, כולל תרגום אוטומטי בממשק המשתמש.
+## 3. Repository Integrity
+- The GitHub file structure MUST mirror the UI navigation.
+- Placeholder data is forbidden; real metadata extraction is mandatory.

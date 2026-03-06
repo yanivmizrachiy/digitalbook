@@ -1,194 +1,242 @@
 [
   {
-    "id": 1,
     "title": "חיבור וחיסור מכוונים",
-    "type": "PDF",
-    "author": "בתיה מירזאייב",
-    "grade": "Grade 7",
-    "url": "pdf/חיבור וחיסור מכוונים.pdf"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/חיבור וחיסור מכוונים.pdf",
+    "ext": "PDF"
   },
   {
-    "id": 2,
     "title": "הצבה לכיתה ז",
-    "type": "PDF",
-    "author": "יניב מזרחי",
-    "grade": "Grade 7",
-    "url": "pdf/הצבה לכיתה ז.pdf"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/הצבה לכיתה ז.pdf",
+    "ext": "PDF"
   },
   {
-    "id": 3,
     "title": "חוברת מכוונים",
-    "type": "חוברת מכוונים",
-    "author": "Unknown Author",
-    "grade": "Grade 7",
-    "url": "pdf/חוברת מכוונים"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/חוברת מכוונים",
+    "ext": "חוברת מכוונים"
   },
   {
-    "id": 4,
     "title": "נקודות במערכת הצירים",
-    "type": "DOC",
-    "author": "Unknown Author",
-    "grade": "Grade 7",
-    "url": "pdf/נקודות במערכת הצירים.doc"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/נקודות במערכת הצירים.doc",
+    "ext": "DOC"
   },
   {
-    "id": 5,
     "title": "מספרים מכוונים",
-    "type": "מספרים מכוונים",
-    "author": "Unknown Author",
-    "grade": "Grade 7",
-    "url": "pdf/מספרים מכוונים"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/מספרים מכוונים",
+    "ext": "מספרים מכוונים"
   },
   {
-    "id": 6,
     "title": "מספרים מכוונים ז'",
-    "type": "PDF",
-    "author": "יניב מזרחי",
-    "grade": "Grade 7",
-    "url": "pdf/מספרים מכוונים ז'.pdf"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/מספרים מכוונים ז'.pdf",
+    "ext": "PDF"
   },
   {
-    "id": 7,
     "title": "מערכת צירים ז' ",
-    "type": "מערכת צירים ז' ",
-    "author": "Unknown Author",
-    "grade": "Grade 7",
-    "url": "pdf/מערכת צירים ז' "
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/מערכת צירים ז' ",
+    "ext": "מערכת צירים ז' "
   },
   {
-    "id": 8,
     "title": "משוואות לחטיבה",
-    "type": "PDF",
-    "author": "יניב מזרחי",
-    "grade": "Grade 7",
-    "url": "pdf/משוואות לחטיבה.pdf"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/משוואות לחטיבה.pdf",
+    "ext": "PDF"
   },
   {
-    "id": 9,
     "title": "סיכום אלגברה",
-    "type": "סיכום אלגברה",
-    "author": "Unknown Author",
-    "grade": "Grade 7",
-    "url": "pdf/סיכום אלגברה"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Summary Assignment",
+    "url": "pdf/סיכום אלגברה",
+    "ext": "סיכום אלגברה"
   },
   {
-    "id": 10,
     "title": "סדר פעולות",
-    "type": "סדר פעולות",
-    "author": "Unknown Author",
-    "grade": "Grade 7",
-    "url": "pdf/סדר פעולות"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/סדר פעולות",
+    "ext": "סדר פעולות"
   },
   {
-    "id": 11,
     "title": "נקודות במערכת הצירים",
-    "type": "PDF",
-    "author": "User",
-    "grade": "Grade 7",
-    "url": "pdf/נקודות במערכת הצירים.pdf"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/נקודות במערכת הצירים.pdf",
+    "ext": "PDF"
   },
   {
-    "id": 12,
     "title": "תובנה מספרית",
-    "type": "תובנה מספרית",
-    "author": "Unknown Author",
-    "grade": "Grade 7",
-    "url": "pdf/תובנה מספרית"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/תובנה מספרית",
+    "ext": "תובנה מספרית"
   },
   {
-    "id": 13,
     "title": "שורש - מבוך",
-    "type": "שורש - מבוך",
-    "author": "Unknown Author",
-    "grade": "Grade 7",
-    "url": "pdf/שורש - מבוך"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/שורש - מבוך",
+    "ext": "שורש - מבוך"
   },
   {
-    "id": 14,
     "title": "סדר פעולות במספרים מכוונים",
-    "type": "DOCX",
-    "author": "יניב מזרחי",
-    "grade": "Grade 7",
-    "url": "pdf/סדר פעולות במספרים מכוונים.docx"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/סדר פעולות במספרים מכוונים.docx",
+    "ext": "DOCX"
   },
   {
-    "id": 15,
     "title": "סדר פעולות במספרים מכוונים",
-    "type": "PDF",
-    "author": "יניב מזרחי",
-    "grade": "Grade 7",
-    "url": "pdf/סדר פעולות במספרים מכוונים.pdf"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/סדר פעולות במספרים מכוונים.pdf",
+    "ext": "PDF"
   },
   {
-    "id": 16,
     "title": "סדר פעולות החשבון (1)",
-    "type": "DOCX",
-    "author": "יניב מזרחי",
-    "grade": "Grade 7",
-    "url": "pdf/סדר פעולות החשבון (1).docx"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/סדר פעולות החשבון (1).docx",
+    "ext": "DOCX"
   },
   {
-    "id": 17,
     "title": "סדר פעולות חשבון במספרים מכוונים כולל חזקות",
-    "type": "PDF",
-    "author": "סמיון",
-    "grade": "Grade 7",
-    "url": "pdf/סדר פעולות חשבון במספרים מכוונים כולל חזקות.pdf"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/סדר פעולות חשבון במספרים מכוונים כולל חזקות.pdf",
+    "ext": "PDF"
   },
   {
-    "id": 18,
     "title": "מבוך חוק הפילוג",
-    "type": "מבוך חוק הפילוג",
-    "author": "Unknown Author",
-    "grade": "Grade 7",
-    "url": "pdf/מבוך חוק הפילוג"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/מבוך חוק הפילוג",
+    "ext": "מבוך חוק הפילוג"
   },
   {
-    "id": 19,
     "title": "חוקיות",
-    "type": "חוקיות",
-    "author": "Unknown Author",
-    "grade": "Grade 7",
-    "url": "pdf/חוקיות"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/חוקיות",
+    "ext": "חוקיות"
   },
   {
-    "id": 20,
     "title": "דף מסכם חוקיות",
-    "type": "דף מסכם חוקיות",
-    "author": "Unknown Author",
-    "grade": "Grade 7",
-    "url": "pdf/דף מסכם חוקיות"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/דף מסכם חוקיות",
+    "ext": "דף מסכם חוקיות"
   },
   {
-    "id": 21,
     "title": "חוקיות לכיתה ז וורד",
-    "type": "DOCX",
-    "author": "יניב מזרחי",
-    "grade": "Grade 7",
-    "url": "pdf/חוקיות לכיתה ז וורד.docx"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Algebra",
+    "type": "Worksheet",
+    "url": "pdf/חוקיות לכיתה ז וורד.docx",
+    "ext": "DOCX"
   },
   {
-    "id": 22,
     "title": "שטחים והיקפים במערכת הצירים",
-    "type": "DOC",
-    "author": "Unknown Author",
-    "grade": "Grade 7",
-    "url": "pdf/שטחים והיקפים במערכת הצירים.doc"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Geometry",
+    "type": "Worksheet",
+    "url": "pdf/שטחים והיקפים במערכת הצירים.doc",
+    "ext": "DOC"
   },
   {
-    "id": 23,
     "title": "שטחים במערכת הצירים",
-    "type": "PDF",
-    "author": "רותם מזרחי",
-    "grade": "Grade 7",
-    "url": "pdf/שטחים במערכת הצירים.pdf"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Geometry",
+    "type": "Worksheet",
+    "url": "pdf/שטחים במערכת הצירים.pdf",
+    "ext": "PDF"
   },
   {
-    "id": 24,
     "title": "שטחים בצירים",
-    "type": "DOCX",
-    "author": "רותם מזרחי",
-    "grade": "Grade 7",
-    "url": "pdf/שטחים בצירים.docx"
+    "author": "Unknown",
+    "year": "Unknown",
+    "level": "Grade 7",
+    "subject": "Geometry",
+    "type": "Worksheet",
+    "url": "pdf/שטחים בצירים.docx",
+    "ext": "DOCX"
   }
 ]
