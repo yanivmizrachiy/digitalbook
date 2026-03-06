@@ -2,80 +2,59 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mathematics Digital Library | Search v2</title>
+    <title>DigitalBook | ארכיון מורים מקצועי</title>
     <style>
-        :root { --p: #1a56db; --bg: #f1f5f9; --card: #ffffff; --text: #1e293b; --download: #059669; }
-        body { font-family: system-ui, sans-serif; background: var(--bg); margin: 0; padding-bottom: 40px; }
-        header { background: linear-gradient(135deg, #1a56db, #1e40af); color: white; padding: 40px 20px; text-align: center; border-bottom: 5px solid #facc15; }
+        :root { --p: #1e3a8a; --bg: #f1f5f9; --card: #ffffff; --text: #0f172a; --print: #4f46e5; }
+        body { font-family: system-ui, sans-serif; background: var(--bg); margin: 0; color: var(--text); padding-bottom: 50px; }
+        header { background: var(--p); color: white; padding: 30px 20px; text-align: center; border-bottom: 4px solid #facc15; }
         .search-area { max-width: 600px; margin: -25px auto 20px; padding: 0 15px; }
-        .search-bar { width: 100%; padding: 15px 25px; border-radius: 50px; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.1); font-size: 1.1rem; outline: none; transition: 0.3s; }
-        .search-bar:focus { box-shadow: 0 10px 30px rgba(26, 86, 219, 0.3); }
-        .nav-container { max-width: 800px; margin: 0 auto 30px; padding: 0 15px; }
-        .tabs { display: flex; gap: 8px; overflow-x: auto; background: white; padding: 8px; border-radius: 50px; scrollbar-width: none; border: 1px solid #e2e8f0; }
-        .tab { padding: 10px 20px; border-radius: 40px; cursor: pointer; font-weight: bold; color: var(--p); white-space: nowrap; transition: 0.3s; }
-        .tab.active { background: var(--p); color: white; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; padding: 20px; max-width: 1400px; margin: auto; }
-        .card { background: var(--card); border-radius: 25px; padding: 25px; border: 1px solid #e2e8f0; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); border-color: var(--p); }
-        .badge { display: inline-block; padding: 4px 10px; border-radius: 8px; font-size: 0.7rem; font-weight: 800; background: #eff6ff; color: var(--p); margin-bottom: 10px; width: fit-content; }
-        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .btn { padding: 10px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; text-decoration: none; font-size: 0.85rem; text-align: center; transition: 0.2s; }
-        .btn-view { background: var(--p); color: white; }
-        .btn-download { background: var(--download); color: white; }
+        .search-input { width: 100%; padding: 15px 25px; border-radius: 12px; border: 1px solid #ddd; background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); font-size: 1rem; outline: none; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; padding: 20px; max-width: 1400px; margin: auto; }
+        .card { background: var(--card); border-radius: 15px; padding: 20px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; transition: 0.2s; }
+        .card:hover { border-color: var(--p); box-shadow: 0 10px 15px rgba(0,0,0,0.05); }
+        .info-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem; }
+        .info-table td { padding: 6px 0; border-bottom: 1px solid #f1f5f9; }
+        .label { color: #64748b; font-weight: bold; width: 80px; }
+        .val { color: var(--text); font-weight: 500; }
+        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
+        .btn { padding: 12px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; font-size: 0.9rem; text-align: center; text-decoration: none; transition: 0.2s; }
+        .btn-view { background: #e0e7ff; color: var(--p); }
+        .btn-print { background: var(--print); color: white; }
     </style>
 </head>
 <body>
-    <header><h1>הספר הדיגיטלי למתמטיקה</h1></header>
-    <div class="search-area">
-        <input type="text" id="s" class="search-bar" placeholder="🔍 חפש נושא, כותרת או מחבר..." oninput="filter()">
-    </div>
-    <div class="nav-container">
-        <div class="tabs">
-            <div class="tab active" onclick="setGrade('all', this)">הכל</div>
-            <div class="tab" onclick="setGrade('Grade 7', this)">כיתה ז'</div>
-            <div class="tab" onclick="setGrade('Grade 8', this)">כיתה ח'</div>
-            <div class="tab" onclick="setGrade('Grade 9', this)">כיתה ט'</div>
-            <div class="tab" onclick="setGrade('Units', this)">בגרות</div>
-        </div>
-    </div>
+    <header><h1>מנוע פדגוגי למורים - DigitalBook</h1></header>
+    <div class="search-area"><input type="text" id="s" class="search-input" placeholder="🔍 חפש קובץ לפי שם, נושא או מחבר..." oninput="filter()"></div>
     <div id="toc" class="grid"></div>
+
     <script>
-        let items = [], grade = 'all';
+        let items = [];
         async function load() {
             const r = await fetch('generated/chapters.json?v=' + Date.now());
             const d = await r.json(); items = d.items || d.files;
             filter();
         }
-        function setGrade(g, b) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            b.classList.add('active'); grade = g; filter();
-        }
         function filter() {
             const q = document.getElementById('s').value.toLowerCase();
-            const res = items.filter(i => {
-                const mG = grade === 'all' || i.level.includes(grade);
-                const mT = i.title.toLowerCase().includes(q) || i.subject.toLowerCase().includes(q) || i.author.toLowerCase().includes(q);
-                return mG && mT;
-            });
+            const res = items.filter(i => i.title.toLowerCase().includes(q) || i.subject.toLowerCase().includes(q) || i.author.toLowerCase().includes(q));
             render(res);
-        }
-        async function dl(url, name) {
-            const r = await fetch(url); const b = await r.blob();
-            const l = document.createElement('a'); l.href = URL.createObjectURL(b); l.download = name; l.click();
         }
         function render(arr) {
             const c = document.getElementById('toc');
-            if (!arr.length) { c.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:50px;"><h3>לא נמצאו חומרים...</h3></div>'; return; }
+            if(!arr.length) { c.innerHTML = '<p>לא נמצאו קבצים העונים לחיפוש.</p>'; return; }
             c.innerHTML = arr.map(i => `
                 <div class="card">
-                    <div>
-                        <div class="badge">${i.level} | ${i.subject}</div>
-                        <h3 onclick="location.href='reader.html?file=${encodeURIComponent(i.url)}'" style="cursor:pointer">${i.title}</h3>
-                        <p style="font-size:0.8rem; color:#64748b;">👤 ${i.author} | 📅 ${i.year}</p>
-                    </div>
+                    <h3 style="margin:0; color:var(--p); font-size:1.15rem;">${i.title}</h3>
+                    <table class="info-table">
+                        <tr><td class="label">כיתה:</td><td class="val">${i.level}</td></tr>
+                        <tr><td class="label">נושא:</td><td class="val">${i.subject}</td></tr>
+                        <tr><td class="label">סוג:</td><td class="val">${i.type}</td></tr>
+                        <tr><td class="label">מחבר:</td><td class="val">${i.author}</td></tr>
+                        <tr><td class="label">שנה:</td><td class="val">${i.year}</td></tr>
+                    </table>
                     <div class="actions">
-                        <button class="btn btn-view" onclick="location.href='reader.html?file=${encodeURIComponent(i.url)}'">👁️ צפייה</button>
-                        <button class="btn btn-download" onclick="dl('${i.url}', '${i.title}.${i.ext.toLowerCase()}')">⬇️ הורדה</button>
+                        <a href="reader.html?file=${encodeURIComponent(i.url)}" class="btn btn-view">📄 פתח לעיון</a>
+                        <button class="btn btn-print" onclick="window.open('reader.html?file=${encodeURIComponent(i.url)}&print=true')">🖨️ הדפס קובץ</button>
                     </div>
                 </div>`).join('');
         }

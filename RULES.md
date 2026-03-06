@@ -1,16 +1,15 @@
-# Digital Mathematics Book - Global Infrastructure (v7.0)
+# 📘 DigitalBook | Teacher's Professional Repository (v8.0)
+**ייעוד:** מערכת ניהול פדגוגית לשימוש מורים בלבד.
 
-## 1. Official Data Sources (Drive Links)
-- **Grade 7:** https://drive.google.com/open?id=1z0jsg8ZVa7rCeVLY1sms-W7C6whFuK8L
-- **Grade 8:** https://drive.google.com/open?id=1ClTb8TrhvaQBIi43z7TKxOG1RuYWdywC
-- **Grade 9:** https://drive.google.com/open?id=1uBFrJRqKJo8o6Rbgylqz0htxvthZ1dOn
-- **High School:** https://drive.google.com/open?id=1ev590-eH5ikT3VG7ZsfDocq-pfE1t1Sz
+## ⚖️ 1. פרוטוקול המטא-דאטה
+- כל קובץ יוצג עם תעודת זהות מלאה: כיתה, נושא, סוג, מחבר ושנה.
+- חובה להציג את המידע לפני ביצוע פעולת הדפסה.
 
-## 2. Ingestion & Architecture
-- **Automatic Sync:** כל קובץ בתיקיית /pdf נסרק ע"י extract_meta.py.
-- **Hierarchical Navigation:** תמיכה מלאה בסינון לפי כיתה (ז-ט) ויחידות לימוד תיכוניות.
-- **Feature Set:** צפייה (Reader), הורדה פיזית, מצב לילה, וטיימר מבחן.
+## 🚀 2. פונקציונליות מורים
+- **Full Metadata View:** הצגה ברורה של פרטי הקובץ בכרטיסייה.
+- **Direct Printing:** אפשרות הדפסה מהירה לאחר סקירת הנתונים.
+- **Internal Archiving:** המערכת משמשת כארכיון מקצועי לריכוז חומרי לימוד.
 
-## 3. Deployment Protocol
-- **Production:** GitHub Pages.
-- **Environment:** Termux -> Atomic Sync.
+## 🛰️ 3. בקרת איכות
+- מנוע ה-Python סורק ומחלץ את המידע אוטומטית מקבצי המקור (PDF/DOCX).
+- המערכת אינה מיועדת לשימוש תלמידים (Internal Staff Only).
