@@ -13,3 +13,7 @@
 ## 3. Maintenance Protocol
 - **Sync Command:** `python extract_meta.py` must be run before every push to ensure `chapters.json` is updated.
 - **Cleanup:** `node_modules` and `.npm` are strictly forbidden in the repository (enforced via .gitignore).
+
+## 7. Admin & Health Monitoring (Update 2026-03-06)
+- **Monitoring:** הגישה לדף הניהול מתבצעת דרך `/admin.html`.
+- **Quality Assurance:** חובת טיפול בקבצים המופיעים ב-Red Flags כדי לשמור על סטנדרט אקדמי.

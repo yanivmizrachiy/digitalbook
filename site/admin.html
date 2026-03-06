@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigitalBook | Mission Control</title>
+    <style>
+        :root { --danger: #ef4444; --success: #10b981; --p: #1a56db; --bg: #0f172a; }
+        body { font-family: system-ui, sans-serif; background: var(--bg); color: white; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: auto; }
+        .header { border-bottom: 1px solid #334155; padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .stat-card { background: #1e293b; padding: 20px; border-radius: 15px; border: 1px solid #334155; }
+        .stat-card h2 { margin: 0; color: #94a3b8; font-size: 0.9rem; }
+        .stat-card .val { font-size: 2rem; font-weight: bold; margin-top: 10px; }
+        .issue-list { background: #1e293b; border-radius: 15px; padding: 20px; border: 1px solid #334155; }
+        .issue-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #334155; font-size: 0.9rem; }
+        .issue-item:last-child { border: none; }
+        .tag { padding: 2px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: bold; }
+        .tag-red { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+        .btn { background: var(--p); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; text-decoration: none; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Mission Control 🛰️</h1>
+            <a href="index.html" class="btn">חזרה לאתר</a>
+        </div>
+        
+        <div class="stats-grid" id="stats">
+            </div>
+
+        <h3>🚩 דוח חריגות (Metadata Red Flags)</h3>
+        <div class="issue-list" id="issues">
+            <p>סורק את המאגר...</p>
+        </div>
+    </div>
+
+    <script>
+        async function runAudit() {
+            const r = await fetch('generated/chapters.json?v=' + Date.now());
+            const d = await r.json();
+            const items = d.items || d.files; // Handling both formats
+
+            // Stats Logic
+            const total = items.length;
+            const unknownAuthor = items.filter(i => i.author === 'Unknown' || i.author === 'Unknown Author').length;
+            const unknownYear = items.filter(i => i.year === 'Unknown').length;
+            const testCount = items.filter(i => i.type === 'Test').length;
+
+            document.getElementById('stats').innerHTML = `
+                <div class="stat-card"><h2>סה"כ קבצים</h2><div class="val">${total}</div></div>
+                <div class="stat-card"><h2>ללא מחבר</h2><div class="val" style="color:var(--danger)">${unknownAuthor}</div></div>
+                <div class="stat-card"><h2>ללא שנה</h2><div class="val" style="color:var(--danger)">${unknownYear}</div></div>
+                <div class="stat-card"><h2>מבחנים/בחנים</h2><div class="val">${testCount}</div></div>
+            `;
+
+            // Issues Logic
+            const issues = items.filter(i => i.author === 'Unknown' || i.year === 'Unknown');
+            document.getElementById('issues').innerHTML = issues.length ? issues.map(i => `
+                <div class="issue-item">
+                    <span>${i.title}</span>
+                    <div>
+                        ${i.author === 'Unknown' ? '<span class="tag tag-red">חסר מחבר</span>' : ''}
+                        ${i.year === 'Unknown' ? '<span class="tag tag-red">חסרה שנה</span>' : ''}
+                    </div>
+                </div>
+            `).join('') : '<p style="color:var(--success)">✅ המאגר תקין ב-100%! אין חריגות מטא-דאטה.</p>';
+        }
+        runAudit();
+    </script>
+</body>
+</html>
