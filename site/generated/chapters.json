@@ -197,6 +197,15 @@
             "type": "עבודה/משימה",
             "author": "Unknown",
             "ext": "pdf"
+        },
+        {
+            "title": "חוקיות לכיתה ז וורד",
+            "url": "pdf/Grade_7/General/Worksheet/חוקיות לכיתה ז וורד.docx",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "docx"
         }
     ]
 }
