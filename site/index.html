@@ -2,22 +2,32 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Book - מאגר מתמטיקה</title>
+    <title>Digital Book - מאגר למידה</title>
     <style>
         body { font-family: system-ui, sans-serif; background: #f4f7f6; text-align: center; padding: 20px; margin: 0; }
+        h1 { color: #0b5cff; margin-bottom: 5px; }
+        .search-box { margin: 20px auto; max-width: 600px; }
+        .search-box input { width: 100%; padding: 15px; border-radius: 30px; border: 2px solid #0b5cff; font-size: 1.1rem; outline: none; box-shadow: 0 4px 10px rgba(11,92,255,0.1); box-sizing: border-box; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; max-width: 1200px; margin: 20px auto; }
-        .card { background: white; padding: 20px; border-radius: 12px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: right; border-right: 4px solid #0b5cff; transition: transform 0.2s; }
+        .card { background: white; padding: 20px; border-radius: 12px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: right; border-right: 4px solid #0b5cff; transition: transform 0.2s; display: block; }
         .card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(11, 92, 255, 0.15); }
         .meta { display: flex; gap: 8px; margin-bottom: 10px; font-size: 0.8rem; font-weight: bold; }
         .tag-type { background: #e1e8ed; padding: 3px 8px; border-radius: 4px; color: #333; }
         .tag-grade { background: #d0f0fd; padding: 3px 8px; border-radius: 4px; color: #0b5cff; }
         .title { font-size: 1.1rem; font-weight: bold; margin-bottom: 8px; color: #1a1a1a; }
         .author { font-size: 0.9rem; color: #666; }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
-    <h1 style="color: #0b5cff;">📚 מאגר למידה מתקדם</h1>
+    <h1>📚 מאגר למידה מתקדם</h1>
+    
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="🔍 חפש נושא, כיתה או סוג קובץ..." onkeyup="filterCards()">
+    </div>
+
     <div id="toc" class="grid"></div>
+
     <script>
         async function load() {
             try {
@@ -25,11 +35,12 @@
                 const c = await r.json();
                 document.getElementById('toc').innerHTML = c.map(ch => {
                     const targetUrl = ch.type === 'PDF' ? `reader.html?file=${encodeURIComponent(ch.url)}` : ch.url;
+                    const gradeHe = ch.grade === 'Grade 7' ? 'כיתה ז\'' : ch.grade === 'Grade 8' ? 'כיתה ח\'' : ch.grade === 'Grade 9' ? 'כיתה ט\'' : 'כללי';
                     return `
-                    <div class="card" onclick="window.location.href='${targetUrl}'">
+                    <div class="card" data-title="${ch.title}" data-grade="${gradeHe}" data-type="${ch.type}" onclick="window.location.href='${targetUrl}'">
                         <div class="meta">
                             <span class="tag-type">${ch.type}</span>
-                            <span class="tag-grade">${ch.grade === 'Grade 7' ? 'כיתה ז\'' : ch.grade === 'Grade 8' ? 'כיתה ח\'' : ch.grade === 'Grade 9' ? 'כיתה ט\'' : 'כללי'}</span>
+                            <span class="tag-grade">${gradeHe}</span>
                         </div>
                         <div class="title">${ch.id}. ${ch.title}</div>
                         <div class="author">👤 ${ch.author}</div>
@@ -39,6 +50,25 @@
                 document.getElementById('toc').innerHTML = '<p>שגיאה בטעינת הנתונים. אנא הרץ master_sync.sh</p>';
             }
         }
+
+        // מנוע חיפוש בזמן אמת
+        function filterCards() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getAttribute('data-title').toLowerCase();
+                let grade = cards[i].getAttribute('data-grade').toLowerCase();
+                let type = cards[i].getAttribute('data-type').toLowerCase();
+                
+                if (title.includes(input) || grade.includes(input) || type.includes(input)) {
+                    cards[i].classList.remove('hidden');
+                } else {
+                    cards[i].classList.add('hidden');
+                }
+            }
+        }
+
         load();
     </script>
 </body>
