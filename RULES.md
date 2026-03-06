@@ -25,3 +25,6 @@
 ## 8. Backup & Disaster Recovery (Update 2026-03-06)
 - **Protocol:** חובת ביצוע גיבוי ZIP דרך ה-Admin Panel לפני כל עדכון גרסה מאסיבי.
 - **Redundancy:** הגיבוי משמש כנקודת שחזור (Point of Return) במקרה של שחיתות נתונים ב-GitHub או ב-Local Storage.
+
+## 9. Advanced Accessibility (Update 2026-03-06)
+- **Night Mode:** ה-Reader חייב לתמוך ב-CSS Inversion לשיפור הקריאה בתנאי תאורה נמוכים.
