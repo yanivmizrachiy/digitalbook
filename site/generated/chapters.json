@@ -206,6 +206,33 @@
             "type": "עבודה/משימה",
             "author": "Unknown",
             "ext": "docx"
+        },
+        {
+            "title": "סדר פעולות במספרים מכוונים",
+            "url": "pdf/Grade_7/General/Worksheet/סדר פעולות במספרים מכוונים.docx",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "docx"
+        },
+        {
+            "title": "סדר פעולות החשבון (1)",
+            "url": "pdf/Grade_7/General/Worksheet/סדר פעולות החשבון (1).docx",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "docx"
+        },
+        {
+            "title": "שטחים בצירים",
+            "url": "pdf/Grade_7/General/Worksheet/שטחים בצירים.docx",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "docx"
         }
     ]
 }
