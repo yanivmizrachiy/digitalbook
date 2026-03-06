@@ -17,3 +17,7 @@
 ## 7. Admin & Health Monitoring (Update 2026-03-06)
 - **Monitoring:** הגישה לדף הניהול מתבצעת דרך `/admin.html`.
 - **Quality Assurance:** חובת טיפול בקבצים המופיעים ב-Red Flags כדי לשמור על סטנדרט אקדמי.
+
+## 7. Admin & Health Monitoring (Update 2026-03-06)
+- **Monitoring:** הגישה לדף הניהול מתבצעת דרך `/admin.html`.
+- **Quality Assurance:** חובת טיפול בקבצים המופיעים ב-Red Flags כדי לשמור על סטנדרט אקדמי.
