@@ -2,34 +2,36 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>קריאת מסמך | פרימיום</title>
+    <title>קורא ספרים דיגיטלי</title>
     <style>
-        :root { --p: #1a56db; --bg: #1f2937; }
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: var(--bg); font-family: system-ui, sans-serif; }
-        .header { background: #111827; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .controls { display: flex; gap: 10px; align-items: center; }
-        .btn { padding: 8px 15px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
-        .btn-back { background: #374151; color: white; }
-        .btn-dark { background: #facc15; color: #111827; }
-        iframe { width: 100%; height: calc(100% - 60px); border: none; transition: filter 0.3s; }
-        .dark-mode iframe { filter: invert(0.9) hue-rotate(180deg); background: #fff; }
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #1e293b; font-family: system-ui, sans-serif; }
+        .header { background: #111827; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .title { font-weight: bold; font-size: 1.1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 50%; }
+        .btns { display: flex; gap: 10px; }
+        .btn { padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 0.9rem; }
+        .btn-dl { background: #059669; color: white; }
+        .btn-back { background: #3b82f6; color: white; }
+        iframe { width: 100%; height: calc(100% - 60px); border: none; }
     </style>
 </head>
 <body>
     <div class="header">
-        <span id="title">טוען...</span>
-        <div class="controls">
-            <button class="btn btn-dark" onclick="document.body.classList.toggle('dark-mode')">🌙 מצב לילה</button>
-            <a href="index.html" class="btn btn-back">חזרה למאגר</a>
+        <div class="title" id="t">טוען ספר...</div>
+        <div class="btns">
+            <a id="dl" class="btn btn-dl">⬇️ הורד למכשיר</a>
+            <a href="index.html" class="btn btn-back">חזרה לספרייה</a>
         </div>
     </div>
-    <iframe id="viewer"></iframe>
+    <iframe id="v"></iframe>
     <script>
-        const params = new URLSearchParams(window.location.search);
-        const file = params.get('file');
-        if (file) {
-            document.getElementById('viewer').src = file;
-            document.getElementById('title').innerText = decodeURIComponent(file.split('/').pop().replace(/_/g, ' '));
+        const p = new URLSearchParams(window.location.search);
+        const f = p.get('file');
+        if (f) {
+            document.getElementById('v').src = f;
+            const name = decodeURIComponent(f.split('/').pop());
+            document.getElementById('t').innerText = name;
+            document.getElementById('dl').href = f;
+            document.getElementById('dl').setAttribute('download', name);
         }
     </script>
 </body>

@@ -2,70 +2,78 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Mathematics Library | פרימיום</title>
+    <title>Mathematics Digital Library</title>
     <style>
-        :root { --p: #1a56db; --bg: #f3f4f6; --card: #ffffff; --text: #111827; }
-        @media (prefers-color-scheme: dark) { :root { --bg: #111827; --card: #1f2937; --text: #f9fafb; --p: #3b82f6; } }
-        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; transition: 0.3s; }
-        header { background: var(--p); color: white; padding: 50px 20px; text-align: center; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .sticky-nav { position: sticky; top: 0; z-index: 100; background: var(--card); padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; gap: 10px; margin-top: -30px; width: 90%; margin-left: auto; margin-right: auto; border-radius: 20px; }
-        .tabs { display: flex; justify-content: center; gap: 10px; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
-        .tab { padding: 8px 20px; cursor: pointer; border-radius: 10px; font-weight: bold; border: 2px solid transparent; }
-        .tab.active { border-color: var(--p); color: var(--p); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 20px; max-width: 1400px; margin: auto; }
-        .card { background: var(--card); padding: 25px; border-radius: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s; border-right: 6px solid var(--p); position: relative; }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px rgba(0,0,0,0.1); }
-        .badge { font-size: 0.75rem; background: var(--p); color: white; padding: 4px 10px; border-radius: 20px; font-weight: bold; }
-        .meta { font-size: 0.85rem; color: #6b7280; margin-top: 10px; }
-        .search-box { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; outline: none; font-size: 1rem; }
-        .skeleton { height: 200px; background: #e5e7eb; border-radius: 20px; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        .hidden { display: none; }
+        :root { --p: #1a56db; --bg: #f8fafc; --card: #ffffff; --text: #1e293b; --download: #059669; }
+        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); margin: 0; color: var(--text); line-height: 1.5; }
+        header { background: linear-gradient(135deg, #1a56db, #1e40af); color: white; padding: 50px 20px; text-align: center; border-radius: 0 0 40px 40px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 800px; margin: -30px auto 30px; padding: 0 15px; }
+        .tabs { display: flex; gap: 10px; background: white; padding: 8px; border-radius: 50px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow-x: auto; scrollbar-width: none; }
+        .tab { padding: 10px 25px; border-radius: 40px; cursor: pointer; font-weight: bold; color: var(--p); white-space: nowrap; transition: 0.3s; }
+        .tab.active { background: var(--p); color: white; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; padding: 20px; max-width: 1400px; margin: auto; }
+        .card { background: var(--card); border-radius: 25px; padding: 25px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.3s; position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: var(--p); }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 10px; font-size: 0.75rem; font-weight: 800; margin-bottom: 12px; background: #eff6ff; color: var(--p); }
+        h3 { margin: 10px 0; font-size: 1.25rem; color: #0f172a; cursor: pointer; }
+        .meta { font-size: 0.85rem; color: #64748b; margin-bottom: 20px; }
+        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .btn { padding: 12px; border-radius: 15px; border: none; font-weight: bold; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; text-decoration: none; }
+        .btn-view { background: var(--p); color: white; }
+        .btn-download { background: var(--download); color: white; }
+        .btn:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
-    <header><h1>הספר הדיגיטלי למתמטיקה</h1><p>חוויית למידה אקדמית מתקדמת</p></header>
-    <div class="sticky-nav">
-        <input type="text" id="q" class="search-box" placeholder="🔍 חפש נושא, מחבר או שנה..." onkeyup="runF()">
+    <header>
+        <h1>הספר הדיגיטלי למתמטיקה</h1>
+        <p id="stats">טוען נתונים...</p>
+    </header>
+    <div class="nav-container">
         <div class="tabs">
-            <div class="tab active" onclick="setTab('all', this)">הכל</div>
-            <div class="tab" onclick="setTab('MS', this)">חטיבה</div>
-            <div class="tab" onclick="setTab('HS', this)">בגרות</div>
+            <div class="tab active" onclick="filter('all', this)">הכל</div>
+            <div class="tab" onclick="filter('Grade 7', this)">כיתה ז'</div>
+            <div class="tab" onclick="filter('Grade 8', this)">כיתה ח'</div>
+            <div class="tab" onclick="filter('Grade 9', this)">כיתה ט'</div>
+            <div class="tab" onclick="filter('Units', this)">בגרות</div>
         </div>
     </div>
     <div id="toc" class="grid"></div>
     <script>
-        let data = [], curTab = 'all';
-        async function init() {
-            const r = await fetch('generated/chapters.json');
-            data = await r.json();
-            runF();
+        let allItems = [];
+        async function load() {
+            const r = await fetch('generated/chapters.json?v=' + Date.now());
+            const d = await r.json(); allItems = d.items || d.files;
+            document.getElementById('stats').innerText = `📊 סה"כ ${allItems.length} ספרים וקבצים זמינים`;
+            render(allItems);
         }
-        function setTab(t, b) {
-            document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-            b.classList.add('active'); curTab = t; runF();
+        function filter(lvl, btn) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            render(lvl === 'all' ? allItems : allItems.filter(i => i.level.includes(lvl)));
         }
-        function runF() {
-            const q = document.getElementById('q').value.toLowerCase();
-            const filtered = data.filter(i => {
-                const mTab = curTab === 'all' || (curTab === 'MS' ? i.level.includes('Grade') : i.level.includes('Units'));
-                const mSearch = i.title.toLowerCase().includes(q) || i.author.toLowerCase().includes(q) || i.subject.toLowerCase().includes(q);
-                return mTab && mSearch;
-            });
-            render(filtered);
+        async function downloadFile(url, filename) {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
         }
         function render(arr) {
-            const container = document.getElementById('toc');
-            if (arr.length === 0) { container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:50px;"><h3>לא נמצאו חומרים תואמים 😕</h3><button onclick="location.reload()">איפוס</button></div>'; return; }
-            container.innerHTML = arr.map(i => `
-                <div class="card" onclick="location.href='reader.html?file=${encodeURIComponent(i.url)}'">
-                    <div style="display:flex;justify-content:space-between;"><span class="badge">${i.level}</span><span style="font-size:0.8rem;opacity:0.7;">${i.ext}</span></div>
-                    <h3 style="margin:15px 0 10px 0;">${i.title}</h3>
+            document.getElementById('toc').innerHTML = arr.map(i => `
+                <div class="card">
+                    <div class="badge">${i.level} | ${i.subject}</div>
+                    <h3 onclick="location.href='reader.html?file=${encodeURIComponent(i.url)}'">${i.title}</h3>
                     <div class="meta">👤 ${i.author} | 📅 ${i.year}</div>
-                    <div class="meta" style="font-weight:bold;color:var(--p);">${i.type}</div>
-                </div>`).join('');
+                    <div class="actions">
+                        <button class="btn btn-view" onclick="location.href='reader.html?file=${encodeURIComponent(i.url)}'">👁️ צפייה</button>
+                        <button class="btn btn-download" onclick="downloadFile('${i.url}', '${i.title}.${i.ext.toLowerCase()}')">⬇️ הורדה</button>
+                    </div>
+                </div>
+            `).join('');
         }
-        init();
+        load();
     </script>
 </body>
 </html>
