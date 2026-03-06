@@ -2,241 +2,193 @@
   {
     "id": 1,
     "title": "חיבור וחיסור מכוונים",
-    "type": "Summary",
-    "subject": "Algebra",
+    "type": "PDF",
     "author": "בתיה מירזאייב",
     "grade": "Grade 7",
-    "url": "pdf/חיבור וחיסור מכוונים.pdf",
-    "file_ext": "PDF"
+    "url": "pdf/חיבור וחיסור מכוונים.pdf"
   },
   {
     "id": 2,
     "title": "הצבה לכיתה ז",
-    "type": "Summary",
-    "subject": "Algebra",
+    "type": "PDF",
     "author": "יניב מזרחי",
     "grade": "Grade 7",
-    "url": "pdf/הצבה לכיתה ז.pdf",
-    "file_ext": "PDF"
+    "url": "pdf/הצבה לכיתה ז.pdf"
   },
   {
     "id": 3,
     "title": "חוברת מכוונים",
-    "type": "Summary",
-    "subject": "Algebra",
-    "author": "יניב מזרחי",
+    "type": "חוברת מכוונים",
+    "author": "Unknown Author",
     "grade": "Grade 7",
-    "url": "pdf/חוברת מכוונים",
-    "file_ext": "חוברת מכוונים"
+    "url": "pdf/חוברת מכוונים"
   },
   {
     "id": 4,
     "title": "נקודות במערכת הצירים",
-    "type": "Additional",
-    "subject": "Algebra",
-    "author": "יניב מזרחי",
+    "type": "DOC",
+    "author": "Unknown Author",
     "grade": "Grade 7",
-    "url": "pdf/נקודות במערכת הצירים.doc",
-    "file_ext": "DOC"
+    "url": "pdf/נקודות במערכת הצירים.doc"
   },
   {
     "id": 5,
     "title": "מספרים מכוונים",
-    "type": "Summary",
-    "subject": "Algebra",
-    "author": "יניב מזרחי",
+    "type": "מספרים מכוונים",
+    "author": "Unknown Author",
     "grade": "Grade 7",
-    "url": "pdf/מספרים מכוונים",
-    "file_ext": "מספרים מכוונים"
+    "url": "pdf/מספרים מכוונים"
   },
   {
     "id": 6,
     "title": "מספרים מכוונים ז'",
-    "type": "Summary",
-    "subject": "Algebra",
+    "type": "PDF",
     "author": "יניב מזרחי",
     "grade": "Grade 7",
-    "url": "pdf/מספרים מכוונים ז'.pdf",
-    "file_ext": "PDF"
+    "url": "pdf/מספרים מכוונים ז'.pdf"
   },
   {
     "id": 7,
     "title": "מערכת צירים ז' ",
-    "type": "Additional",
-    "subject": "Algebra",
-    "author": "יניב מזרחי",
+    "type": "מערכת צירים ז' ",
+    "author": "Unknown Author",
     "grade": "Grade 7",
-    "url": "pdf/מערכת צירים ז' ",
-    "file_ext": "מערכת צירים ז' "
+    "url": "pdf/מערכת צירים ז' "
   },
   {
     "id": 8,
     "title": "משוואות לחטיבה",
-    "type": "Additional",
-    "subject": "Algebra",
+    "type": "PDF",
     "author": "יניב מזרחי",
     "grade": "Grade 7",
-    "url": "pdf/משוואות לחטיבה.pdf",
-    "file_ext": "PDF"
+    "url": "pdf/משוואות לחטיבה.pdf"
   },
   {
     "id": 9,
     "title": "סיכום אלגברה",
-    "type": "Summary",
-    "subject": "Algebra",
-    "author": "יניב מזרחי",
+    "type": "סיכום אלגברה",
+    "author": "Unknown Author",
     "grade": "Grade 7",
-    "url": "pdf/סיכום אלגברה",
-    "file_ext": "סיכום אלגברה"
+    "url": "pdf/סיכום אלגברה"
   },
   {
     "id": 10,
     "title": "סדר פעולות",
-    "type": "Additional",
-    "subject": "Algebra",
-    "author": "יניב מזרחי",
+    "type": "סדר פעולות",
+    "author": "Unknown Author",
     "grade": "Grade 7",
-    "url": "pdf/סדר פעולות",
-    "file_ext": "סדר פעולות"
+    "url": "pdf/סדר פעולות"
   },
   {
     "id": 11,
     "title": "נקודות במערכת הצירים",
-    "type": "Additional",
-    "subject": "Algebra",
+    "type": "PDF",
     "author": "User",
     "grade": "Grade 7",
-    "url": "pdf/נקודות במערכת הצירים.pdf",
-    "file_ext": "PDF"
+    "url": "pdf/נקודות במערכת הצירים.pdf"
   },
   {
     "id": 12,
     "title": "תובנה מספרית",
-    "type": "Summary",
-    "subject": "Algebra",
-    "author": "יניב מזרחי",
+    "type": "תובנה מספרית",
+    "author": "Unknown Author",
     "grade": "Grade 7",
-    "url": "pdf/תובנה מספרית",
-    "file_ext": "תובנה מספרית"
+    "url": "pdf/תובנה מספרית"
   },
   {
     "id": 13,
     "title": "שורש - מבוך",
-    "type": "Practice",
-    "subject": "Algebra",
-    "author": "יניב מזרחי",
+    "type": "שורש - מבוך",
+    "author": "Unknown Author",
     "grade": "Grade 7",
-    "url": "pdf/שורש - מבוך",
-    "file_ext": "שורש - מבוך"
+    "url": "pdf/שורש - מבוך"
   },
   {
     "id": 14,
     "title": "סדר פעולות במספרים מכוונים",
-    "type": "Summary",
-    "subject": "Algebra",
+    "type": "DOCX",
     "author": "יניב מזרחי",
     "grade": "Grade 7",
-    "url": "pdf/סדר פעולות במספרים מכוונים.docx",
-    "file_ext": "DOCX"
+    "url": "pdf/סדר פעולות במספרים מכוונים.docx"
   },
   {
     "id": 15,
     "title": "סדר פעולות במספרים מכוונים",
-    "type": "Summary",
-    "subject": "Algebra",
+    "type": "PDF",
     "author": "יניב מזרחי",
     "grade": "Grade 7",
-    "url": "pdf/סדר פעולות במספרים מכוונים.pdf",
-    "file_ext": "PDF"
+    "url": "pdf/סדר פעולות במספרים מכוונים.pdf"
   },
   {
     "id": 16,
     "title": "סדר פעולות החשבון (1)",
-    "type": "Additional",
-    "subject": "Algebra",
+    "type": "DOCX",
     "author": "יניב מזרחי",
     "grade": "Grade 7",
-    "url": "pdf/סדר פעולות החשבון (1).docx",
-    "file_ext": "DOCX"
+    "url": "pdf/סדר פעולות החשבון (1).docx"
   },
   {
     "id": 17,
     "title": "סדר פעולות חשבון במספרים מכוונים כולל חזקות",
-    "type": "Summary",
-    "subject": "Algebra",
+    "type": "PDF",
     "author": "סמיון",
     "grade": "Grade 7",
-    "url": "pdf/סדר פעולות חשבון במספרים מכוונים כולל חזקות.pdf",
-    "file_ext": "PDF"
+    "url": "pdf/סדר פעולות חשבון במספרים מכוונים כולל חזקות.pdf"
   },
   {
     "id": 18,
     "title": "מבוך חוק הפילוג",
-    "type": "Practice",
-    "subject": "Algebra",
-    "author": "יניב מזרחי",
+    "type": "מבוך חוק הפילוג",
+    "author": "Unknown Author",
     "grade": "Grade 7",
-    "url": "pdf/מבוך חוק הפילוג",
-    "file_ext": "מבוך חוק הפילוג"
+    "url": "pdf/מבוך חוק הפילוג"
   },
   {
     "id": 19,
     "title": "חוקיות",
-    "type": "Summary",
-    "subject": "Algebra",
-    "author": "יניב מזרחי",
+    "type": "חוקיות",
+    "author": "Unknown Author",
     "grade": "Grade 7",
-    "url": "pdf/חוקיות",
-    "file_ext": "חוקיות"
+    "url": "pdf/חוקיות"
   },
   {
     "id": 20,
     "title": "דף מסכם חוקיות",
-    "type": "Worksheet",
-    "subject": "Algebra",
-    "author": "יניב מזרחי",
+    "type": "דף מסכם חוקיות",
+    "author": "Unknown Author",
     "grade": "Grade 7",
-    "url": "pdf/דף מסכם חוקיות",
-    "file_ext": "דף מסכם חוקיות"
+    "url": "pdf/דף מסכם חוקיות"
   },
   {
     "id": 21,
     "title": "חוקיות לכיתה ז וורד",
-    "type": "Summary",
-    "subject": "Algebra",
+    "type": "DOCX",
     "author": "יניב מזרחי",
     "grade": "Grade 7",
-    "url": "pdf/חוקיות לכיתה ז וורד.docx",
-    "file_ext": "DOCX"
+    "url": "pdf/חוקיות לכיתה ז וורד.docx"
   },
   {
     "id": 22,
     "title": "שטחים והיקפים במערכת הצירים",
-    "type": "Additional",
-    "subject": "Geometry",
-    "author": "יניב מזרחי",
+    "type": "DOC",
+    "author": "Unknown Author",
     "grade": "Grade 7",
-    "url": "pdf/שטחים והיקפים במערכת הצירים.doc",
-    "file_ext": "DOC"
+    "url": "pdf/שטחים והיקפים במערכת הצירים.doc"
   },
   {
     "id": 23,
     "title": "שטחים במערכת הצירים",
-    "type": "Additional",
-    "subject": "Geometry",
+    "type": "PDF",
     "author": "רותם מזרחי",
     "grade": "Grade 7",
-    "url": "pdf/שטחים במערכת הצירים.pdf",
-    "file_ext": "PDF"
+    "url": "pdf/שטחים במערכת הצירים.pdf"
   },
   {
     "id": 24,
     "title": "שטחים בצירים",
-    "type": "Additional",
-    "subject": "Geometry",
+    "type": "DOCX",
     "author": "רותם מזרחי",
     "grade": "Grade 7",
-    "url": "pdf/שטחים בצירים.docx",
-    "file_ext": "DOCX"
+    "url": "pdf/שטחים בצירים.docx"
   }
 ]
