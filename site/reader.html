@@ -2,36 +2,37 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>קורא ספרים דיגיטלי</title>
+    <title>קורא דיגיטלי | הדפסה וצפייה</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #1e293b; font-family: system-ui, sans-serif; }
-        .header { background: #111827; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .title { font-weight: bold; font-size: 1.1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 50%; }
-        .btns { display: flex; gap: 10px; }
-        .btn { padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 0.9rem; }
-        .btn-dl { background: #059669; color: white; }
-        .btn-back { background: #3b82f6; color: white; }
-        iframe { width: 100%; height: calc(100% - 60px); border: none; }
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #0f172a; font-family: system-ui, sans-serif; }
+        .header { background: #1e293b; color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .btns { display: flex; gap: 8px; }
+        .btn { padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 0.85rem; transition: 0.2s; color: white; }
+        .btn-print { background: #6366f1; }
+        .btn-dl { background: #059669; }
+        .btn-back { background: #3b82f6; }
+        iframe { width: 100%; height: calc(100% - 55px); border: none; }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="title" id="t">טוען ספר...</div>
+        <div id="t" style="font-weight:bold; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:40%;">טוען...</div>
         <div class="btns">
-            <a id="dl" class="btn btn-dl">⬇️ הורד למכשיר</a>
-            <a href="index.html" class="btn btn-back">חזרה לספרייה</a>
+            <button class="btn btn-print" onclick="window.frames['v'].print()">🖨️ הדפס</button>
+            <a id="dl" class="btn btn-dl">⬇️ הורדה</a>
+            <a href="index.html" class="btn btn-back">חזרה</a>
         </div>
     </div>
-    <iframe id="v"></iframe>
+    <iframe id="v" name="v"></iframe>
     <script>
         const p = new URLSearchParams(window.location.search);
         const f = p.get('file');
         if (f) {
             document.getElementById('v').src = f;
-            const name = decodeURIComponent(f.split('/').pop());
-            document.getElementById('t').innerText = name;
+            const n = decodeURIComponent(f.split('/').pop());
+            document.getElementById('t').innerText = n;
             document.getElementById('dl').href = f;
-            document.getElementById('dl').setAttribute('download', name);
+            document.getElementById('dl').setAttribute('download', n);
         }
     </script>
 </body>
