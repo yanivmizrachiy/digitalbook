@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Digital Book</title>
+<style>body{font-family:sans-serif;background:#f4f7f6;text-align:center;padding:20px} .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:15px} .card{background:white;padding:20px;border-radius:12px;cursor:pointer;box-shadow:0 2px 5px rgba(0,0,0,0.1)}</style></head>
+<body><h1>📚 הספר הדיגיטלי של יניב</h1><div id="toc" class="grid"></div><script>
+async function load(){const r=await fetch('generated/chapters.json');const c=await r.json();document.getElementById('toc').innerHTML=c.map(ch=>`<div class="card" onclick="location.href='reader.html?file='+encodeURIComponent(ch.url)"><b>${ch.id}.</b> ${ch.title}</div>`).join('');}load();
+</script></body></html>
