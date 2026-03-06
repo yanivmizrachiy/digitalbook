@@ -1,19 +1,16 @@
-# Digital Mathematics Book - Library Protocol (v6.0)
+# Digital Mathematics Book - Global Infrastructure (v7.0)
 
-## 1. Digital Library Standards
-- **Real File Access:** כל קובץ חייב לכלול כפתור הורדה (Download) שעובד בטכנולוגיית Blob להבטחת הורדה פיזית.
-- **Visual Library:** הממשק מעוצב כספרייה דיגיטלית עם כרטיסיות תוכן עשירות.
+## 1. Official Data Sources (Drive Links)
+- **Grade 7:** https://drive.google.com/open?id=1z0jsg8ZVa7rCeVLY1sms-W7C6whFuK8L
+- **Grade 8:** https://drive.google.com/open?id=1ClTb8TrhvaQBIi43z7TKxOG1RuYWdywC
+- **Grade 9:** https://drive.google.com/open?id=1uBFrJRqKJo8o6Rbgylqz0htxvthZ1dOn
+- **High School:** https://drive.google.com/open?id=1ev590-eH5ikT3VG7ZsfDocq-pfE1t1Sz
 
-## 2. Button Functionality
-- **No-Demo Policy:** כל כפתור "הורדה" או "צפייה" חייב להיות מחובר לקובץ האמיתי בתיקיית /pdf.
-- **Mobile Native:** הכפתורים מותאמים ללחיצה קלה במסכי מגע (Fat-finger friendly).
+## 2. Ingestion & Architecture
+- **Automatic Sync:** כל קובץ בתיקיית /pdf נסרק ע"י extract_meta.py.
+- **Hierarchical Navigation:** תמיכה מלאה בסינון לפי כיתה (ז-ט) ויחידות לימוד תיכוניות.
+- **Feature Set:** צפייה (Reader), הורדה פיזית, מצב לילה, וטיימר מבחן.
 
-## 12. Exam Mode & Time Management (Update 2026-03-06)
-- **Functional Timer:** ה-Reader כולל טיימר אקטיבי לספירה לאחור (90 דקות ברירת מחדל).
-- **Focus Mode:** אפשרות להעלמת הממשק (Focus Mode) כדי למנוע הסחות דעת בזמן פתרון.
-- **Strict Implementation:** כל כפתור במצב המבחן מחובר ללוגיקה של Javascript ואינו דקורטיבי.
-
-## 13. Data Ingestion Protocol (Update 2026-03-06)
-- **Source Sync:** בוצעה שאיבת קבצים מתיקיות הדרייב "שאלות כמו בתוכנית" ו"מתמטיקה ז'".
-- **New Content:** הוטמעה חוברת תרגול כיתה ז' (מחצית א').
-- **Integrity:** כל קובץ חדש קיבל אוטומטית כפתורי צפייה, הורדה ומצב מבחן.
+## 3. Deployment Protocol
+- **Production:** GitHub Pages.
+- **Environment:** Termux -> Atomic Sync.
