@@ -12,3 +12,8 @@
 ## 3. Repository Structure
 - Files are organized by `Grade/Subject/Type` subdirectories.
 - Flat file structures in `/pdf` are strictly prohibited.
+
+## 15. Advanced Navigation Protocol (Update 2026-03-06)
+- **Sidebar Filtering:** המערכת תומכת בסינון רב-שכבתי (כיתה, נושא, סוג) הפועל בזמן אמת.
+- **Dynamic Counters:** מונה הקבצים מתעדכן אוטומטית לפי תוצאות הסינון.
+- **RTL Integrity:** הממשק שומר על יישור לימין (RTL) מלא גם בתצוגת ה-Sidebar.

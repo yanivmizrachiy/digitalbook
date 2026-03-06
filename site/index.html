@@ -2,46 +2,109 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigitalBook | ארכיון מתמטיקה מקצועי</title>
+    <title>DigitalBook | ארכיון ניהול פדגוגי</title>
     <style>
-        :root { --p: #1e3a8a; --bg: #f8fafc; --card: #ffffff; }
-        body { font-family: system-ui, sans-serif; background: var(--bg); margin: 0; padding-bottom: 50px; }
-        header { background: var(--p); color: white; padding: 25px; text-align: center; border-bottom: 4px solid #facc15; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; padding: 20px; max-width: 1400px; margin: auto; }
-        .card { background: var(--card); border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; }
-        .meta-table { width: 100%; margin: 15px 0; font-size: 0.85rem; border-collapse: collapse; }
-        .meta-table td { padding: 5px 0; border-bottom: 1px solid #f1f5f9; }
-        .label { color: #64748b; font-weight: bold; width: 100px; }
-        .val { color: #0f172a; }
-        .unknown { color: #ef4444; font-weight: bold; font-style: italic; }
-        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
-        .btn { padding: 10px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; font-size: 0.85rem; }
+        :root { --p: #1e3a8a; --bg: #f8fafc; --sidebar: #ffffff; }
+        body { font-family: system-ui, sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        header { background: var(--p); color: white; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); flex-shrink: 0; }
+        .main-container { display: flex; flex: 1; overflow: hidden; }
+        
+        /* Sidebar Styles */
+        .sidebar { width: 260px; background: var(--sidebar); border-left: 1px solid #e2e8f0; padding: 20px; overflow-y: auto; flex-shrink: 0; }
+        .filter-group { margin-bottom: 25px; }
+        .filter-title { font-weight: bold; font-size: 0.9rem; color: #64748b; margin-bottom: 12px; display: block; text-transform: uppercase; }
+        .filter-option { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer; font-size: 0.95rem; }
+        .filter-option input { width: 16px; height: 16px; cursor: pointer; }
+
+        /* Content Styles */
+        .content { flex: 1; padding: 25px; overflow-y: auto; }
+        .search-area { margin-bottom: 20px; }
+        .search-bar { width: 100%; max-width: 500px; padding: 12px 20px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 1rem; outline: none; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: white; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; transition: 0.2s; position: relative; }
+        .card:hover { border-color: var(--p); transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        .badge { font-size: 0.75rem; font-weight: bold; color: var(--p); background: #eff6ff; padding: 3px 8px; border-radius: 4px; }
+        .actions { display: flex; gap: 10px; margin-top: 15px; }
+        .btn { flex: 1; padding: 10px; border-radius: 6px; border: none; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; font-size: 0.85rem; }
         .btn-view { background: #e0e7ff; color: var(--p); }
         .btn-dl { background: #059669; color: white; }
     </style>
 </head>
 <body>
-    <header><h1>הספר הדיגיטלי - ניהול חומרי לימוד</h1></header>
-    <div id="toc" class="grid"></div>
+    <header>
+        <div style="font-weight:bold; font-size:1.2rem;">DigitalBook | מנוע מורים</div>
+        <div id="stats" style="font-size:0.9rem; opacity:0.8;"></div>
+    </header>
+    
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="filter-group">
+                <span class="filter-title">כיתה / שלב</span>
+                <label class="filter-option"><input type="checkbox" value="כיתה ז" onchange="filter()"> כיתה ז'</label>
+                <label class="filter-option"><input type="checkbox" value="כיתה ח" onchange="filter()"> כיתה ח'</label>
+                <label class="filter-option"><input type="checkbox" value="כיתה ט" onchange="filter()"> כיתה ט'</label>
+                <label class="filter-option"><input type="checkbox" value="חומר לבגרות" onchange="filter()"> חומר לבגרות</label>
+            </div>
+            <div class="filter-group">
+                <span class="filter-title">נושא</span>
+                <label class="filter-option"><input type="checkbox" value="אלגברה" onchange="filter()"> אלגברה</label>
+                <label class="filter-option"><input type="checkbox" value="גיאומטריה" onchange="filter()"> גיאומטריה</label>
+                <label class="filter-option"><input type="checkbox" value="כללי" onchange="filter()"> כללי</label>
+            </div>
+            <div class="filter-group">
+                <span class="filter-title">סוג קובץ</span>
+                <label class="filter-option"><input type="checkbox" value="מבחן" onchange="filter()"> מבחן</label>
+                <label class="filter-option"><input type="checkbox" value="עבודה/משימה" onchange="filter()"> דף עבודה</label>
+                <label class="filter-option"><input type="checkbox" value="הכנה למבחן" onchange="filter()"> הכנה למבחן</label>
+            </div>
+        </aside>
+
+        <main class="content">
+            <div class="search-area">
+                <input type="text" id="s" class="search-bar" placeholder="🔍 חפש כותרת או מחבר..." oninput="filter()">
+            </div>
+            <div id="toc" class="grid"></div>
+        </main>
+    </div>
+
     <script>
+        let allItems = [];
+        async function load() {
+            const r = await fetch('generated/chapters.json?v=' + Date.now());
+            const d = await r.json(); allItems = d.items;
+            filter();
+        }
+
         async function dl(url, name) {
             const r = await fetch(url); const b = await r.blob();
             const l = document.createElement('a'); l.href = URL.createObjectURL(b); l.download = name; l.click();
         }
-        async function load() {
-            const r = await fetch('generated/chapters.json?v=' + Date.now());
-            const d = await r.json();
-            document.getElementById('toc').innerHTML = d.items.map(i => `
+
+        function filter() {
+            const query = document.getElementById('s').value.toLowerCase();
+            const checked = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+            
+            const filtered = allItems.filter(i => {
+                const matchesSearch = i.title.toLowerCase().includes(query) || i.author.toLowerCase().includes(query);
+                const matchesFilters = checked.length === 0 || 
+                    checked.includes(i.level) || checked.includes(i.subject) || checked.includes(i.type);
+                return matchesSearch && matchesFilters;
+            });
+            render(filtered);
+        }
+
+        function render(arr) {
+            document.getElementById('stats').innerText = `${arr.length} קבצים נמצאו`;
+            document.getElementById('toc').innerHTML = arr.map(i => `
                 <div class="card">
-                    <h3 style="margin:0; color:var(--p);">${i.title}</h3>
-                    <table class="meta-table">
-                        <tr><td class="label">מחבר:</td><td class="val ${i.author === 'Unknown' ? 'unknown' : ''}">${i.author === 'Unknown' ? 'Unknown' : i.author}</td></tr>
-                        <tr><td class="label">סיווג כיתה:</td><td class="val">${i.level}</td></tr>
-                        <tr><td class="label">נושא:</td><td class="val">${i.subject}</td></tr>
-                        <tr><td class="label">סוג מטלה:</td><td class="val">${i.type}</td></tr>
-                    </table>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                        <span class="badge">${i.level}</span>
+                        <span style="font-size:0.7rem; color:#64748b;">${i.type}</span>
+                    </div>
+                    <h3 style="margin:0; font-size:1.1rem; color:var(--p);">${i.title}</h3>
+                    <p style="font-size:0.8rem; color:#64748b; margin:10px 0;">👤 ${i.author}</p>
                     <div class="actions">
-                        <a href="reader.html?file=${encodeURIComponent(i.url)}" class="btn btn-view">👁️ צפייה</a>
+                        <a href="reader.html?file=${encodeURIComponent(i.url)}" class="btn btn-view">📄 עיון</a>
                         <button class="btn btn-dl" onclick="dl('${i.url}', '${i.title}.${i.ext}')">⬇️ הורדה</button>
                     </div>
                 </div>`).join('');
