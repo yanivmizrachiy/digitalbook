@@ -1,183 +1,48 @@
 {
     "items": [
         {
-            "title": "חיבור וחיסור מכוונים",
-            "url": "pdf/חיבור וחיסור מכוונים.pdf",
-            "level": "Unknown",
-            "subject": "כללי",
-            "type": "מסמך",
-            "author": "Unknown",
-            "year": "2026",
-            "ext": "pdf"
-        },
-        {
-            "title": "הצבה לכיתה ז",
-            "url": "pdf/הצבה לכיתה ז.pdf",
-            "level": "Unknown",
-            "subject": "כללי",
-            "type": "מסמך",
-            "author": "Unknown",
-            "year": "2026",
-            "ext": "pdf"
-        },
-        {
-            "title": "מספרים מכוונים ז'",
-            "url": "pdf/מספרים מכוונים ז'.pdf",
-            "level": "Unknown",
-            "subject": "כללי",
-            "type": "מסמך",
-            "author": "Unknown",
-            "year": "2026",
-            "ext": "pdf"
-        },
-        {
-            "title": "משוואות לחטיבה",
-            "url": "pdf/משוואות לחטיבה.pdf",
-            "level": "Unknown",
-            "subject": "כללי",
-            "type": "מסמך",
-            "author": "Unknown",
-            "year": "2026",
-            "ext": "pdf"
-        },
-        {
-            "title": "נקודות במערכת הצירים",
-            "url": "pdf/נקודות במערכת הצירים.pdf",
-            "level": "Unknown",
-            "subject": "כללי",
-            "type": "מסמך",
-            "author": "Unknown",
-            "year": "2026",
-            "ext": "pdf"
-        },
-        {
             "title": "סדר פעולות במספרים מכוונים",
             "url": "pdf/סדר פעולות במספרים מכוונים.docx",
             "level": "Unknown",
             "subject": "כללי",
-            "type": "מסמך",
+            "type": "עבודה/משימה",
             "author": "Unknown",
-            "year": "2026",
             "ext": "docx"
-        },
-        {
-            "title": "סדר פעולות במספרים מכוונים",
-            "url": "pdf/סדר פעולות במספרים מכוונים.pdf",
-            "level": "Unknown",
-            "subject": "כללי",
-            "type": "מסמך",
-            "author": "Unknown",
-            "year": "2026",
-            "ext": "pdf"
         },
         {
             "title": "סדר פעולות החשבון (1)",
             "url": "pdf/סדר פעולות החשבון (1).docx",
             "level": "Unknown",
             "subject": "כללי",
-            "type": "מסמך",
+            "type": "עבודה/משימה",
             "author": "Unknown",
-            "year": "2026",
             "ext": "docx"
-        },
-        {
-            "title": "סדר פעולות חשבון במספרים מכוונים כולל חזקות",
-            "url": "pdf/סדר פעולות חשבון במספרים מכוונים כולל חזקות.pdf",
-            "level": "Unknown",
-            "subject": "כללי",
-            "type": "מסמך",
-            "author": "Unknown",
-            "year": "2026",
-            "ext": "pdf"
         },
         {
             "title": "חוקיות לכיתה ז וורד",
             "url": "pdf/חוקיות לכיתה ז וורד.docx",
             "level": "Unknown",
             "subject": "כללי",
-            "type": "מסמך",
+            "type": "עבודה/משימה",
             "author": "Unknown",
-            "year": "2026",
             "ext": "docx"
-        },
-        {
-            "title": "שטחים במערכת הצירים",
-            "url": "pdf/שטחים במערכת הצירים.pdf",
-            "level": "Unknown",
-            "subject": "כללי",
-            "type": "מסמך",
-            "author": "Unknown",
-            "year": "2026",
-            "ext": "pdf"
         },
         {
             "title": "שטחים בצירים",
             "url": "pdf/שטחים בצירים.docx",
             "level": "Unknown",
             "subject": "כללי",
-            "type": "מסמך",
+            "type": "עבודה/משימה",
             "author": "Unknown",
-            "year": "2026",
             "ext": "docx"
-        },
-        {
-            "title": "אחוזים לחטיבת הביניים",
-            "url": "pdf/אחוזים לחטיבת הביניים.pdf",
-            "level": "Unknown",
-            "subject": "כללי",
-            "type": "מסמך",
-            "author": "Unknown",
-            "year": "2026",
-            "ext": "pdf"
-        },
-        {
-            "title": "אחוזים שאלות מיצב",
-            "url": "pdf/אחוזים שאלות מיצב.pdf",
-            "level": "Unknown",
-            "subject": "כללי",
-            "type": "מסמך",
-            "author": "Unknown",
-            "year": "2026",
-            "ext": "pdf"
-        },
-        {
-            "title": "יחס לכיתה ח ",
-            "url": "pdf/יחס לכיתה ח .pdf",
-            "level": "Unknown",
-            "subject": "כללי",
-            "type": "מסמך",
-            "author": "Unknown",
-            "year": "2026",
-            "ext": "pdf"
-        },
-        {
-            "title": "מערכת משוואות בשני נעלמים ",
-            "url": "pdf/מערכת משוואות בשני נעלמים .pdf",
-            "level": "Unknown",
-            "subject": "כללי",
-            "type": "מסמך",
-            "author": "Unknown",
-            "year": "2026",
-            "ext": "pdf"
-        },
-        {
-            "title": "מבוך מערכת משוואות",
-            "url": "pdf/מבוך מערכת משוואות.pdf",
-            "level": "Unknown",
-            "subject": "כללי",
-            "type": "מסמך",
-            "author": "Unknown",
-            "year": "2026",
-            "ext": "pdf"
         },
         {
             "title": "אחוזים לחטיבת הביניים",
             "url": "pdf/אחוזים לחטיבת הביניים.docx",
             "level": "Unknown",
             "subject": "כללי",
-            "type": "מסמך",
+            "type": "עבודה/משימה",
             "author": "Unknown",
-            "year": "2026",
             "ext": "docx"
         },
         {
@@ -185,9 +50,8 @@
             "url": "pdf/אחוזים ממיצבים.docx",
             "level": "Unknown",
             "subject": "כללי",
-            "type": "מסמך",
+            "type": "עבודה/משימה",
             "author": "Unknown",
-            "year": "2026",
             "ext": "docx"
         },
         {
@@ -195,9 +59,8 @@
             "url": "pdf/יחס לכיתה ח .docx",
             "level": "Unknown",
             "subject": "כללי",
-            "type": "מסמך",
+            "type": "עבודה/משימה",
             "author": "Unknown",
-            "year": "2026",
             "ext": "docx"
         },
         {
@@ -205,9 +68,8 @@
             "url": "pdf/יחס שאלות מיצב.docx",
             "level": "Unknown",
             "subject": "כללי",
-            "type": "מסמך",
+            "type": "עבודה/משימה",
             "author": "Unknown",
-            "year": "2026",
             "ext": "docx"
         },
         {
@@ -215,10 +77,126 @@
             "url": "pdf/פונקציה לינארית א.docx",
             "level": "Unknown",
             "subject": "כללי",
-            "type": "מסמך",
+            "type": "עבודה/משימה",
             "author": "Unknown",
-            "year": "2026",
             "ext": "docx"
+        },
+        {
+            "title": "חיבור וחיסור מכוונים",
+            "url": "pdf/Grade_7/General/Worksheet/חיבור וחיסור מכוונים.pdf",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "pdf"
+        },
+        {
+            "title": "הצבה לכיתה ז",
+            "url": "pdf/Grade_7/General/Worksheet/הצבה לכיתה ז.pdf",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "pdf"
+        },
+        {
+            "title": "מספרים מכוונים ז'",
+            "url": "pdf/Grade_7/General/Worksheet/מספרים מכוונים ז'.pdf",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "pdf"
+        },
+        {
+            "title": "משוואות לחטיבה",
+            "url": "pdf/Grade_7/General/Worksheet/משוואות לחטיבה.pdf",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "pdf"
+        },
+        {
+            "title": "נקודות במערכת הצירים",
+            "url": "pdf/Grade_7/General/Worksheet/נקודות במערכת הצירים.pdf",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "pdf"
+        },
+        {
+            "title": "סדר פעולות במספרים מכוונים",
+            "url": "pdf/Grade_7/General/Worksheet/סדר פעולות במספרים מכוונים.pdf",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "pdf"
+        },
+        {
+            "title": "סדר פעולות חשבון במספרים מכוונים כולל חזקות",
+            "url": "pdf/Grade_7/General/Worksheet/סדר פעולות חשבון במספרים מכוונים כולל חזקות.pdf",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "pdf"
+        },
+        {
+            "title": "שטחים במערכת הצירים",
+            "url": "pdf/Grade_7/General/Worksheet/שטחים במערכת הצירים.pdf",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "pdf"
+        },
+        {
+            "title": "אחוזים לחטיבת הביניים",
+            "url": "pdf/Grade_7/General/Worksheet/אחוזים לחטיבת הביניים.pdf",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "pdf"
+        },
+        {
+            "title": "אחוזים שאלות מיצב",
+            "url": "pdf/Grade_7/General/Worksheet/אחוזים שאלות מיצב.pdf",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "pdf"
+        },
+        {
+            "title": "יחס לכיתה ח ",
+            "url": "pdf/Grade_7/General/Worksheet/יחס לכיתה ח .pdf",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "pdf"
+        },
+        {
+            "title": "מערכת משוואות בשני נעלמים ",
+            "url": "pdf/Grade_7/General/Worksheet/מערכת משוואות בשני נעלמים .pdf",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "pdf"
+        },
+        {
+            "title": "מבוך מערכת משוואות",
+            "url": "pdf/Grade_7/General/Worksheet/מבוך מערכת משוואות.pdf",
+            "level": "כיתה 7",
+            "subject": "כללי",
+            "type": "עבודה/משימה",
+            "author": "Unknown",
+            "ext": "pdf"
         }
     ]
 }
