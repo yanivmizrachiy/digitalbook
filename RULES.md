@@ -1,15 +1,14 @@
-# 📘 DigitalBook | Teacher's Professional Repository (v8.0)
-**ייעוד:** מערכת ניהול פדגוגית לשימוש מורים בלבד.
+# DigitalBook | Engineering Audit & Classification Protocol
 
-## ⚖️ 1. פרוטוקול המטא-דאטה
-- כל קובץ יוצג עם תעודת זהות מלאה: כיתה, נושא, סוג, מחבר ושנה.
-- חובה להציג את המידע לפני ביצוע פעולת הדפסה.
+## 1. Classification Standards
+- **Grades:** 7, 8, 9 or Bagrut (חומר לבגרות).
+- **Subjects:** Algebra (אלגברה), Geometry (גיאומטריה), or General (כללי).
+- **Types:** Worksheet (עבודה), Test (מבחן), Exam_Prep (הכנה), Summary (סיכום).
 
-## 🚀 2. פונקציונליות מורים
-- **Full Metadata View:** הצגה ברורה של פרטי הקובץ בכרטיסייה.
-- **Direct Printing:** אפשרות הדפסה מהירה לאחר סקירת הנתונים.
-- **Internal Archiving:** המערכת משמשת כארכיון מקצועי לריכוז חומרי לימוד.
+## 2. Metadata Integrity
+- **Authorship:** Every file MUST display an author. If not found in document text, it is marked as `Unknown`.
+- **Validation:** No placeholder buttons allowed. Every "Download" button must trigger a physical file fetch.
 
-## 🛰️ 3. בקרת איכות
-- מנוע ה-Python סורק ומחלץ את המידע אוטומטית מקבצי המקור (PDF/DOCX).
-- המערכת אינה מיועדת לשימוש תלמידים (Internal Staff Only).
+## 3. Repository Structure
+- Files are organized by `Grade/Subject/Type` subdirectories.
+- Flat file structures in `/pdf` are strictly prohibited.

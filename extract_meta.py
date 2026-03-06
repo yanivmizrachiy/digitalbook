@@ -1,51 +1,42 @@
 import os, json, re
-from docx import Document
-from PyPDF2 import PdfReader
 
-def get_meta_from_file(filepath, ext):
-    author, year = "Unknown", "Unknown"
-    try:
-        if ext == 'DOCX':
-            doc = Document(filepath)
-            author = doc.core_properties.author or "Unknown"
-            year = str(doc.core_properties.created.year) if doc.core_properties.created else "Unknown"
-        elif ext == 'PDF':
-            reader = PdfReader(filepath)
-            meta = reader.metadata
-            author = meta.author if meta and meta.author else "Unknown"
-    except: pass
-    return author, year
-
-def get_assignment_type(name):
-    n = name.lower()
-    if any(x in n for x in ['מבחן', 'בוחן', 'מיצב']): return 'Test'
-    if 'סיכום' in n: return 'Summary Assignment'
-    if 'תיקון' in n: return 'Correction Assignment'
-    return 'Worksheet'
+def get_metadata(filepath):
+    # Classification based on path
+    parts = filepath.split(os.sep)
+    grade = "חומר לבגרות" if "Bagrut" in parts else "Unknown"
+    for g in ["Grade_7", "Grade_8", "Grade_9"]:
+        if g in parts: grade = g.replace("Grade_", "כיתה ")
+    
+    subject = "אלגברה" if "Algebra" in parts else ("גיאומטריה" if "Geometry" in parts else "כללי")
+    type_map = {"Worksheet": "עבודה/משימה", "Test": "מבחן", "Exam_Prep": "הכנה למבחן", "Summary": "עבודת סיכום"}
+    doc_type = "מסמך"
+    for k, v in type_map.items():
+        if k in parts: doc_type = v
+    
+    # Author Extraction Placeholder (Marked as Unknown if not found)
+    author = "Unknown" 
+    # Logic to be expanded: search text for "מאת:" or "נכתב ע"י"
+    
+    return grade, subject, doc_type, author
 
 data = []
-for root, dirs, files in os.walk('./pdf'):
-    for f in files:
-        if f.startswith('.'): continue
-        ext = f.split('.')[-1].upper()
-        author, year = get_meta_from_file(os.path.join(root, f), ext)
-        
-        # לוגיקת סיווג רמה (Level)
-        path = root.lower()
-        level = "General"
-        if 'ז' in path or '7' in path: level = "Grade 7"
-        elif '3 יח' in path: level = "3 Units"
-        
-        data.append({
-            "title": f.rsplit('.', 1)[0].replace('_', ' '),
-            "author": author,
-            "year": year,
-            "level": level,
-            "subject": "Mathematics",
-            "type": get_assignment_type(f),
-            "url": f"pdf/{f}",
-            "ext": ext
-        })
+base_path = "site/pdf"
+for root, dirs, files in os.walk(base_path):
+    for file in files:
+        if file.endswith(('.pdf', '.docx')):
+            rel_path = os.path.join(root, file)
+            grade, subject, doc_type, author = get_metadata(rel_path)
+            data.append({
+                "title": file.replace(".pdf", "").replace(".docx", ""),
+                "url": rel_path.replace("site/", ""),
+                "level": grade,
+                "subject": subject,
+                "type": doc_type,
+                "author": author,
+                "year": "2026",
+                "ext": file.split('.')[-1]
+            })
 
-with open('./site/generated/chapters.json', 'w', encoding='utf-8') as jf:
-    json.dump(data, jf, ensure_ascii=False, indent=2)
+os.makedirs("site/generated", exist_ok=True)
+with open("site/generated/chapters.json", "w", encoding="utf-8") as f:
+    json.dump({"items": data}, f, ensure_ascii=False, indent=4)

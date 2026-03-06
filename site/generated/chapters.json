@@ -1,242 +1,224 @@
-[
-  {
-    "title": "חיבור וחיסור מכוונים",
-    "author": "בתיה מירזאייב",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/חיבור וחיסור מכוונים.pdf",
-    "ext": "PDF"
-  },
-  {
-    "title": "הצבה לכיתה ז",
-    "author": "יניב מזרחי",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/הצבה לכיתה ז.pdf",
-    "ext": "PDF"
-  },
-  {
-    "title": "חוברת מכוונים",
-    "author": "Unknown",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/חוברת מכוונים",
-    "ext": "חוברת מכוונים"
-  },
-  {
-    "title": "נקודות במערכת הצירים",
-    "author": "Unknown",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/נקודות במערכת הצירים.doc",
-    "ext": "DOC"
-  },
-  {
-    "title": "מספרים מכוונים",
-    "author": "Unknown",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/מספרים מכוונים",
-    "ext": "מספרים מכוונים"
-  },
-  {
-    "title": "מספרים מכוונים ז'",
-    "author": "יניב מזרחי",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/מספרים מכוונים ז'.pdf",
-    "ext": "PDF"
-  },
-  {
-    "title": "מערכת צירים ז' ",
-    "author": "Unknown",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/מערכת צירים ז' ",
-    "ext": "מערכת צירים ז' "
-  },
-  {
-    "title": "משוואות לחטיבה",
-    "author": "יניב מזרחי",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/משוואות לחטיבה.pdf",
-    "ext": "PDF"
-  },
-  {
-    "title": "סיכום אלגברה",
-    "author": "Unknown",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Summary Assignment",
-    "url": "pdf/סיכום אלגברה",
-    "ext": "סיכום אלגברה"
-  },
-  {
-    "title": "סדר פעולות",
-    "author": "Unknown",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/סדר פעולות",
-    "ext": "סדר פעולות"
-  },
-  {
-    "title": "נקודות במערכת הצירים",
-    "author": "User",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/נקודות במערכת הצירים.pdf",
-    "ext": "PDF"
-  },
-  {
-    "title": "תובנה מספרית",
-    "author": "Unknown",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/תובנה מספרית",
-    "ext": "תובנה מספרית"
-  },
-  {
-    "title": "שורש - מבוך",
-    "author": "Unknown",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/שורש - מבוך",
-    "ext": "שורש - מבוך"
-  },
-  {
-    "title": "סדר פעולות במספרים מכוונים",
-    "author": "יניב מזרחי",
-    "year": "2023",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/סדר פעולות במספרים מכוונים.docx",
-    "ext": "DOCX"
-  },
-  {
-    "title": "סדר פעולות במספרים מכוונים",
-    "author": "יניב מזרחי",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/סדר פעולות במספרים מכוונים.pdf",
-    "ext": "PDF"
-  },
-  {
-    "title": "סדר פעולות החשבון (1)",
-    "author": "יניב מזרחי",
-    "year": "2023",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/סדר פעולות החשבון (1).docx",
-    "ext": "DOCX"
-  },
-  {
-    "title": "סדר פעולות חשבון במספרים מכוונים כולל חזקות",
-    "author": "סמיון",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/סדר פעולות חשבון במספרים מכוונים כולל חזקות.pdf",
-    "ext": "PDF"
-  },
-  {
-    "title": "מבוך חוק הפילוג",
-    "author": "Unknown",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/מבוך חוק הפילוג",
-    "ext": "מבוך חוק הפילוג"
-  },
-  {
-    "title": "חוקיות",
-    "author": "Unknown",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/חוקיות",
-    "ext": "חוקיות"
-  },
-  {
-    "title": "דף מסכם חוקיות",
-    "author": "Unknown",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/דף מסכם חוקיות",
-    "ext": "דף מסכם חוקיות"
-  },
-  {
-    "title": "חוקיות לכיתה ז וורד",
-    "author": "יניב מזרחי",
-    "year": "2023",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/חוקיות לכיתה ז וורד.docx",
-    "ext": "DOCX"
-  },
-  {
-    "title": "שטחים והיקפים במערכת הצירים",
-    "author": "Unknown",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/שטחים והיקפים במערכת הצירים.doc",
-    "ext": "DOC"
-  },
-  {
-    "title": "שטחים במערכת הצירים",
-    "author": "רותם מזרחי",
-    "year": "Unknown",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/שטחים במערכת הצירים.pdf",
-    "ext": "PDF"
-  },
-  {
-    "title": "שטחים בצירים",
-    "author": "רותם מזרחי",
-    "year": "2024",
-    "level": "Grade 7",
-    "subject": "Mathematics",
-    "type": "Worksheet",
-    "url": "pdf/שטחים בצירים.docx",
-    "ext": "DOCX"
-  }
-]
+{
+    "items": [
+        {
+            "title": "חיבור וחיסור מכוונים",
+            "url": "pdf/חיבור וחיסור מכוונים.pdf",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "pdf"
+        },
+        {
+            "title": "הצבה לכיתה ז",
+            "url": "pdf/הצבה לכיתה ז.pdf",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "pdf"
+        },
+        {
+            "title": "מספרים מכוונים ז'",
+            "url": "pdf/מספרים מכוונים ז'.pdf",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "pdf"
+        },
+        {
+            "title": "משוואות לחטיבה",
+            "url": "pdf/משוואות לחטיבה.pdf",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "pdf"
+        },
+        {
+            "title": "נקודות במערכת הצירים",
+            "url": "pdf/נקודות במערכת הצירים.pdf",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "pdf"
+        },
+        {
+            "title": "סדר פעולות במספרים מכוונים",
+            "url": "pdf/סדר פעולות במספרים מכוונים.docx",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "docx"
+        },
+        {
+            "title": "סדר פעולות במספרים מכוונים",
+            "url": "pdf/סדר פעולות במספרים מכוונים.pdf",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "pdf"
+        },
+        {
+            "title": "סדר פעולות החשבון (1)",
+            "url": "pdf/סדר פעולות החשבון (1).docx",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "docx"
+        },
+        {
+            "title": "סדר פעולות חשבון במספרים מכוונים כולל חזקות",
+            "url": "pdf/סדר פעולות חשבון במספרים מכוונים כולל חזקות.pdf",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "pdf"
+        },
+        {
+            "title": "חוקיות לכיתה ז וורד",
+            "url": "pdf/חוקיות לכיתה ז וורד.docx",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "docx"
+        },
+        {
+            "title": "שטחים במערכת הצירים",
+            "url": "pdf/שטחים במערכת הצירים.pdf",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "pdf"
+        },
+        {
+            "title": "שטחים בצירים",
+            "url": "pdf/שטחים בצירים.docx",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "docx"
+        },
+        {
+            "title": "אחוזים לחטיבת הביניים",
+            "url": "pdf/אחוזים לחטיבת הביניים.pdf",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "pdf"
+        },
+        {
+            "title": "אחוזים שאלות מיצב",
+            "url": "pdf/אחוזים שאלות מיצב.pdf",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "pdf"
+        },
+        {
+            "title": "יחס לכיתה ח ",
+            "url": "pdf/יחס לכיתה ח .pdf",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "pdf"
+        },
+        {
+            "title": "מערכת משוואות בשני נעלמים ",
+            "url": "pdf/מערכת משוואות בשני נעלמים .pdf",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "pdf"
+        },
+        {
+            "title": "מבוך מערכת משוואות",
+            "url": "pdf/מבוך מערכת משוואות.pdf",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "pdf"
+        },
+        {
+            "title": "אחוזים לחטיבת הביניים",
+            "url": "pdf/אחוזים לחטיבת הביניים.docx",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "docx"
+        },
+        {
+            "title": "אחוזים ממיצבים",
+            "url": "pdf/אחוזים ממיצבים.docx",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "docx"
+        },
+        {
+            "title": "יחס לכיתה ח ",
+            "url": "pdf/יחס לכיתה ח .docx",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "docx"
+        },
+        {
+            "title": "יחס שאלות מיצב",
+            "url": "pdf/יחס שאלות מיצב.docx",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "docx"
+        },
+        {
+            "title": "פונקציה לינארית א",
+            "url": "pdf/פונקציה לינארית א.docx",
+            "level": "Unknown",
+            "subject": "כללי",
+            "type": "מסמך",
+            "author": "Unknown",
+            "year": "2026",
+            "ext": "docx"
+        }
+    ]
+}
