@@ -14,3 +14,8 @@ Every document MUST contain:
 ## 3. Repository Integrity
 - The GitHub file structure MUST mirror the UI navigation.
 - Placeholder data is forbidden; real metadata extraction is mandatory.
+
+## 5. Deep Metadata Protocol (Update 2026-03-06)
+- **Automated Extraction:** המערכת מחויבת להשתמש ב-python-docx ו-PyPDF2 לחילוץ מחבר ושנה מתוך ה-Core Properties של הקובץ.
+- **Fallback Policy:** במידה והמידע אינו קיים בקובץ, השדה יסומן כ-"Unknown" (אין להמציא נתונים).
+- **Taxonomy Validation:** סיווג רמות (ז'-ט' מול 3-5 יח"ל) מבוצע על בסיס נתיב התיקייה ושם הקובץ במקביל.
