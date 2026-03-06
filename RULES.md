@@ -1,24 +1,16 @@
+# Digital Mathematics Book - Project Rules & Governance
 
----
-## System Upgrade — Universal File Integration & Metadata
-- **Scope:** Process ALL file types (PDF, DOCX, DOC) from the source directory. No file left behind.
-- **Metadata Extraction:** Systematically extract filename, author (via internal file properties), and educational grade level.
-- **UI Integration:** Display extracted metadata on the dashboard. PDFs route to the Reader; Word docs route to native device viewers.
-- **System Dependencies:** Termux specifically requires libxml2, libxslt, clang, and pkg-config to compile python-docx and lxml.
+## 1. תיעוד וסנכרון
+- כל שינוי במבנה המערכת חייב להשתקף ב-GitHub באופן מיידי.
+- ה-Repository הוא המקור הסמכותי למצב הפרויקט.
 
----
-## פרויקט מושלם — 2026-03-06
-- [X] PWA Deployment: האתר ניתן להתקנה כאפליקציה.
-- [X] Live Search: הוטמע מנוע חיפוש חכם.
-- [X] Metadata: זיהוי אוטומטי של מחברים ושכבות גיל.
-- **סטטוס סופי:** מערכת מבצעית מלאה.
+## 2. קטלוג וסיווג (Taxonomy)
+כל קובץ במערכת חייב לכלול:
+- **שכבת גיל:** כיתה ז' (Grade 7), כיתה ח' (Grade 8), כיתה ט' (Grade 9).
+- **תחום מתמטי:** אלגברה (Algebra), גיאומטריה (Geometry).
+- **סוג מסמך:** מבחן (Test), דף עבודה (Worksheet), דף תיקון (Correction), תרגול (Practice), חומרי עזר (Additional).
+- **מחבר:** שדה חובה לכל מסמך.
 
----
-## שדרוג ארכיטקטורה ועיצוב פרימיום — 2026-03-06
-- **בידוד פרויקט:** המערכת מנוהלת כישות עצמאית ומבודדת (Digital Book System).
-- **סטנדרט עיצוב:** יישום UI ברמת פרימיום (Elegant Typography, High-Contrast, Modern Hierarchy).
-- **עיבוד קבצים:** מעבר לסריקה שיטתית של כל סוגי הקבצים (PDF, DOCX, DOC) עם חילוץ מטא-דאטה מלא.
-- **תיעוד:** כל פעולה במערכת מחויבת בעדכון ה-RULES.md לסנכרון מלא עם GitHub.
-- **Visual Finalization:** הוטמע ממשק Premium UI המבוסס על היררכיה מודרנית וצבעי מותג יוקרתיים.
-- **Data Integrity:** סנכרון מוצלח של 25 קבצי ליבה ראשונים עם חילוץ מטא-דאטה אוטומטי.
-- **UI Logic:** הוספת מנוע סינון בזמן אמת המבוסס על כרטיסיות אינטראקטיביות.
+## 3. מבנה ממשק המשתמש
+- הממשק חייב לכלול ניווט היררכי לפי כיתה -> נושא -> סוג.
+- הצגת המטא-דאטה חייבת להיות מלאה וברורה לכל פריט.
