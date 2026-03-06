@@ -17,3 +17,5 @@
 ## 4. Technical Standards
 - **Sync Integrity:** GitHub repository structure must mirror the UI taxonomy.
 - **Performance:** Optimized JSON parsing and CSS Grid for mobile-first responsiveness.
+## 6. Smart URL Parameters (Update 2026-03-06)
+- המערכת תומכת בקישורים מסוננים מראש: ?grade=7 יפתח אוטומטית את חומרי כיתה ז'.
