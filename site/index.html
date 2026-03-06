@@ -4,57 +4,70 @@
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DigitalBook | Ultra Edition</title>
     <style>
-        :root { --p: #6366f1; --bg: #0f172a; --card: rgba(30, 41, 59, 0.7); }
+        :root { --p: #6366f1; --bg: #05070a; --glass: rgba(255, 255, 255, 0.05); }
         body { 
             margin: 0; font-family: 'Assistant', sans-serif; background: var(--bg); color: white;
-            background-image: radial-gradient(circle at 20% 30%, #1e1b4b 0%, transparent 50%), radial-gradient(circle at 80% 70%, #312e81 0%, transparent 50%);
-            height: 100vh; display: flex; flex-direction: column; overflow: hidden;
+            overflow: hidden; height: 100vh;
         }
+        /* Animated Background */
+        .bg-blobs {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at 20% 30%, #1e1b4b 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, #312e81 0%, transparent 40%);
+            filter: blur(80px); animation: move 20s infinite alternate;
+        }
+        @keyframes move { from { transform: scale(1); } to { transform: scale(1.2); } }
+
         header { 
-            backdrop-filter: blur(10px); background: rgba(15, 23, 42, 0.8); padding: 20px; 
-            border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(20px); background: rgba(0,0,0,0.4); padding: 20px 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between;
         }
-        .main-container { display: flex; flex: 1; overflow: hidden; }
-        .sidebar { 
-            width: 280px; background: rgba(15, 23, 42, 0.5); border-left: 1px solid rgba(255,255,255,0.1); 
-            padding: 25px; backdrop-filter: blur(15px); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .content { flex: 1; padding: 40px; overflow-y: auto; scroll-behavior: smooth; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 25px; }
+        .main-container { display: flex; height: calc(100vh - 80px); }
         
-        /* Glass Card with Animation */
+        .sidebar { 
+            width: 300px; background: rgba(0,0,0,0.2); backdrop-filter: blur(10px);
+            border-left: 1px solid rgba(255,255,255,0.05); padding: 30px;
+        }
+
+        .content { flex: 1; padding: 40px; overflow-y: auto; perspective: 1000px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+
+        /* Cinematic Card */
         .card { 
-            background: var(--card); border-radius: 24px; padding: 25px; border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            opacity: 0; transform: translateY(20px);
+            background: var(--glass); border-radius: 24px; padding: 25px;
+            border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); opacity: 0;
+            transform-style: preserve-3d;
         }
         .card:hover { 
-            transform: scale(1.03) translateY(-10px); border-color: var(--p);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(99, 102, 241, 0.3);
+            background: rgba(255,255,255,0.1); border-color: var(--p);
+            transform: translateY(-10px) rotateX(5deg) rotateY(-5deg);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
-        .badge { background: var(--p); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 800; }
+        .badge { background: var(--p); padding: 5px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; }
+        
         .btn { 
-            padding: 12px; border-radius: 12px; border: none; font-weight: 800; cursor: pointer;
-            transition: 0.3s; font-size: 0.9rem; text-decoration: none; text-align: center;
+            padding: 12px; border-radius: 14px; border: none; font-weight: 800; cursor: pointer;
+            transition: 0.3s; text-align: center; text-decoration: none; font-size: 0.85rem;
         }
-        .btn-view { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
-        .btn-dl { background: linear-gradient(135deg, #6366f1, #a855f7); color: white; }
-        .btn:active { transform: scale(0.95); }
+        .btn-view { background: white; color: black; }
+        .btn-dl { background: var(--p); color: white; box-shadow: 0 0 15px rgba(99, 102, 241, 0.4); }
+        .btn:hover { transform: scale(1.05); filter: brightness(1.2); }
     </style>
 </head>
 <body>
+    <div class="bg-blobs"></div>
     <header>
-        <div style="font-size:1.5rem; font-weight:900; letter-spacing:-1px;">Digital<span style="color:var(--p)">Book</span></div>
-        <div id="stats" style="background:rgba(255,255,255,0.1); padding:5px 15px; border-radius:50px; font-size:0.8rem;"></div>
+        <div style="font-size:1.8rem; font-weight:800; letter-spacing:-1px;">Digital<span style="color:var(--p)">Book</span></div>
+        <div id="stats" style="opacity:0.6"></div>
     </header>
     <div class="main-container">
-        <aside class="sidebar" id="sidebar">
-            <h4 style="color:var(--p)">סינון חכם</h4>
-            </aside>
+        <aside class="sidebar" id="filters"></aside>
         <main class="content">
             <div id="toc" class="grid"></div>
         </main>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script>
         async function load() {
@@ -69,23 +82,22 @@
                 <div class="card">
                     <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
                         <span class="badge">${i.level}</span>
-                        <span style="opacity:0.6; font-size:0.75rem;">${i.type}</span>
+                        <span style="opacity:0.4; font-size:0.7rem;">${i.type}</span>
                     </div>
-                    <h3 style="margin:0; font-size:1.25rem;">${i.title}</h3>
-                    <p style="opacity:0.5; font-size:0.85rem; margin:15px 0;">👤 ${i.author}</p>
+                    <h3 style="margin:0; font-size:1.3rem; line-height:1.2;">${i.title}</h3>
+                    <p style="opacity:0.5; font-size:0.8rem; margin:15px 0;">👤 ${i.author}</p>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-                        <a href="reader.html?file=${encodeURIComponent(i.url)}" class="btn btn-view">👁️ עיון</a>
+                        <a href="reader.html?file=${encodeURIComponent(i.url)}" class="btn btn-view">👁️ דפדוף</a>
                         <button class="btn btn-dl" onclick="location.href='${i.url}'">⬇️ הורדה</button>
                     </div>
                 </div>`).join('');
             
-            // 🔥 Extreme Staggered Animation
             anime({
                 targets: '.card',
-                translateY: [50, 0],
+                translateY: [100, 0],
                 opacity: [0, 1],
-                delay: anime.stagger(100),
-                easing: 'easeOutElastic(1, .8)'
+                delay: anime.stagger(80),
+                easing: 'easeOutElastic(1, .6)'
             });
         }
         load();
