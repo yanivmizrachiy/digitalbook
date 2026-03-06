@@ -7,28 +7,36 @@ def get_grade(path):
     return 'General'
 
 def get_subject(path):
-    if 'אלגברה' in path: return 'Algebra'
-    if any(x in path for x in ['גיאומטריה', 'גאומטריה', 'משולש', 'מלבן', 'שטחים', 'היקפים']): return 'Geometry'
+    if 'אלגברה' in path or 'משוואות' in path or 'פונקצי' in path: return 'Algebra'
+    if any(x in path for x in ['גיאומטריה', 'גאומטריה', 'משולש', 'מרובע', 'שטח', 'היקף', 'זווית']): return 'Geometry'
     return 'General'
 
 def get_type(name):
     name = name.lower()
-    if 'מבחן' in name or 'מיצב' in name or 'בוחן' in name: return 'Test'
+    # מבחנים והערכות
+    if any(x in name for x in ['מבחן', 'בוחן', 'מיצב', 'מבדק', 'הערכה', 'מיון']): return 'Test'
+    # דפי עבודה ותרגילים
+    if any(x in name for x in ['דף', 'עבודה', 'משימה', 'שאלות', 'תרגילים']): return 'Worksheet'
+    # סיכומים וחומרי ליבה
+    if any(x in name for x in ['סיכום', 'מכוונים', 'כללים', 'משפט', 'חוקיות', 'מבוא', 'מסכם', 'הצבה', 'תובנה']): return 'Summary'
+    # תרגול וחזרה
+    if any(x in name for x in ['תרגול', 'חזרה', 'הכנה', 'מבוך']): return 'Practice'
+    # תיקונים
     if 'תיקון' in name: return 'Correction'
-    if 'תרגול' in name or 'חזרה' in name: return 'Practice'
-    if 'דף' in name or 'עבודה' in name or 'משימה' in name: return 'Worksheet'
+    
     return 'Additional'
 
 def extract_author(filepath, ext):
-    author = "Unknown Author"
+    author = "יניב מזרחי" # Default Academic Author
     try:
         if ext == 'pdf':
             from PyPDF2 import PdfReader
             meta = PdfReader(filepath).metadata
-            if meta and meta.author: author = meta.author
+            if meta and meta.author and meta.author.strip(): author = meta.author
         elif ext in ['docx', 'doc']:
             import docx
-            author = docx.Document(filepath).core_properties.author or "Unknown Author"
+            doc_author = docx.Document(filepath).core_properties.author
+            if doc_author and doc_author.strip(): author = doc_author
     except: pass
     return author
 
@@ -62,7 +70,8 @@ for root, dirs, files in os.walk(base_dir):
             "url": f"pdf/{f}",
             "file_ext": ext.upper()
         })
-        print(f"\033[0;32m   [+] Classified: {title} | {grade} | {subject} | {doc_type}\033[0m")
+        # הדפסה צבעונית חכמה לטרמינל
+        print(f"\033[0;36m[DATA]\033[0m {title[:30]:<30} | \033[0;32m{grade}\033[0m | \033[0;33m{subject}\033[0m | \033[0;35m{doc_type}\033[0m")
         count += 1
 
 with open('./site/generated/chapters.json', 'w', encoding='utf-8') as f:

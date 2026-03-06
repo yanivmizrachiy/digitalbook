@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "חיבור וחיסור מכוונים",
-    "type": "Additional",
+    "type": "Summary",
     "subject": "Algebra",
     "author": "בתיה מירזאייב",
     "grade": "Grade 7",
@@ -12,7 +12,7 @@
   {
     "id": 2,
     "title": "הצבה לכיתה ז",
-    "type": "Additional",
+    "type": "Summary",
     "subject": "Algebra",
     "author": "יניב מזרחי",
     "grade": "Grade 7",
@@ -22,9 +22,9 @@
   {
     "id": 3,
     "title": "חוברת מכוונים",
-    "type": "Additional",
+    "type": "Summary",
     "subject": "Algebra",
-    "author": "Unknown Author",
+    "author": "יניב מזרחי",
     "grade": "Grade 7",
     "url": "pdf/חוברת מכוונים",
     "file_ext": "חוברת מכוונים"
@@ -34,7 +34,7 @@
     "title": "נקודות במערכת הצירים",
     "type": "Additional",
     "subject": "Algebra",
-    "author": "Unknown Author",
+    "author": "יניב מזרחי",
     "grade": "Grade 7",
     "url": "pdf/נקודות במערכת הצירים.doc",
     "file_ext": "DOC"
@@ -42,9 +42,9 @@
   {
     "id": 5,
     "title": "מספרים מכוונים",
-    "type": "Additional",
+    "type": "Summary",
     "subject": "Algebra",
-    "author": "Unknown Author",
+    "author": "יניב מזרחי",
     "grade": "Grade 7",
     "url": "pdf/מספרים מכוונים",
     "file_ext": "מספרים מכוונים"
@@ -52,7 +52,7 @@
   {
     "id": 6,
     "title": "מספרים מכוונים ז'",
-    "type": "Additional",
+    "type": "Summary",
     "subject": "Algebra",
     "author": "יניב מזרחי",
     "grade": "Grade 7",
@@ -64,7 +64,7 @@
     "title": "מערכת צירים ז' ",
     "type": "Additional",
     "subject": "Algebra",
-    "author": "Unknown Author",
+    "author": "יניב מזרחי",
     "grade": "Grade 7",
     "url": "pdf/מערכת צירים ז' ",
     "file_ext": "מערכת צירים ז' "
@@ -82,9 +82,9 @@
   {
     "id": 9,
     "title": "סיכום אלגברה",
-    "type": "Additional",
+    "type": "Summary",
     "subject": "Algebra",
-    "author": "Unknown Author",
+    "author": "יניב מזרחי",
     "grade": "Grade 7",
     "url": "pdf/סיכום אלגברה",
     "file_ext": "סיכום אלגברה"
@@ -94,7 +94,7 @@
     "title": "סדר פעולות",
     "type": "Additional",
     "subject": "Algebra",
-    "author": "Unknown Author",
+    "author": "יניב מזרחי",
     "grade": "Grade 7",
     "url": "pdf/סדר פעולות",
     "file_ext": "סדר פעולות"
@@ -112,9 +112,9 @@
   {
     "id": 12,
     "title": "תובנה מספרית",
-    "type": "Additional",
+    "type": "Summary",
     "subject": "Algebra",
-    "author": "Unknown Author",
+    "author": "יניב מזרחי",
     "grade": "Grade 7",
     "url": "pdf/תובנה מספרית",
     "file_ext": "תובנה מספרית"
@@ -122,9 +122,9 @@
   {
     "id": 13,
     "title": "שורש - מבוך",
-    "type": "Additional",
+    "type": "Practice",
     "subject": "Algebra",
-    "author": "Unknown Author",
+    "author": "יניב מזרחי",
     "grade": "Grade 7",
     "url": "pdf/שורש - מבוך",
     "file_ext": "שורש - מבוך"
@@ -132,7 +132,7 @@
   {
     "id": 14,
     "title": "סדר פעולות במספרים מכוונים",
-    "type": "Additional",
+    "type": "Summary",
     "subject": "Algebra",
     "author": "יניב מזרחי",
     "grade": "Grade 7",
@@ -142,7 +142,7 @@
   {
     "id": 15,
     "title": "סדר פעולות במספרים מכוונים",
-    "type": "Additional",
+    "type": "Summary",
     "subject": "Algebra",
     "author": "יניב מזרחי",
     "grade": "Grade 7",
@@ -162,7 +162,7 @@
   {
     "id": 17,
     "title": "סדר פעולות חשבון במספרים מכוונים כולל חזקות",
-    "type": "Additional",
+    "type": "Summary",
     "subject": "Algebra",
     "author": "סמיון",
     "grade": "Grade 7",
@@ -172,9 +172,9 @@
   {
     "id": 18,
     "title": "מבוך חוק הפילוג",
-    "type": "Additional",
+    "type": "Practice",
     "subject": "Algebra",
-    "author": "Unknown Author",
+    "author": "יניב מזרחי",
     "grade": "Grade 7",
     "url": "pdf/מבוך חוק הפילוג",
     "file_ext": "מבוך חוק הפילוג"
@@ -182,9 +182,9 @@
   {
     "id": 19,
     "title": "חוקיות",
-    "type": "Additional",
+    "type": "Summary",
     "subject": "Algebra",
-    "author": "Unknown Author",
+    "author": "יניב מזרחי",
     "grade": "Grade 7",
     "url": "pdf/חוקיות",
     "file_ext": "חוקיות"
@@ -194,7 +194,7 @@
     "title": "דף מסכם חוקיות",
     "type": "Worksheet",
     "subject": "Algebra",
-    "author": "Unknown Author",
+    "author": "יניב מזרחי",
     "grade": "Grade 7",
     "url": "pdf/דף מסכם חוקיות",
     "file_ext": "דף מסכם חוקיות"
@@ -202,7 +202,7 @@
   {
     "id": 21,
     "title": "חוקיות לכיתה ז וורד",
-    "type": "Additional",
+    "type": "Summary",
     "subject": "Algebra",
     "author": "יניב מזרחי",
     "grade": "Grade 7",
@@ -214,7 +214,7 @@
     "title": "שטחים והיקפים במערכת הצירים",
     "type": "Additional",
     "subject": "Geometry",
-    "author": "Unknown Author",
+    "author": "יניב מזרחי",
     "grade": "Grade 7",
     "url": "pdf/שטחים והיקפים במערכת הצירים.doc",
     "file_ext": "DOC"
