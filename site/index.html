@@ -2,54 +2,130 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Mathematics Book | ספרייה אקדמית</title>
+    <title>Digital Mathematics Book</title>
     <style>
-        :root { --primary: #0b5cff; --dark: #1e293b; --bg: #f1f5f9; }
-        body { font-family: system-ui, sans-serif; background: var(--bg); margin: 0; padding: 20px; }
-        header { text-align: center; padding: 40px; background: white; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 30px; }
-        .nav-filters { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-        .filter-btn { padding: 10px 20px; border-radius: 30px; border: 2px solid var(--primary); background: transparent; color: var(--primary); cursor: pointer; font-weight: bold; transition: 0.3s; }
-        .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
-        .card { background: white; padding: 25px; border-radius: 15px; border-top: 5px solid var(--primary); box-shadow: 0 2px 10px rgba(0,0,0,0.05); cursor: pointer; }
-        .card-meta { font-size: 0.8rem; font-weight: bold; color: var(--primary); margin-bottom: 10px; display: flex; gap: 10px; }
-        .card-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; }
-        .card-footer { font-size: 0.85rem; color: #64748b; border-top: 1px solid #eee; pt: 10px; margin-top: 10px; }
-        .tag-type { background: #e2e8f0; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; }
+        :root {
+            --primary: #1e3a8a; --secondary: #3b82f6; --accent: #eff6ff;
+            --text-dark: #0f172a; --text-muted: #64748b; --card-bg: #ffffff;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+        }
+        * { box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background-color: #f8fafc; margin: 0; padding: 0; color: var(--text-dark); }
+        
+        /* Premium Header */
+        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 60px 20px 40px; text-align: center; color: white; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: var(--shadow-lg); margin-bottom: 40px; }
+        h1 { margin: 0; font-size: 2.5rem; font-weight: 800; letter-spacing: -0.5px; }
+        p.subtitle { opacity: 0.9; font-size: 1.1rem; margin-top: 10px; }
+        
+        /* Navigation Controls */
+        .controls { max-width: 1200px; margin: -60px auto 30px; background: white; padding: 20px; border-radius: 20px; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; gap: 15px; position: relative; z-index: 10; width: 90%; }
+        .filter-group { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; }
+        .filter-group:last-child { border-bottom: none; padding-bottom: 0; }
+        .filter-label { width: 100%; text-align: center; font-size: 0.85rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        
+        /* Premium Buttons */
+        button { background: var(--accent); color: var(--secondary); border: 2px solid transparent; padding: 10px 24px; border-radius: 50px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        button:hover { background: #dbeafe; transform: translateY(-2px); }
+        button.active { background: var(--secondary); color: white; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+        
+        /* Grid & Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; }
+        .card { background: var(--card-bg); border-radius: 20px; padding: 25px; border-top: 6px solid var(--secondary); box-shadow: var(--shadow-sm); cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
+        .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-top-color: var(--primary); }
+        
+        /* Metadata Typography */
+        .meta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .badge { background: #f1f5f9; color: var(--text-dark); padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; }
+        .badge-subject { background: #eef2ff; color: #4338ca; }
+        .badge-type { background: #fef2f2; color: #b91c1c; }
+        .card-title { font-size: 1.2rem; font-weight: 800; line-height: 1.4; margin-bottom: 20px; color: var(--text-dark); }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f1f5f9; padding-top: 15px; font-size: 0.85rem; color: var(--text-muted); }
+        
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
-    <header><h1>📚 הספר הדיגיטלי למתמטיקה</h1><p>מאגר ידע אקדמי מסווג</p></header>
-    <div class="nav-filters" id="gradeFilters">
-        <button class="filter-btn active" onclick="filterGrade('all')">הכל</button>
-        <button class="filter-btn" onclick="filterGrade('Grade 7')">כיתה ז'</button>
-        <button class="filter-btn" onclick="filterGrade('Grade 8')">כיתה ח'</button>
-        <button class="filter-btn" onclick="filterGrade('Grade 9')">כיתה ט'</button>
+    <header>
+        <h1>הספר הדיגיטלי למתמטיקה</h1>
+        <p class="subtitle">ספרייה אקדמית מסווגת ומאורגנת</p>
+    </header>
+
+    <div class="controls">
+        <div class="filter-group" id="gradeFilters">
+            <div class="filter-label">שכבת גיל</div>
+            <button class="active" onclick="setFilter('grade', 'all', this)">הכל</button>
+            <button onclick="setFilter('grade', 'Grade 7', this)">כיתה ז'</button>
+            <button onclick="setFilter('grade', 'Grade 8', this)">כיתה ח'</button>
+            <button onclick="setFilter('grade', 'Grade 9', this)">כיתה ט'</button>
+        </div>
+        <div class="filter-group" id="subjectFilters">
+            <div class="filter-label">תחום למידה</div>
+            <button class="active" onclick="setFilter('subject', 'all', this)">כל הנושאים</button>
+            <button onclick="setFilter('subject', 'Algebra', this)">אלגברה</button>
+            <button onclick="setFilter('subject', 'Geometry', this)">גיאומטריה</button>
+        </div>
     </div>
+
     <div id="toc" class="grid"></div>
+
     <script>
         let allData = [];
+        let currentFilters = { grade: 'all', subject: 'all' };
+
         async function load() {
-            const r = await fetch('generated/chapters.json');
-            allData = await r.json();
-            render(allData);
+            try {
+                const r = await fetch('generated/chapters.json');
+                allData = await r.json();
+                renderCards(allData);
+            } catch(e) {
+                document.getElementById('toc').innerHTML = '<p style="text-align:center; width:100%;">שגיאה בטעינת הנתונים. ודא הרצת מערכת סנכרון.</p>';
+            }
         }
-        function render(items) {
+
+        function setFilter(type, value, btn) {
+            // Update active state on buttons
+            const siblings = btn.parentElement.querySelectorAll('button');
+            siblings.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Update filter state and execute
+            currentFilters[type] = value;
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const filtered = allData.filter(item => {
+                const matchGrade = currentFilters.grade === 'all' || item.grade === currentFilters.grade;
+                const matchSubject = currentFilters.subject === 'all' || item.subject === currentFilters.subject;
+                return matchGrade && matchSubject;
+            });
+            renderCards(filtered);
+        }
+
+        function renderCards(items) {
+            const gradeHe = {"Grade 7":"כיתה ז'","Grade 8":"כיתה ח'","Grade 9":"כיתה ט'","General":"כללי"};
+            const subjectHe = {"Algebra":"אלגברה","Geometry":"גיאומטריה","General":"כללי"};
+            const typeHe = {"Test":"מבחן","Worksheet":"דף עבודה","Correction":"תיקון","Practice":"תרגול","Additional":"חומר עזר"};
+            
             document.getElementById('toc').innerHTML = items.map(ch => `
                 <div class="card" onclick="location.href='${ch.file_ext === 'PDF' ? 'reader.html?file=' + encodeURIComponent(ch.url) : ch.url}'">
-                    <div class="card-meta">
-                        <span>${ch.grade}</span> | <span>${ch.subject}</span>
-                        <span class="tag-type">${ch.type}</span>
+                    <div>
+                        <div class="meta-header">
+                            <span class="badge">${gradeHe[ch.grade] || ch.grade}</span>
+                            <span class="badge badge-subject">${subjectHe[ch.subject] || ch.subject}</span>
+                            <span class="badge badge-type">${typeHe[ch.type] || ch.type}</span>
+                        </div>
+                        <div class="card-title">${ch.title}</div>
                     </div>
-                    <div class="card-title">${ch.title}</div>
-                    <div class="card-footer">👤 מחבר: ${ch.author} | 📄 סוג: ${ch.file_ext}</div>
-                </div>`).join('');
+                    <div class="card-footer">
+                        <span>👤 ${ch.author}</span>
+                        <span>📄 ${ch.file_ext}</span>
+                    </div>
+                </div>
+            `).join('');
         }
-        function filterGrade(grade) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
-            render(grade === 'all' ? allData : allData.filter(d => d.grade === grade));
-        }
+
         load();
     </script>
 </body>
