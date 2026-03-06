@@ -7,3 +7,8 @@
 ## 2. Button Functionality
 - **No-Demo Policy:** כל כפתור "הורדה" או "צפייה" חייב להיות מחובר לקובץ האמיתי בתיקיית /pdf.
 - **Mobile Native:** הכפתורים מותאמים ללחיצה קלה במסכי מגע (Fat-finger friendly).
+
+## 12. Exam Mode & Time Management (Update 2026-03-06)
+- **Functional Timer:** ה-Reader כולל טיימר אקטיבי לספירה לאחור (90 דקות ברירת מחדל).
+- **Focus Mode:** אפשרות להעלמת הממשק (Focus Mode) כדי למנוע הסחות דעת בזמן פתרון.
+- **Strict Implementation:** כל כפתור במצב המבחן מחובר ללוגיקה של Javascript ואינו דקורטיבי.
