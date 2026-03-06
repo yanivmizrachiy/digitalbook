@@ -18,3 +18,4 @@ Every file processed into the system contains a complete metadata profile:
 ## 4. Advanced Taxonomy & Classification (Update 2026-03-06)
 - **Enhanced Document Types:** הוספת קטגוריית "Summary" (סיכום/מבוא/חוקיות).
 - **Smart Routing:** מנוע הסיווג משתמש כעת בניתוח מילות מפתח מורחב בשמות הקבצים כדי לצמצם סיווג שגוי (Additional) למינימום.
+- **Frontend Alignment (2026-03-06):** הוספת ייצוג ויזואלי ברמת Premium (Amber Badge) לקטגוריית 'Summary' החדשה, כולל תרגום אוטומטי בממשק המשתמש.

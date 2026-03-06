@@ -13,32 +13,32 @@
         * { box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
         body { background-color: #f8fafc; margin: 0; padding: 0; color: var(--text-dark); }
         
-        /* Premium Header */
         header { background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 60px 20px 40px; text-align: center; color: white; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: var(--shadow-lg); margin-bottom: 40px; }
         h1 { margin: 0; font-size: 2.5rem; font-weight: 800; letter-spacing: -0.5px; }
         p.subtitle { opacity: 0.9; font-size: 1.1rem; margin-top: 10px; }
         
-        /* Navigation Controls */
         .controls { max-width: 1200px; margin: -60px auto 30px; background: white; padding: 20px; border-radius: 20px; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; gap: 15px; position: relative; z-index: 10; width: 90%; }
         .filter-group { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; }
         .filter-group:last-child { border-bottom: none; padding-bottom: 0; }
         .filter-label { width: 100%; text-align: center; font-size: 0.85rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
         
-        /* Premium Buttons */
         button { background: var(--accent); color: var(--secondary); border: 2px solid transparent; padding: 10px 24px; border-radius: 50px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         button:hover { background: #dbeafe; transform: translateY(-2px); }
         button.active { background: var(--secondary); color: white; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
         
-        /* Grid & Cards */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; }
         .card { background: var(--card-bg); border-radius: 20px; padding: 25px; border-top: 6px solid var(--secondary); box-shadow: var(--shadow-sm); cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
         .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-top-color: var(--primary); }
         
-        /* Metadata Typography */
-        .meta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .badge { background: #f1f5f9; color: var(--text-dark); padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; }
+        .meta-header { display: flex; justify-content: flex-start; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
+        .badge { background: #f1f5f9; color: var(--text-dark); padding: 5px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; }
         .badge-subject { background: #eef2ff; color: #4338ca; }
-        .badge-type { background: #fef2f2; color: #b91c1c; }
+        .badge-test { background: #fef2f2; color: #b91c1c; }
+        .badge-worksheet { background: #f0fdf4; color: #15803d; }
+        .badge-practice { background: #fdf4ff; color: #a21caf; }
+        .badge-summary { background: #fffbeb; color: #b45309; border: 1px solid #fef3c7; }
+        .badge-additional { background: #f3f4f6; color: #4b5563; }
+        
         .card-title { font-size: 1.2rem; font-weight: 800; line-height: 1.4; margin-bottom: 20px; color: var(--text-dark); }
         .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f1f5f9; padding-top: 15px; font-size: 0.85rem; color: var(--text-muted); }
         
@@ -84,12 +84,10 @@
         }
 
         function setFilter(type, value, btn) {
-            // Update active state on buttons
             const siblings = btn.parentElement.querySelectorAll('button');
             siblings.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             
-            // Update filter state and execute
             currentFilters[type] = value;
             applyFilters();
         }
@@ -106,15 +104,19 @@
         function renderCards(items) {
             const gradeHe = {"Grade 7":"כיתה ז'","Grade 8":"כיתה ח'","Grade 9":"כיתה ט'","General":"כללי"};
             const subjectHe = {"Algebra":"אלגברה","Geometry":"גיאומטריה","General":"כללי"};
-            const typeHe = {"Test":"מבחן","Worksheet":"דף עבודה","Correction":"תיקון","Practice":"תרגול","Additional":"חומר עזר"};
+            const typeHe = {"Test":"מבחן","Worksheet":"דף עבודה","Correction":"תיקון","Practice":"תרגול","Summary":"סיכום","Additional":"חומר עזר"};
             
-            document.getElementById('toc').innerHTML = items.map(ch => `
+            document.getElementById('toc').innerHTML = items.map(ch => {
+                // שיוך קלאס צבעוני לפי סוג הקובץ
+                const typeClass = ch.type ? 'badge-' + ch.type.toLowerCase() : 'badge-additional';
+                
+                return `
                 <div class="card" onclick="location.href='${ch.file_ext === 'PDF' ? 'reader.html?file=' + encodeURIComponent(ch.url) : ch.url}'">
                     <div>
                         <div class="meta-header">
                             <span class="badge">${gradeHe[ch.grade] || ch.grade}</span>
                             <span class="badge badge-subject">${subjectHe[ch.subject] || ch.subject}</span>
-                            <span class="badge badge-type">${typeHe[ch.type] || ch.type}</span>
+                            <span class="badge ${typeClass}">${typeHe[ch.type] || ch.type}</span>
                         </div>
                         <div class="card-title">${ch.title}</div>
                     </div>
@@ -123,7 +125,7 @@
                         <span>📄 ${ch.file_ext}</span>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         load();
