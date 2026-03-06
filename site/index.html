@@ -1,7 +1,45 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Digital Book</title>
-<style>body{font-family:sans-serif;background:#f4f7f6;text-align:center;padding:20px} .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:15px} .card{background:white;padding:20px;border-radius:12px;cursor:pointer;box-shadow:0 2px 5px rgba(0,0,0,0.1)}</style></head>
-<body><h1>📚 הספר הדיגיטלי של יניב</h1><div id="toc" class="grid"></div><script>
-async function load(){const r=await fetch('generated/chapters.json');const c=await r.json();document.getElementById('toc').innerHTML=c.map(ch=>`<div class="card" onclick="location.href='reader.html?file='+encodeURIComponent(ch.url)"><b>${ch.id}.</b> ${ch.title}</div>`).join('');}load();
-</script></body></html>
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Book - מאגר מתמטיקה</title>
+    <style>
+        body { font-family: system-ui, sans-serif; background: #f4f7f6; text-align: center; padding: 20px; margin: 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; max-width: 1200px; margin: 20px auto; }
+        .card { background: white; padding: 20px; border-radius: 12px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: right; border-right: 4px solid #0b5cff; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(11, 92, 255, 0.15); }
+        .meta { display: flex; gap: 8px; margin-bottom: 10px; font-size: 0.8rem; font-weight: bold; }
+        .tag-type { background: #e1e8ed; padding: 3px 8px; border-radius: 4px; color: #333; }
+        .tag-grade { background: #d0f0fd; padding: 3px 8px; border-radius: 4px; color: #0b5cff; }
+        .title { font-size: 1.1rem; font-weight: bold; margin-bottom: 8px; color: #1a1a1a; }
+        .author { font-size: 0.9rem; color: #666; }
+    </style>
+</head>
+<body>
+    <h1 style="color: #0b5cff;">📚 מאגר למידה מתקדם</h1>
+    <div id="toc" class="grid"></div>
+    <script>
+        async function load() {
+            try {
+                const r = await fetch('generated/chapters.json');
+                const c = await r.json();
+                document.getElementById('toc').innerHTML = c.map(ch => {
+                    const targetUrl = ch.type === 'PDF' ? `reader.html?file=${encodeURIComponent(ch.url)}` : ch.url;
+                    return `
+                    <div class="card" onclick="window.location.href='${targetUrl}'">
+                        <div class="meta">
+                            <span class="tag-type">${ch.type}</span>
+                            <span class="tag-grade">${ch.grade === 'Grade 7' ? 'כיתה ז\'' : ch.grade === 'Grade 8' ? 'כיתה ח\'' : ch.grade === 'Grade 9' ? 'כיתה ט\'' : 'כללי'}</span>
+                        </div>
+                        <div class="title">${ch.id}. ${ch.title}</div>
+                        <div class="author">👤 ${ch.author}</div>
+                    </div>`;
+                }).join('');
+            } catch (e) {
+                document.getElementById('toc').innerHTML = '<p>שגיאה בטעינת הנתונים. אנא הרץ master_sync.sh</p>';
+            }
+        }
+        load();
+    </script>
+</body>
+</html>
