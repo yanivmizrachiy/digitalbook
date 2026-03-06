@@ -2,57 +2,70 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mathematics Digital Library</title>
+    <title>Digital Mathematics Library | פרימיום</title>
     <style>
-        :root { --p: #1a56db; --bg: #f9fafb; --card: #ffffff; }
-        body { font-family: system-ui, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #111827; }
-        header { background: var(--p); color: white; padding: 40px; border-radius: 20px; text-align: center; margin-bottom: 30px; }
-        .nav-section { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-        button { padding: 10px 20px; border-radius: 10px; border: 2px solid var(--p); background: white; color: var(--p); cursor: pointer; font-weight: bold; }
-        button.active { background: var(--p); color: white; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-        .card { background: white; padding: 20px; border-radius: 15px; border-top: 5px solid var(--p); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .meta { font-size: 0.8rem; color: #6b7280; margin-bottom: 10px; }
-        .badge { background: #ebf5ff; color: var(--p); padding: 4px 8px; border-radius: 6px; font-weight: bold; }
+        :root { --p: #1a56db; --bg: #f3f4f6; --card: #ffffff; --text: #111827; }
+        @media (prefers-color-scheme: dark) { :root { --bg: #111827; --card: #1f2937; --text: #f9fafb; --p: #3b82f6; } }
+        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; transition: 0.3s; }
+        header { background: var(--p); color: white; padding: 50px 20px; text-align: center; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .sticky-nav { position: sticky; top: 0; z-index: 100; background: var(--card); padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; gap: 10px; margin-top: -30px; width: 90%; margin-left: auto; margin-right: auto; border-radius: 20px; }
+        .tabs { display: flex; justify-content: center; gap: 10px; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+        .tab { padding: 8px 20px; cursor: pointer; border-radius: 10px; font-weight: bold; border: 2px solid transparent; }
+        .tab.active { border-color: var(--p); color: var(--p); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 20px; max-width: 1400px; margin: auto; }
+        .card { background: var(--card); padding: 25px; border-radius: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s; border-right: 6px solid var(--p); position: relative; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px rgba(0,0,0,0.1); }
+        .badge { font-size: 0.75rem; background: var(--p); color: white; padding: 4px 10px; border-radius: 20px; font-weight: bold; }
+        .meta { font-size: 0.85rem; color: #6b7280; margin-top: 10px; }
+        .search-box { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; outline: none; font-size: 1rem; }
+        .skeleton { height: 200px; background: #e5e7eb; border-radius: 20px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
-    <header><h1>הספר הדיגיטלי למתמטיקה</h1><p>מאגר אקדמי מסווג: חטיבה ובגרות</p></header>
-    
-    <div class="nav-section" id="navLevel">
-        <button class="active" onclick="setF('all')">הכל</button>
-        <button onclick="setF('Grade 7')">ז'</button><button onclick="setF('Grade 8')">ח'</button><button onclick="setF('Grade 9')">ט'</button>
-        <button onclick="setF('3 Units')">3 יח"ל</button><button onclick="setF('4 Units')">4 יח"ל</button><button onclick="setF('5 Units')">5 יח"ל</button>
+    <header><h1>הספר הדיגיטלי למתמטיקה</h1><p>חוויית למידה אקדמית מתקדמת</p></header>
+    <div class="sticky-nav">
+        <input type="text" id="q" class="search-box" placeholder="🔍 חפש נושא, מחבר או שנה..." onkeyup="runF()">
+        <div class="tabs">
+            <div class="tab active" onclick="setTab('all', this)">הכל</div>
+            <div class="tab" onclick="setTab('MS', this)">חטיבה</div>
+            <div class="tab" onclick="setTab('HS', this)">בגרות</div>
+        </div>
     </div>
-
     <div id="toc" class="grid"></div>
-
     <script>
-        let items = [];
-        async function load() {
+        let data = [], curTab = 'all';
+        async function init() {
             const r = await fetch('generated/chapters.json');
-            items = await r.json();
-            render('all');
+            data = await r.json();
+            runF();
         }
-        function setF(lvl) {
-            document.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
-            render(lvl);
+        function setTab(t, b) {
+            document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+            b.classList.add('active'); curTab = t; runF();
         }
-        function render(lvl) {
-            const filtered = lvl === 'all' ? items : items.filter(i => i.level === lvl);
-            document.getElementById('toc').innerHTML = filtered.map(i => `
-                <div class="card" onclick="location.href='${i.ext === 'PDF' ? 'reader.html?file=' + encodeURIComponent(i.url) : i.url}'">
-                    <div class="meta">
-                        <span class="badge">${i.level}</span> | <span>${i.subject}</span>
-                    </div>
-                    <h3>${i.title}</h3>
-                    <div class="meta">מחבר: ${i.author} | שנה: ${i.year}</div>
-                    <div class="meta"><b>סוג: ${i.type}</b></div>
-                </div>
-            `).join('');
+        function runF() {
+            const q = document.getElementById('q').value.toLowerCase();
+            const filtered = data.filter(i => {
+                const mTab = curTab === 'all' || (curTab === 'MS' ? i.level.includes('Grade') : i.level.includes('Units'));
+                const mSearch = i.title.toLowerCase().includes(q) || i.author.toLowerCase().includes(q) || i.subject.toLowerCase().includes(q);
+                return mTab && mSearch;
+            });
+            render(filtered);
         }
-        load();
+        function render(arr) {
+            const container = document.getElementById('toc');
+            if (arr.length === 0) { container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:50px;"><h3>לא נמצאו חומרים תואמים 😕</h3><button onclick="location.reload()">איפוס</button></div>'; return; }
+            container.innerHTML = arr.map(i => `
+                <div class="card" onclick="location.href='reader.html?file=${encodeURIComponent(i.url)}'">
+                    <div style="display:flex;justify-content:space-between;"><span class="badge">${i.level}</span><span style="font-size:0.8rem;opacity:0.7;">${i.ext}</span></div>
+                    <h3 style="margin:15px 0 10px 0;">${i.title}</h3>
+                    <div class="meta">👤 ${i.author} | 📅 ${i.year}</div>
+                    <div class="meta" style="font-weight:bold;color:var(--p);">${i.type}</div>
+                </div>`).join('');
+        }
+        init();
     </script>
 </body>
 </html>

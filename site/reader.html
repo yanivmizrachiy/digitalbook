@@ -1,7 +1,28 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl"><head><meta charset="UTF-8"><title>Reader</title><script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<style>body{margin:0;background:#333;color:white}header{height:60px;background:white;color:black;display:flex;align-items:center;padding:0 20px;justify-content:space-between;position:fixed;top:0;width:100%;z-index:10} #v{margin-top:70px;text-align:center} canvas{max-width:100%;box-shadow:0 0 20px black}</style><link rel="manifest" href="manifest.webmanifest"><script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js");}</script></head>
-<body><header><a href="index.html" style="text-decoration:none;color:black;font-weight:bold">🔙 חזרה</a><div id="info">טוען...</div></header><div id="v"><canvas id="c"></canvas></div><script>
-const url=new URLSearchParams(window.location.search).get('file');pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-if(url){pdfjsLib.getDocument(url).promise.then(doc=>{doc.getPage(1).then(page=>{const v=page.getViewport({scale:1.5});const can=document.getElementById('c');can.height=v.height;can.width=v.width;page.render({canvasContext:can.getContext('2d'),viewport:v});document.getElementById('info').textContent=`עמוד 1 מתוך ${doc.numPages}`;});});}
-</script></body></html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קריאת מסמך</title>
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #333; }
+        .header { background: #1a56db; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        iframe { width: 100%; height: calc(100% - 60px); border: none; }
+        .back-btn { background: white; color: #1a56db; padding: 8px 15px; border-radius: 8px; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span id="title">טוען מסמך...</span>
+        <a href="index.html" class="back-btn">חזרה למאגר</a>
+    </div>
+    <iframe id="viewer"></iframe>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const file = params.get('file');
+        if (file) {
+            document.getElementById('viewer').src = file;
+            document.getElementById('title').innerText = decodeURIComponent(file.split('/').pop());
+        }
+    </script>
+</body>
+</html>
