@@ -21,3 +21,7 @@
 ## 7. Admin & Health Monitoring (Update 2026-03-06)
 - **Monitoring:** הגישה לדף הניהול מתבצעת דרך `/admin.html`.
 - **Quality Assurance:** חובת טיפול בקבצים המופיעים ב-Red Flags כדי לשמור על סטנדרט אקדמי.
+
+## 8. Backup & Disaster Recovery (Update 2026-03-06)
+- **Protocol:** חובת ביצוע גיבוי ZIP דרך ה-Admin Panel לפני כל עדכון גרסה מאסיבי.
+- **Redundancy:** הגיבוי משמש כנקודת שחזור (Point of Return) במקרה של שחיתות נתונים ב-GitHub או ב-Local Storage.

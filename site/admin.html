@@ -25,16 +25,16 @@
         <div class="header">
             <h1>Mission Control 🛰️</h1>
             <a href="index.html" class="btn">חזרה לאתר</a>
-        </div>
+        <div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div>
         
         <div class="stats-grid" id="stats">
-            </div>
+            <div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div>
 
         <h3>🚩 דוח חריגות (Metadata Red Flags)</h3>
         <div class="issue-list" id="issues">
             <p>סורק את המאגר...</p>
-        </div>
-    </div>
+        <div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div>
+    <div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div>
 
     <script>
         async function runAudit() {
@@ -49,10 +49,10 @@
             const testCount = items.filter(i => i.type === 'Test').length;
 
             document.getElementById('stats').innerHTML = `
-                <div class="stat-card"><h2>סה"כ קבצים</h2><div class="val">${total}</div></div>
-                <div class="stat-card"><h2>ללא מחבר</h2><div class="val" style="color:var(--danger)">${unknownAuthor}</div></div>
-                <div class="stat-card"><h2>ללא שנה</h2><div class="val" style="color:var(--danger)">${unknownYear}</div></div>
-                <div class="stat-card"><h2>מבחנים/בחנים</h2><div class="val">${testCount}</div></div>
+                <div class="stat-card"><h2>סה"כ קבצים</h2><div class="val">${total}<div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div></div>
+                <div class="stat-card"><h2>ללא מחבר</h2><div class="val" style="color:var(--danger)">${unknownAuthor}<div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div></div>
+                <div class="stat-card"><h2>ללא שנה</h2><div class="val" style="color:var(--danger)">${unknownYear}<div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div></div>
+                <div class="stat-card"><h2>מבחנים/בחנים</h2><div class="val">${testCount}<div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div></div>
             `;
 
             // Issues Logic
@@ -63,10 +63,11 @@
                     <div>
                         ${i.author === 'Unknown' ? '<span class="tag tag-red">חסר מחבר</span>' : ''}
                         ${i.year === 'Unknown' ? '<span class="tag tag-red">חסרה שנה</span>' : ''}
-                    </div>
-                </div>
+                    <div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div>
+                <div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div>
             `).join('') : '<p style="color:var(--success)">✅ המאגר תקין ב-100%! אין חריגות מטא-דאטה.</p>';
         }
+function downloadBackup() { window.open("https://github.com/yanivmizrachiy/digitalbook/archive/refs/heads/main.zip", "_blank"); }
         runAudit();
     </script>
 </body>
