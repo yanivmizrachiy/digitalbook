@@ -22,3 +22,8 @@
 - **Glassmorphism:** הממשק חייב להתבסס על שכבות שקופות וטשטוש (Blur).
 - **Physics-Based Motion:** כל אלמנט נכנס לאתר עם אנימציית Stagger המבוססת על Anime.js.
 - **Visual Feedback:** כל לחיצה על כפתור חייבת לכלול תגובה ויזואלית (Scaling/Haptic feel).
+
+## 17. Atomic Sync Protocol (v11.0)
+- **Master Control:** המערכת מנוהלת ע"י `sync_engine.py` המאחד את כל תיקיות הדרייב.
+- **Incremental Updates:** שימוש בדגל `--remaining` מבטיח הורדה של קבצים חדשים בלבד.
+- **Auto-Deployment:** כל סנכרון מסתיים בדחיפה אוטומטית ל-GitHub Pages.
