@@ -1,42 +1,50 @@
-import os, json, fitz
+﻿import os, json, fitz
 
-def estimate_difficulty(text):
-    complexity_symbols = ["√", "²", "π", "Σ", "Δ", "=", "x^", "/", "(", ")"]
-    score = sum(text.count(s) for s in complexity_symbols)
-    if score > 40: return "מאתגר"
-    if score > 15: return "בינוני"
-    return "קל"
+TOPIC_MAP = {
+    "אלגברה": ["משוואה ריבועית", "חוק הפילוג", "פונקציה קווית", "פרבולה", "מערכת משוואות", "חזקות"],
+    "גיאומטריה": ["משפט פיתגורס", "דמיון משולשים", "חפיפת משולשים", "שטח ומעגל", "טרפז", "דלתון"]
+}
+
+def extract_tags(text):
+    found_tags = []
+    for category, topics in TOPIC_MAP.items():
+        for topic in topics:
+            if topic in text:
+                found_tags.append(topic)
+    return list(set(found_tags))[:3] # מחזיר עד 3 תגיות רלוונטיות
 
 def analyze_content(filepath):
-    subject, difficulty, pages = "כללי", "קל", 0
+    subject, tags, pages = "כללי", [], 0
     try:
         doc = fitz.open(filepath)
         pages = len(doc)
-        if filepath.endswith('.pdf'):
-            text = "".join([doc[i].get_text().lower() for i in range(min(2, pages))])
-            a_score = sum(1 for k in ["משוואה", "נעלם", "אלגברה", "פונקציה", "x", "y"] if k in text)
-            g_score = sum(1 for k in ["שטח", "היקף", "זווית", "משולש", "מלבן", "גיאומטריה"] if k in text)
-            if a_score > g_score: subject = "אלגברה"
-            elif g_score > a_score: subject = "גיאומטריה"
-            difficulty = estimate_difficulty(text)
+        text = "".join([doc[i].get_text().lower() for i in range(min(2, pages))])
+        
+        # זיהוי נושא ראשי
+        a_score = sum(1 for k in ["משוואה", "אלגברה", "פונקציה", "x", "y"] if k in text)
+        g_score = sum(1 for k in ["שטח", "זווית", "משולש", "מלבן", "גיאומטריה"] if k in text)
+        if a_score > g_score: subject = "אלגברה"
+        elif g_score > a_score: subject = "גיאומטריה"
+        
+        # חילוץ תגיות ספציפיות
+        tags = extract_tags(text)
     except: pass
-    return subject, difficulty, pages
+    return subject, tags, pages
 
 data = []
 for root, dirs, files in os.walk("site/pdf"):
     for file in files:
-        if file.endswith(('.pdf', '.docx')):
+        if file.endswith('.pdf'):
             path = os.path.join(root, file)
-            sub, diff, p_count = analyze_content(path)
+            sub, tags, p_count = analyze_content(path)
             data.append({
-                "title": file.replace(".pdf", "").replace(".docx", ""),
+                "title": file.replace(".pdf", ""),
                 "url": path.replace("site/", ""),
                 "level": path.split(os.sep)[-2].replace("Grade_", "כיתה "),
-                "subject": sub, 
-                "difficulty": diff, 
+                "subject": sub,
+                "tags": tags,
                 "pages": p_count,
-                "date": os.path.getmtime(path) * 1000,
-                "author": "משרד החינוך" if "Min" in file else "Unknown"
+                "date": os.path.getmtime(path) * 1000
             })
 
 with open("site/generated/chapters.json", "w", encoding="utf-8") as f:
