@@ -76,3 +76,9 @@
 - **שיפור:** הוספת סינון קטגוריות חכם (מתמטיקה/חברה).
 - **קבצים:** chapters.json, index.html, RULES.md.
 
+
+## 🕒 שדרוג Control & Print (v34.0) - 2026-03-07 23:41
+- **פעולה:** הטמעת כפתור הדפסה (window.print) ב-Reader.
+- **UX:** הוספת כפתורי סינון קטגוריות ב-Index.
+- **קבצים:** reader.html, index.html, RULES.md.
+

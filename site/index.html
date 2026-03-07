@@ -18,6 +18,12 @@
 <body class="p-6 md:p-12">
     <div id="particles-js"></div>
     <div class="max-w-7xl mx-auto">
+                <div class="flex gap-4 mb-12 overflow-x-auto pb-4">
+            <button onclick="render(allData)" class="glass px-6 py-2 rounded-full hover:bg-indigo-500 transition-all text-sm font-bold">הכל</button>
+            <button onclick="filterBySubject('אלגברה')" class="glass px-6 py-2 rounded-full hover:bg-indigo-500 transition-all text-sm font-bold">🔢 אלגברה</button>
+            <button onclick="filterBySubject('גיאומטריה')" class="glass px-6 py-2 rounded-full hover:bg-indigo-500 transition-all text-sm font-bold">📐 גיאומטריה</button>
+            <button onclick="filterBySubject('כללי')" class="glass px-6 py-2 rounded-full hover:bg-indigo-500 transition-all text-sm font-bold">🎉 פורים וחברה</button>
+        </div>
         <header class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
             <h1 class="text-6xl font-black italic tracking-tighter">DIGITAL<span class="text-indigo-500 text-glow">BOOK</span></h1>
             <div class="relative w-full md:w-96 flex gap-2">
@@ -52,6 +58,9 @@
             allData = validItems;
             render(allData);
         }
+
+        
+        function filterBySubject(s) { render(allData.filter(i => i.subject === s)); }
 
         function render(items) {
             const grid = document.getElementById('grid');
@@ -105,4 +114,5 @@
     </div>
 </body>
 </html>
+
 
