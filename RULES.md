@@ -1,29 +1,27 @@
-# DigitalBook | Engineering Audit & Classification Protocol
+# 📜 DigitalBook Project - Sovereign Protocol (v13.0)
+> **אדריכל מערכת:** יניב רז | **סטטוס:** Live / Autonomous | **יעד:** אפס תקלות, מקסימום עוצמה.
 
-## 1. Classification Standards
-- **Grades:** 7, 8, 9 or Bagrut (חומר לבגרות).
-- **Subjects:** Algebra (אלגברה), Geometry (גיאומטריה), or General (כללי).
-- **Types:** Worksheet (עבודה), Test (מבחן), Exam_Prep (הכנה), Summary (סיכום).
+---
 
-## 2. Metadata Integrity
-- **Authorship:** Every file MUST display an author. If not found in document text, it is marked as `Unknown`.
-- **Validation:** No placeholder buttons allowed. Every "Download" button must trigger a physical file fetch.
+## 1. ניהול נכסים (Asset Management)
+- **נתיב פיזי:** כל הקבצים מאוחסנים תחת `site/pdf/` בחלוקה לשכבות גיל.
+- **סנכרון (Atomic Sync):** מתבצע אך ורק דרך `sync_engine.py`. אין להעתיק קבצים ידנית.
+- **זהות קובץ:** כל קובץ חייב לעבור דרך `extract_meta.py` להפקת מזהה ייחודי, סיווג כיתה וחילוץ מחבר.
 
-## 3. Repository Structure
-- Files are organized by `Grade/Subject/Type` subdirectories.
-- Flat file structures in `/pdf` are strictly prohibited.
+## 2. חוקת העיצוב (Cinematic Interface)
+- **Theme:** "Eclipse Mode" בלבד. רקע Deep Space, Glassmorphism וטקסט נאון.
+- **Physics:** כל תנועה בממשק חייבת לעבור דרך Anime.js עם אפקטי Elastic.
+- **Reading Experience:** הקורא חייב לתמוך באנימציית 3D Flip המדמה דפדוף פיזי.
 
-## 15. Advanced Navigation Protocol (Update 2026-03-06)
-- **Sidebar Filtering:** המערכת תומכת בסינון רב-שכבתי (כיתה, נושא, סוג) הפועל בזמן אמת.
-- **Dynamic Counters:** מונה הקבצים מתעדכן אוטומטית לפי תוצאות הסינון.
-- **RTL Integrity:** הממשק שומר על יישור לימין (RTL) מלא גם בתצוגת ה-Sidebar.
+## 3. בקרה וניהול (Command Center)
+- **Admin Panel:** לוח הבקרה ב-`admin.html` הוא מקור הסמכות היחיד לסטטיסטיקה.
+- **Audit Logs:** כל פעולת מערכת (Sync, Push, Error) מתועדת ב-`logs.json`.
+- **Integrity:** יחס ה-Unknown Author חייב להישאר מתחת ל-5%.
 
-## 16. Maximalist UX & Motion Protocol (v10.0)
-- **Glassmorphism:** הממשק חייב להתבסס על שכבות שקופות וטשטוש (Blur).
-- **Physics-Based Motion:** כל אלמנט נכנס לאתר עם אנימציית Stagger המבוססת על Anime.js.
-- **Visual Feedback:** כל לחיצה על כפתור חייבת לכלול תגובה ויזואלית (Scaling/Haptic feel).
+## 4. תשתית טכנולוגית (The Stack)
+- **Frontend:** HTML5, CSS3 (Modern features only), JavaScript (ES6+).
+- **Backend Automation:** Python 3.13, Shell scripts, Git.
+- **Tools:** גיוס הכלים המקומיים (jq, gdown, gh) לטובת אוטומציה מלאה.
 
-## 17. Atomic Sync Protocol (v11.0)
-- **Master Control:** המערכת מנוהלת ע"י `sync_engine.py` המאחד את כל תיקיות הדרייב.
-- **Incremental Updates:** שימוש בדגל `--remaining` מבטיח הורדה של קבצים חדשים בלבד.
-- **Auto-Deployment:** כל סנכרון מסתיים בדחיפה אוטומטית ל-GitHub Pages.
+---
+*נערך לאחרונה: 2026-03-07 | המערכת במצב Sovereign - פועלת עצמאית.*
