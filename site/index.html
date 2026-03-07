@@ -35,10 +35,21 @@
         });
 
         let allData = [];
+                async function checkIntegrity(items) {
+            // בודק שכל קובץ אכן נגיש בשרת לפני הרינדור
+            const validated = await Promise.all(items.map(async i => {
+                try {
+                    const r = await fetch(i.url, { method: 'HEAD' });
+                    return r.ok ? i : null;
+                } catch(e) { return null; }
+            }));
+            return validated.filter(i => i !== null);
+        }
         async function load() {
             const r = await fetch('generated/chapters.json?v=' + Date.now());
             const d = await r.json();
-            allData = d.items;
+            const validItems = await checkIntegrity(d.items);
+            allData = validItems;
             render(allData);
         }
 
@@ -88,5 +99,10 @@
 
         load();
     </script>
+    <div id="sync-badge" class="fixed bottom-6 right-6 glass p-3 rounded-2xl flex items-center gap-3 z-50 border border-emerald-500/30 shadow-lg shadow-emerald-500/10">
+        <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+        <div class="text-[10px] font-mono text-emerald-400 uppercase tracking-tighter">Live Sync: ab10341</div>
+    </div>
 </body>
 </html>
+
