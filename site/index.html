@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigitalBook | Sovereign v39</title>
+    <title>DigitalBook | Sovereign v40</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { background: #020408; color: #f8fafc; font-family: 'Assistant', sans-serif; transition: 0.5s; overflow-x: hidden; }
@@ -13,24 +13,29 @@
         .diff-מאתגר { color: #f87171; background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.3); }
         .cinema-mode { background: #ffffff !important; color: #000000 !important; }
         .cinema-mode .glass { border: 1px solid #ddd; background: #f9f9f9; color: #000; }
+        .stealth-mode .difficulty-badge, .stealth-mode .page-count { display: none !important; }
     </style>
 </head>
 <body class="p-6 md:p-12">
     <div class="max-w-7xl mx-auto">
         <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
-            <h1 class="text-5xl font-black italic tracking-tighter">DIGITAL<span class="text-indigo-500">BOOK</span></h1>
+            <h1 class="text-5xl font-black italic tracking-tighter cursor-pointer" onclick="location.reload()">DIGITAL<span class="text-indigo-500">BOOK</span></h1>
             <div class="flex gap-2 flex-wrap justify-center">
-                <button onclick="sortData('date')" class="glass px-4 py-2 rounded-xl text-[10px] font-bold hover:bg-indigo-500/20 transition-all">🕒 חדש ביותר</button>
-                <button onclick="sortData('pages')" class="glass px-4 py-2 rounded-xl text-[10px] font-bold hover:bg-indigo-500/20 transition-all">📄 הכי הרבה דפים</button>
-                <button onclick="toggleCinema()" class="glass p-3 rounded-xl hover:bg-amber-500/20 transition-all">👁️</button>
+                <button onclick="toggleStealth()" class="glass p-3 rounded-xl hover:bg-indigo-500/20 transition-all" title="מצב סטודנט (הסתרת נתונים)">🕶️</button>
+                <button onclick="toggleCinema()" class="glass p-3 rounded-xl hover:bg-amber-500/20 transition-all" title="מצב הקרנה">👁️</button>
+                <button onclick="sortData('date')" class="glass px-4 py-2 rounded-xl text-[10px] font-bold">🕒 חדש</button>
                 <input type="text" id="search" placeholder="חפש חומר..." class="glass p-3 rounded-xl w-48 outline-none text-sm focus:ring-2 focus:ring-indigo-500">
             </div>
         </header>
 
-        <div class="flex gap-4 mb-10 overflow-x-auto pb-2">
-            <button onclick="render(allData)" class="glass px-6 py-2 rounded-full text-xs font-bold hover:bg-indigo-500 transition-all">הכל</button>
-            <button onclick="filterBySubject('אלגברה')" class="glass px-6 py-2 rounded-full text-xs font-bold hover:bg-indigo-500 transition-all">🔢 אלגברה</button>
-            <button onclick="filterBySubject('גיאומטריה')" class="glass px-6 py-2 rounded-full text-xs font-bold hover:bg-indigo-500 transition-all">📐 גיאומטריה</button>
+        <div class="flex gap-3 mb-10 overflow-x-auto pb-2 no-scrollbar">
+            <button onclick="render(allData)" class="glass px-5 py-2 rounded-full text-xs font-bold hover:bg-indigo-500 transition-all">הכל</button>
+            <button onclick="filterByGrade('כיתה ז')" class="glass px-5 py-2 rounded-full text-xs font-bold hover:bg-emerald-500/20 border-emerald-500/30">ז'</button>
+            <button onclick="filterByGrade('כיתה ח')" class="glass px-5 py-2 rounded-full text-xs font-bold hover:bg-emerald-500/20 border-emerald-500/30">ח'</button>
+            <button onclick="filterByGrade('כיתה ט')" class="glass px-5 py-2 rounded-full text-xs font-bold hover:bg-emerald-500/20 border-emerald-500/30">ט'</button>
+            <div class="w-px h-8 bg-white/10 mx-2"></div>
+            <button onclick="filterBySubject('אלגברה')" class="glass px-5 py-2 rounded-full text-xs font-bold border-indigo-500/30">🔢 אלגברה</button>
+            <button onclick="filterBySubject('גיאומטריה')" class="glass px-5 py-2 rounded-full text-xs font-bold border-indigo-500/30">📐 גיאומטריה</button>
         </div>
 
         <div id="grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
@@ -54,10 +59,10 @@
                 <div class="glass p-6 rounded-2xl cursor-pointer hover:border-indigo-500 transition-all group" onclick="window.location.href='reader.html?file=\'">
                     <div class="text-[10px] font-bold mb-3 opacity-60 flex justify-between items-center">
                         <span>\ | \</span>
-                        <span>📄 \</span>
+                        <span class="page-count">📄 \</span>
                     </div>
                     <h3 class="text-lg font-bold mb-5 leading-tight group-hover:text-indigo-400 transition-colors">\\</h3>
-                    <div class="inline-block text-[10px] font-black px-3 py-1 rounded-lg diff-\">\</div>
+                    <div class="difficulty-badge inline-block text-[10px] font-black px-3 py-1 rounded-lg diff-\">\</div>
                 </div>
             }).join('');
         }
@@ -68,11 +73,16 @@
         }
 
         function filterBySubject(s) { render(allData.filter(i => i.subject === s)); }
+        function filterByGrade(g) { render(allData.filter(i => i.level.includes(g))); }
         
         function toggleCinema() {
             document.body.classList.toggle('cinema-mode');
             const isCinema = document.body.classList.contains('cinema-mode');
             document.getElementById('grid').classList.toggle('md:grid-cols-2', isCinema);
+        }
+
+        function toggleStealth() {
+            document.body.classList.toggle('stealth-mode');
         }
 
         document.getElementById('search').oninput = (e) => {
