@@ -94,3 +94,9 @@
 - **UI:** הוספת מונים חיים בראש האתר ותיקון Cinema Mode.
 - **קבצים:** index.html, RULES.md.
 
+
+## 🕒 שדרוג Sovereign Meta-Insights (v38.0) - 2026-03-07 23:45
+- **AI:** הוספת חילוץ מספר עמודים אוטומטי לכל קובץ.
+- **UX:** הצגת 'X דפים' על כרטיסיות המידע ב-Index.
+- **קבצים:** extract_meta.py, index.html, RULES.md.
+
