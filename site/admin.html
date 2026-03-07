@@ -2,73 +2,74 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigitalBook | Mission Control</title>
+    <title>DigitalBook | Command Center</title>
     <style>
-        :root { --danger: #ef4444; --success: #10b981; --p: #1a56db; --bg: #0f172a; }
-        body { font-family: system-ui, sans-serif; background: var(--bg); color: white; margin: 0; padding: 20px; }
-        .container { max-width: 1000px; margin: auto; }
-        .header { border-bottom: 1px solid #334155; padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px; }
-        .stat-card { background: #1e293b; padding: 20px; border-radius: 15px; border: 1px solid #334155; }
-        .stat-card h2 { margin: 0; color: #94a3b8; font-size: 0.9rem; }
-        .stat-card .val { font-size: 2rem; font-weight: bold; margin-top: 10px; }
-        .issue-list { background: #1e293b; border-radius: 15px; padding: 20px; border: 1px solid #334155; }
-        .issue-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #334155; font-size: 0.9rem; }
-        .issue-item:last-child { border: none; }
-        .tag { padding: 2px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: bold; }
-        .tag-red { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
-        .btn { background: var(--p); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; text-decoration: none; font-size: 0.9rem; }
+        :root { --p: #6366f1; --bg: #05070a; --glass: rgba(255, 255, 255, 0.05); --danger: #ef4444; }
+        body { margin: 0; font-family: 'Assistant', sans-serif; background: var(--bg); color: white; }
+        header { padding: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .container { padding: 40px; max-width: 1200px; margin: auto; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .stat-card { background: var(--glass); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-align: center; }
+        .stat-card h2 { font-size: 2.5rem; margin: 10px 0; color: var(--p); }
+        .stat-card p { opacity: 0.6; margin: 0; }
+        
+        .insight-section { background: rgba(99, 102, 241, 0.1); border: 1px solid var(--p); padding: 25px; border-radius: 24px; margin-bottom: 40px; }
+        .insight-section h3 { margin-top: 0; display: flex; align-items: center; gap: 10px; }
+        
+        .action-bar { display: flex; gap: 15px; }
+        .btn { padding: 12px 25px; border-radius: 12px; border: none; font-weight: 800; cursor: pointer; text-decoration: none; color: white; background: var(--glass); border: 1px solid rgba(255,255,255,0.2); transition: 0.3s; }
+        .btn-p { background: var(--p); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
     </style>
 </head>
 <body>
+    <header>
+        <div style="font-size:1.5rem; font-weight:800;">Command <span style="color:var(--p)">Center</span></div>
+        <a href="index.html" class="btn">🏠 חזרה לספרייה</a>
+    </header>
     <div class="container">
-        <div class="header">
-            <h1>Mission Control 🛰️</h1>
-            <a href="index.html" class="btn">חזרה לאתר</a>
-        <div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div>
-        
-        <div class="stats-grid" id="stats">
-            <div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div>
+        <div class="stat-grid" id="stats">
+            </div>
 
-        <h3>🚩 דוח חריגות (Metadata Red Flags)</h3>
-        <div class="issue-list" id="issues">
-            <p>סורק את המאגר...</p>
-        <div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div>
-    <div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div>
+        <div class="insight-section">
+            <h3>🧠 AI Insights & Recommendations</h3>
+            <div id="ai-messages">מנתח נתונים...</div>
+        </div>
+
+        <h3>🛠️ פעולות ניהול</h3>
+        <div class="action-bar">
+            <button class="btn btn-p" onclick="alert('מפעיל סריקה מחדש...')">🔄 עדכון מטא-דאטה</button>
+            <button class="btn" onclick="location.href='https://github.com/yanivmizrachiy/digitalbook'">📂 GitHub Repo</button>
+        </div>
+    </div>
 
     <script>
-        async function runAudit() {
+        async function init() {
             const r = await fetch('generated/chapters.json?v=' + Date.now());
             const d = await r.json();
-            const items = d.items || d.files; // Handling both formats
+            const items = d.items;
 
-            // Stats Logic
+            // Stats Calculation
             const total = items.length;
-            const unknownAuthor = items.filter(i => i.author === 'Unknown' || i.author === 'Unknown Author').length;
-            const unknownYear = items.filter(i => i.year === 'Unknown').length;
-            const testCount = items.filter(i => i.type === 'Test').length;
+            const unknown = items.filter(i => i.author === 'Unknown').length;
+            const grade7 = items.filter(i => i.level.includes('ז')).length;
+            const grade8 = items.filter(i => i.level.includes('ח')).length;
 
             document.getElementById('stats').innerHTML = `
-                <div class="stat-card"><h2>סה"כ קבצים</h2><div class="val">${total}<div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div></div>
-                <div class="stat-card"><h2>ללא מחבר</h2><div class="val" style="color:var(--danger)">${unknownAuthor}<div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div></div>
-                <div class="stat-card"><h2>ללא שנה</h2><div class="val" style="color:var(--danger)">${unknownYear}<div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div></div>
-                <div class="stat-card"><h2>מבחנים/בחנים</h2><div class="val">${testCount}<div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div></div>
+                <div class="stat-card"><h2>${total}</h2><p>סה"כ קבצים</p></div>
+                <div class="stat-card"><h2>${grade7}</h2><p>כיתה ז'</p></div>
+                <div class="stat-card"><h2>${grade8}</h2><p>כיתה ח'</p></div>
+                <div class="stat-card" style="border-color:var(--danger)"><h2>${unknown}</h2><p>ללא מחבר (Unknown)</p></div>
             `;
 
-            // Issues Logic
-            const issues = items.filter(i => i.author === 'Unknown' || i.year === 'Unknown');
-            document.getElementById('issues').innerHTML = issues.length ? issues.map(i => `
-                <div class="issue-item">
-                    <span>${i.title}</span>
-                    <div>
-                        ${i.author === 'Unknown' ? '<span class="tag tag-red">חסר מחבר</span>' : ''}
-                        ${i.year === 'Unknown' ? '<span class="tag tag-red">חסרה שנה</span>' : ''}
-                    <div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div>
-                <div class="stat-card"><h2>כספת גיבוי</h2><div class="val">🛡️</div><button class="btn" style="margin-top:10px; background:#059669" onclick="downloadBackup()">הורד גיבוי מלא (ZIP)</button></div></div>
-            `).join('') : '<p style="color:var(--success)">✅ המאגר תקין ב-100%! אין חריגות מטא-דאטה.</p>';
+            // AI Insights Logic
+            let insights = "המערכת במצב תקין.";
+            if (unknown > 0) insights = `⚠️ נמצאו ${unknown} קבצים ללא מחבר. מומלץ לעדכן את המטא-דאטה לשיפור הסדר האקדמי.`;
+            if (grade7 > grade8 * 2) insights += `<br>📊 שים לב: יש פער משמעותי בין כמות החומר של כיתה ז' לכיתה ח'. מומלץ להעלות תכנים נוספים לשכבת ח'.`;
+            
+            document.getElementById('ai-messages').innerHTML = insights;
         }
-function downloadBackup() { window.open("https://github.com/yanivmizrachiy/digitalbook/archive/refs/heads/main.zip", "_blank"); }
-        runAudit();
+        init();
     </script>
 </body>
 </html>
