@@ -1,4 +1,4 @@
-import os, subprocess, json
+import os, subprocess, json, datetime
 
 FOLDERS = {
     "Grade_7": "1z0jsg8ZVa7rCeVLY1sms-W7C6whFuK8L",
@@ -9,23 +9,36 @@ FOLDERS = {
     "Mekhavnim": "1rvMYdiQ65_ZAoi_U0AcHBrqw4FcdozhX"
 }
 
+def notify(msg):
+    # שליחת התראה ישירות למכשיר האנדרואיד שלך
+    subprocess.run(["termux-notification", "-t", "🚀 DigitalBook Sync", "-c", msg, "--priority", "high"])
+
+def check_integrity():
+    # שימוש ב-jq לוודא שה-JSON תקין
+    res = subprocess.run(["jq", ".", "site/generated/chapters.json"], capture_output=True)
+    return res.returncode == 0
+
 def run_sync():
-    print("🚀 Starting Global Drive Sync...")
-    for label, folder_id in FOLDERS.items():
-        print(f"📥 Syncing {label}...")
-        target = f"site/pdf/{label}/"
-        os.makedirs(target, exist_ok=True)
-        # שימוש ב-gdown לשאיבה אגרסיבית
-        subprocess.run(["gdown", "--folder", "--id", folder_id, "-O", target, "--remaining"])
-
-    print("📊 Updating Metadata...")
-    subprocess.run(["python", "extract_meta.py"])
-
-    print("☁️ Pushing to GitHub...")
-    subprocess.run(["git", "add", "."])
-    subprocess.run(["git", "commit", "-m", "⚡ ATOMIC SYNC: Automated folder synchronization"])
-    subprocess.run(["git", "push", "origin", "main"])
-    print("✅ System fully synchronized!")
+    print("🛰️ Sovereign Sync Started...")
+    count_new = 0
+    try:
+        for label, folder_id in FOLDERS.items():
+            target = f"site/pdf/{label}/"
+            os.makedirs(target, exist_ok=True)
+            subprocess.run(["gdown", "--folder", "--id", folder_id, "-O", target, "--remaining"])
+        
+        subprocess.run(["python", "extract_meta.py"])
+        
+        if check_integrity():
+            subprocess.run(["git", "add", "."])
+            subprocess.run(["git", "commit", "-m", "🌌 SOVEREIGN-AUTO: System integrity verified and synced"])
+            subprocess.run(["git", "push", "origin", "main"])
+            notify("הסנכרון הושלם בהצלחה! האתר מעודכן ב-GitHub.")
+        else:
+            notify("⚠️ שגיאת Integrity! קובץ המטא-דאטה פגום.")
+            
+    except Exception as e:
+        notify(f"❌ קריסה בסנכרון: {str(e)}")
 
 if __name__ == "__main__":
     run_sync()
