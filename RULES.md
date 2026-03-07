@@ -41,3 +41,9 @@
 - **UX:** הוספת תצוגה מקדימה של תוכן הקובץ במעבר עכבר (Hover Preview).
 - **קבצים:** site/index.html, generate_thumbs.py, RULES.md.
 
+
+## 🕒 שדרוג AI Difficulty Estimator (v25.0) - 2026-03-07 22:10
+- **תיקון:** פריסה מחדש דרך PowerShell.
+- **פעולה:** ניתוח פדגוגי אוטומטי של רמות קושי.
+- **קבצים:** extract_meta.py, chapters.json, RULES.md.
+
