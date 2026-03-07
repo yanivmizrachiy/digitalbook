@@ -35,3 +35,9 @@
 - **טכנולוגיה:** אינטגרציה מלאה בין chapters.json לממשק המשתמש.
 - **קבצים:** site/index.html, RULES.md.
 
+
+## 🕒 שדרוג Visual Previews (v24.0) - 2026-03-07 22:08
+- **פעולה:** הטמעת מנוע Thumbnail מבוסס PyMuPDF.
+- **UX:** הוספת תצוגה מקדימה של תוכן הקובץ במעבר עכבר (Hover Preview).
+- **קבצים:** site/index.html, generate_thumbs.py, RULES.md.
+
