@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigitalBook | Sovereign Voice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        body { background: #020408; color: #f8fafc; font-family: 'Assistant', sans-serif; overflow-x: hidden; }
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; }
+        .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.05); }
+        .neon-glow:hover { box-shadow: 0 0 25px rgba(99, 102, 241, 0.4); border-color: #6366f1; }
+        .difficulty-tag { cursor: pointer; transition: 0.3s; }
+        .difficulty-tag:hover { filter: brightness(1.5); transform: scale(1.1); }
+    </style>
+</head>
+<body class="p-6 md:p-12">
+    <div id="particles-js"></div>
+    <div class="max-w-7xl mx-auto">
+        <header class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+            <h1 class="text-6xl font-black italic tracking-tighter">DIGITAL<span class="text-indigo-500 text-glow">BOOK</span></h1>
+            <div class="relative w-full md:w-96 flex gap-2">
+                <input type="text" id="search" placeholder="חפש נושא, כיתה או קושי..." class="glass p-4 rounded-2xl w-full outline-none focus:ring-2 focus:ring-indigo-500">
+                <button onclick="startVoice()" class="glass p-4 rounded-2xl hover:bg-indigo-500/20 transition-all" title="חיפוש קולי">🎤</button>
+            </div>
+        </header>
+
+        <div id="grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8"></div>
+    </div>
+
+    <script>
+        particlesJS('particles-js', {
+            "particles": { "number": { "value": 40 }, "color": { "value": "#6366f1" }, "opacity": { "value": 0.2 }, "move": { "enable": true, "speed": 1 } }
+        });
+
+        let allData = [];
+        async function load() {
+            const r = await fetch('generated/chapters.json?v=' + Date.now());
+            const d = await r.json();
+            allData = d.items;
+            render(allData);
+        }
+
+        function render(items) {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = items.map(i => 
+                <div class="glass p-8 rounded-3xl neon-glow cursor-pointer group transition-all" onclick="window.location.href='reader.html?file=\'">
+                    <div class="text-indigo-400 font-bold text-xs mb-3 uppercase tracking-tighter">
+                        \ | \ | 
+                        <span class="difficulty-tag text-white bg-indigo-500/20 px-2 py-0.5 rounded" onclick="event.stopPropagation(); filterByTag('\')">\</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6 leading-tight group-hover:text-indigo-400 transition-colors">\</h3>
+                    <div class="text-slate-500 text-xs flex justify-between">
+                        <span>\</span>
+                        <span class="opacity-50">#\</span>
+                    </div>
+                </div>
+            ).join('');
+        }
+
+        function filterByTag(tag) {
+            document.getElementById('search').value = tag;
+            render(allData.filter(i => i.difficulty === tag));
+        }
+
+        function startVoice() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'he-IL';
+            recognition.onresult = (event) => {
+                const text = event.results[0][0].transcript;
+                document.getElementById('search').value = text;
+                render(allData.filter(i => 
+                    i.title.includes(text) || i.level.includes(text) || i.subject.includes(text) || i.difficulty.includes(text)
+                ));
+            };
+            recognition.start();
+        }
+
+        document.getElementById('search').oninput = (e) => {
+            const val = e.target.value.toLowerCase();
+            render(allData.filter(i => 
+                i.title.toLowerCase().includes(val) || 
+                i.level.toLowerCase().includes(val) || 
+                i.difficulty.toLowerCase().includes(val)
+            ));
+        };
+
+        load();
+    </script>
+</body>
+</html>
