@@ -27,7 +27,7 @@
             <h1 class="text-6xl font-black italic tracking-tighter cursor-pointer" onclick="location.reload()">DIGITAL<span class="text-indigo-500">BOOK</span></h1>
             <div class="flex gap-2 flex-wrap justify-center glass p-2 rounded-2xl">
                 <button onclick="toggleStealth()" class="p-3 rounded-xl hover:bg-indigo-500/20 transition-all" title="מצב סטודנט">🕶️</button>
-                <button onclick="toggleCinema()" class="p-3 rounded-xl hover:bg-amber-500/20 transition-all" title="מצב הקרנה">👁️</button>
+                <button id="compare-btn" onclick="toggleCompareMode()" class="glass p-3 rounded-xl hover:bg-indigo-500/20" title="השוואת קבצים (Shift+Click)">⚖️</button>`n                <button onclick="toggleCinema()" class="p-3 rounded-xl hover:bg-amber-500/20 transition-all" title="מצב הקרנה">👁️</button>
                 <button onclick="sortData('date')" class="px-5 py-2 rounded-xl text-[10px] font-bold hover:bg-indigo-500/20">🕒 חדש</button>
                 <input type="text" id="search" placeholder="חפש חומר..." class="bg-white/5 p-3 rounded-xl w-48 outline-none text-sm focus:ring-2 focus:ring-indigo-500">
             </div>
@@ -49,6 +49,28 @@
         particlesJS('particles-js', { "particles": { "number": { "value": 40 }, "color": { "value": "#6366f1" }, "opacity": { "value": 0.2 }, "move": { "enable": true, "speed": 1 } } });
 
         let allData = [];
+                let selectedForCompare = [];
+        function toggleCompareMode() {
+            const btn = document.getElementById('compare-btn');
+            if (selectedForCompare.length === 2) {
+                window.location.href = compare.html?file1=\&file2=\;
+            } else {
+                alert('בחר 2 קבצים להשוואה ע"י לחיצה עליהם');
+            }
+        }
+        function handleCardClick(url, event) {
+            if (event.shiftKey) {
+                event.preventDefault();
+                if (selectedForCompare.includes(url)) {
+                    selectedForCompare = selectedForCompare.filter(u => u !== url);
+                } else if (selectedForCompare.length < 2) {
+                    selectedForCompare.push(url);
+                }
+                render(allData);
+            } else {
+                window.location.href = 'reader.html?file=' + url;
+            }
+        }
         async function load() {
             const r = await fetch('generated/chapters.json?v=' + Date.now());
             const d = await r.json();
@@ -97,3 +119,4 @@
     </script>
 </body>
 </html>
+
