@@ -3,117 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigitalBook | Sovereign Voice</title>
+    <title>DigitalBook | Sovereign v36</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
-        body { background: #020408; color: #f8fafc; font-family: 'Assistant', sans-serif; overflow-x: hidden; }
-        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; }
+        body { background: #020408; color: #f8fafc; font-family: 'Assistant', sans-serif; transition: 0.5s; }
         .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.05); }
-        .neon-glow:hover { box-shadow: 0 0 25px rgba(99, 102, 241, 0.4); border-color: #6366f1; }
-        .difficulty-tag { cursor: pointer; transition: 0.3s; }
-        .difficulty-tag:hover { filter: brightness(1.5); transform: scale(1.1); }
+        .cinema-mode { background: #ffffff !important; color: #000000 !important; }
+        .cinema-mode .glass { border: 1px solid #ddd; background: #f9f9f9; color: #000; }
     </style>
 </head>
 <body class="p-6 md:p-12">
-    <div id="particles-js"></div>
     <div class="max-w-7xl mx-auto">
-                <div class="flex gap-4 mb-12 overflow-x-auto pb-4">
-            <button onclick="render(allData)" class="glass px-6 py-2 rounded-full hover:bg-indigo-500 transition-all text-sm font-bold">הכל</button>
-            <button onclick="filterBySubject('אלגברה')" class="glass px-6 py-2 rounded-full hover:bg-indigo-500 transition-all text-sm font-bold">🔢 אלגברה</button>
-            <button onclick="filterBySubject('גיאומטריה')" class="glass px-6 py-2 rounded-full hover:bg-indigo-500 transition-all text-sm font-bold">📐 גיאומטריה</button>
-            <button onclick="filterBySubject('כללי')" class="glass px-6 py-2 rounded-full hover:bg-indigo-500 transition-all text-sm font-bold">🎉 פורים וחברה</button>
+        <div class="flex gap-4 mb-6 text-[10px] font-mono uppercase tracking-widest opacity-60">
+            <span>סה"כ נכסים: 15</span> | <span>🔢 אלגברה: 0</span> | <span>📐 גיאומטריה: 2</span> | <span>🎉 חברה: 13</span>
         </div>
-        <header class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
-            <h1 class="text-6xl font-black italic tracking-tighter">DIGITAL<span class="text-indigo-500 text-glow">BOOK</span></h1>
-            <div class="relative w-full md:w-96 flex gap-2">
-                <input type="text" id="search" placeholder="חפש נושא, כיתה או קושי..." class="glass p-4 rounded-2xl w-full outline-none focus:ring-2 focus:ring-indigo-500">
-                <button onclick="startVoice()" class="glass p-4 rounded-2xl hover:bg-indigo-500/20 transition-all" title="חיפוש קולי">🎤</button>
+
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
+            <h1 class="text-5xl font-black italic tracking-tighter">DIGITAL<span class="text-indigo-500">BOOK</span></h1>
+            <div class="flex gap-2">
+                <input type="text" id="search" placeholder="חפש..." class="glass p-3 rounded-xl w-64 outline-none">
+                <button onclick="toggleCinema()" class="glass p-3 rounded-xl hover:bg-amber-500/20" title="מצב כיתה">👁️</button>
+                <button onclick="startVoice()" class="glass p-3 rounded-xl hover:bg-indigo-500/20">🎤</button>
             </div>
         </header>
 
-        <div id="grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8"></div>
+        <div class="flex gap-4 mb-10 overflow-x-auto pb-2">
+            <button onclick="render(allData)" class="glass px-5 py-1.5 rounded-full text-xs font-bold">הכל</button>
+            <button onclick="filterBySubject('אלגברה')" class="glass px-5 py-1.5 rounded-full text-xs font-bold">אלגברה</button>
+            <button onclick="filterBySubject('גיאומטריה')" class="glass px-5 py-1.5 rounded-full text-xs font-bold">גיאומטריה</button>
+        </div>
+
+        <div id="grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
     </div>
 
     <script>
-        particlesJS('particles-js', {
-            "particles": { "number": { "value": 40 }, "color": { "value": "#6366f1" }, "opacity": { "value": 0.2 }, "move": { "enable": true, "speed": 1 } }
-        });
-
         let allData = [];
-                async function checkIntegrity(items) {
-            // בודק שכל קובץ אכן נגיש בשרת לפני הרינדור
-            const validated = await Promise.all(items.map(async i => {
-                try {
-                    const r = await fetch(i.url, { method: 'HEAD' });
-                    return r.ok ? i : null;
-                } catch(e) { return null; }
-            }));
-            return validated.filter(i => i !== null);
-        }
         async function load() {
             const r = await fetch('generated/chapters.json?v=' + Date.now());
             const d = await r.json();
-            const validItems = await checkIntegrity(d.items);
-            allData = validItems;
+            allData = d.items;
             render(allData);
         }
-
-        
-        function filterBySubject(s) { render(allData.filter(i => i.subject === s)); }
 
         function render(items) {
             const grid = document.getElementById('grid');
             grid.innerHTML = items.map(i => 
-                <div class="glass p-8 rounded-3xl neon-glow cursor-pointer group transition-all" onclick="window.location.href='reader.html?file=\'">
-                    <div class="text-indigo-400 font-bold text-xs mb-3 uppercase tracking-tighter">
-                        \ | \ | 
-                        <span class="difficulty-tag text-white bg-indigo-500/20 px-2 py-0.5 rounded" onclick="event.stopPropagation(); filterByTag('\')">\</span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-6 leading-tight group-hover:text-indigo-400 transition-colors">\</h3>
-                    <div class="text-slate-500 text-xs flex justify-between">
-                        <span>\</span>
-                        <span class="opacity-50">#\</span>
-                    </div>
+                <div class="glass p-6 rounded-2xl cursor-pointer hover:border-indigo-500 transition-all" onclick="window.location.href='reader.html?file=\'">
+                    <div class="text-indigo-400 text-[10px] font-bold mb-2">\ | \</div>
+                    <h3 class="text-lg font-bold mb-4">\</h3>
+                    <div class="text-slate-500 text-[10px]">\</div>
                 </div>
             ).join('');
         }
 
-        function filterByTag(tag) {
-            document.getElementById('search').value = tag;
-            render(allData.filter(i => i.difficulty === tag));
+        function filterBySubject(s) { render(allData.filter(i => i.subject === s)); }
+        
+        function toggleCinema() {
+            document.body.classList.toggle('cinema-mode');
+            const isCinema = document.body.classList.contains('cinema-mode');
+            document.getElementById('grid').classList.toggle('md:grid-cols-2', isCinema);
         }
 
         function startVoice() {
-            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-            recognition.lang = 'he-IL';
-            recognition.onresult = (event) => {
-                const text = event.results[0][0].transcript;
-                document.getElementById('search').value = text;
-                render(allData.filter(i => 
-                    i.title.includes(text) || i.level.includes(text) || i.subject.includes(text) || i.difficulty.includes(text)
-                ));
+            const rec = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            rec.lang = 'he-IL';
+            rec.onresult = (e) => { 
+                const t = e.results[0][0].transcript;
+                document.getElementById('search').value = t;
+                render(allData.filter(i => i.title.includes(t) || i.subject.includes(t)));
             };
-            recognition.start();
+            rec.start();
         }
 
         document.getElementById('search').oninput = (e) => {
-            const val = e.target.value.toLowerCase();
-            render(allData.filter(i => 
-                i.title.toLowerCase().includes(val) || 
-                i.level.toLowerCase().includes(val) || 
-                i.difficulty.toLowerCase().includes(val)
-            ));
+            const v = e.target.value.toLowerCase();
+            render(allData.filter(i => i.title.toLowerCase().includes(v)));
         };
 
         load();
     </script>
-    <div id="sync-badge" class="fixed bottom-6 right-6 glass p-3 rounded-2xl flex items-center gap-3 z-50 border border-emerald-500/30 shadow-lg shadow-emerald-500/10">
-        <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-        <div class="text-[10px] font-mono text-emerald-400 uppercase tracking-tighter">Live Sync: ab10341</div>
-    </div>
 </body>
 </html>
-
-
-
