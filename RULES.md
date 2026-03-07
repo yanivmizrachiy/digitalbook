@@ -82,3 +82,9 @@
 - **UX:** הוספת כפתורי סינון קטגוריות ב-Index.
 - **קבצים:** reader.html, index.html, RULES.md.
 
+
+## 🕒 שדרוג Classroom Mode & Fix (v35.0) - 2026-03-07 23:42
+- **תיקון:** כתיבה מחדש של reader.html למניעת שגיאות סינטקס.
+- **UX:** הוספת 'מצב כיתה' (Cinema Mode) להקרנה ברורה על מקרן.
+- **קבצים:** reader.html, index.html, RULES.md.
+
