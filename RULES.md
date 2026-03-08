@@ -38,13 +38,16 @@ https://yanivmizrachiy.github.io/digitalbook/
 
 
 ## מצב פריסה חי
-- עודכן: 2026-03-08 12:16:31
-- root/index.html: True
-- root/reader.html: True
-- root/compare.html: True
-- root/app.js: False
-- root/styles.css: False
-- root/manifest.webmanifest: False
+- עודכן: 2026-03-08 13:12:23
+- publish source בפועל: site/
+- site/index.html: True
+- site/reader.html: True
+- site/compare.html: True
+- site/app.js: True
+- site/styles.css: True
+- site/manifest.webmanifest: True
+- site/generated/chapters.json: True
+
 
 
 ## מה בוצע ואומת ✅
@@ -69,12 +72,10 @@ https://yanivmizrachiy.github.io/digitalbook/
 
 
 
+
 ## מצב מערכת אוטומטי
-- עודכן: 2026-03-08 12:58:17
-- מספר PDFs: 15
-- root/index.html: yes
-- root/reader.html: yes
-- root/compare.html: yes
-- root/app.js: yes
-- root/styles.css: yes
-- root/manifest.webmanifest: yes
+- עודכן:  + "TS" + 
+- commit אחרון:  + "LAST_COMMIT" + 
+- הודעה:  + "LAST_MSG" + 
+- מספר PDFs:  + "PDF_COUNT" + 
+
