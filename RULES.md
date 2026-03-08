@@ -113,6 +113,13 @@ https://yanivmizrachiy.github.io/digitalbook/
 - דוח נשמר: STATE/multiview_phase_a_report.md
 
 
+## מצב ניקוי אחרי multiview
+- עודכן: 2026-03-08 23:09:18
+- קבצי bak של reader/styles נוקו או הוחרגו
+- .gitignore עודכן עבור site/*.bak.*
+- הריפו נשמר נקי אחרי שלב א'
+
+
 ## מצב מערכת אוטומטי
 - עודכן:  + "TS" + 
 - commit אחרון:  + "LAST_COMMIT" + 

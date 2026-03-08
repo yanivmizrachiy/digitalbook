@@ -2,3 +2,4 @@
 .backup_compare/
 .backup_v2/
 .backup_rules/
+site/*.bak.*
