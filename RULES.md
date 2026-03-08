@@ -1,68 +1,64 @@
 # 📘 DigitalBook — RULES (Source of Truth)
 
-עודכן: 2026-03-08 07:34:13
+עודכן: 2026-03-08 07:41:39
 
 ## עיקרון על
-הקובץ הזה חייב לשקף רק מצב אמיתי שנבדק בפועל.
+הקובץ הזה משקף רק מצב אמיתי שנבדק בפועל.
 אין דמו.
-אין תיאור כאילו הוא קיים אם הוא לא נבדק.
+אין תיאור של יכולת שלא אומתה.
 
 ---
 
 ## מטרת הפרויקט
-לבנות ספר דיגיטלי אמיתי בעברית RTL, עם צפייה אמיתית ב-PDF, ניווט אמיתי, הורדה אמיתית, וריפו מסודר.
+ספר דיגיטלי אמיתי בעברית RTL, עם צפייה אמיתית ב-PDF, ניווט אמיתי, הורדה אמיתית, וריפו מסודר.
 
 ---
 
 ## מה בוצע ונבדק ✅
-- ריפו GitHub פעיל
+- ריפו GitHub פעיל ומסונכרן
 - אתר חי ב-GitHub Pages
-- site/index.html: yes
-- site/reader.html: yes
-- site/compare.html: yes
-- site/generated/chapters.json: yes
-- מספר PDFים אמיתיים תחת site/pdf: 15
+- site/index.html קיים
+- site/reader.html קיים
+- site/compare.html קיים
+- site/generated/chapters.json קיים
+- extract_meta.py קיים
+- קיימים 15 קובצי PDF אמיתיים תחת site/pdf
+- זוהתה ותוקנה בעיית נתיבים ב-chapters.json:
+  - לפני: pdf\...
+  - אחרי: pdf/...
 
 ---
 
-## מה קיים בקבצים אבל עדיין צריך אימות מלא ⚠️
-- site/app.js: no
-- site/styles.css: no
-- site/manifest.webmanifest: no
-- compare feature בקוד: yes
-- stealth feature בקוד: yes
-- voice search בקוד: no
-- night mode בקוד: yes
-- cinema mode בקוד: no
+## מה קיים אבל עדיין צריך אימות מלא ⚠️
+- compare feature זוהה בקוד
+- stealth feature זוהה בקוד
+- night mode זוהה בקוד
 
 ---
 
 ## מה לא הוכח או לא קיים עדיין ❌
-- site/sw.js: no
-- extract_meta.py: yes
-
-אם ערך הוא no — מבחינת הפרויקט זה לא קיים/לא הוכח.
-
----
-
-## תהליך עבודה מחייב
-כל שינוי בפרויקט מחייב:
-1. שינוי אמיתי בקוד
-2. בדיקה אמיתית
-3. עדכון RULES.md
-4. commit
-5. push
+- site/app.js לא זוהה מקומית בבדיקה הקודמת
+- site/styles.css לא זוהה מקומית בבדיקה הקודמת
+- site/manifest.webmanifest לא זוהה מקומית בבדיקה הקודמת
+- site/sw.js לא זוהה
+- voice search לא זוהה
+- cinema mode לא זוהה
 
 ---
 
 ## מה נשאר לעשות
-1. לאמת שכל קבצי ה-PDF באמת מוצגים באתר
-2. לאמת שכפתור הורדה עובד באמת
-3. לאמת מה מתוך compare / stealth / voice / night / cinema באמת עובד
-4. להוסיף רק אחר כך פיצ'רים חסרים
+1. לאמת שכל 15 ה-PDFים נפתחים באמת דרך האתר
+2. לאמת שהורדה עובדת באמת
+3. לאמת ש-compare עובד באמת
+4. לאמת ש-reader עובד באמת לכל הפרקים
+5. לנקות קבצים מיותרים ולייצב את מבנה הריפו
 
 ---
 
-## דוח מצב
-ראו:
-- STATE/REAL_STATUS.md
+## דרך עבודה מחייבת
+כל שינוי מחייב:
+1. שינוי אמיתי בקוד או בנתונים
+2. בדיקה אמיתית
+3. עדכון RULES.md
+4. commit
+5. push
