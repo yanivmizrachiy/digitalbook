@@ -116,6 +116,17 @@
   </style>
 </head>
 <body>
+
+<div id="compareTopBar" class="compare-top-bar">
+  <h2 class="compare-title">השוואת קבצים</h2>
+  <div class="compare-actions">
+    <a id="downloadFile1" class="reader-action-btn" href="#" target="_blank" rel="noopener">⬇ הורדת קובץ 1</a>
+    <a id="downloadFile2" class="reader-action-btn" href="#" target="_blank" rel="noopener">⬇ הורדת קובץ 2</a>
+    <button id="compareBackBtn" class="reader-action-btn" type="button">⬅ חזרה לקטלוג</button>
+  </div>
+</div>
+
+
   <div class="top">
     <div class="title">⚖️ Compare V2 — השוואת שני קבצים</div>
     <div class="controls">
@@ -249,5 +260,29 @@
       document.body.insertAdjacentHTML("beforeend", `<div class="empty">שגיאה בטעינת compare: ${String(err)}</div>`);
     });
   </script>
+
+<script>
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const f1 = params.get('file1') || '';
+  const f2 = params.get('file2') || '';
+  const d1 = document.getElementById('downloadFile1');
+  const d2 = document.getElementById('downloadFile2');
+  const backBtn = document.getElementById('compareBackBtn');
+
+  if (d1 && f1) {
+    d1.href = f1;
+    const parts = f1.split('/');
+    d1.setAttribute('download', parts[parts.length - 1] || 'file1.pdf');
+  }
+  if (d2 && f2) {
+    d2.href = f2;
+    const parts = f2.split('/');
+    d2.setAttribute('download', parts[parts.length - 1] || 'file2.pdf');
+  }
+  if (backBtn) backBtn.addEventListener('click', () => history.back());
+})();
+</script>
+
 </body>
 </html>

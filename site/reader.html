@@ -15,6 +15,14 @@
     </style>
 </head>
 <body>
+
+<div id="readerTopActions" class="reader-top-actions">
+  <a id="downloadBtn" class="reader-action-btn" href="#" target="_blank" rel="noopener">⬇ הורדת PDF</a>
+  <button id="backToCatalogBtn" class="reader-action-btn" type="button">⬅ חזרה לקטלוג</button>
+  <button id="scrollTopBtn" class="reader-action-btn" type="button">⬆ לראש הדף</button>
+</div>
+
+
     <div class="toolbar">
         <button class="nav-button" onclick="location.href='index.html'">🔙 חזרה</button>
         <button class="nav-button night-btn" onclick="toggleNight()">🌙 מצב לילה</button>
@@ -53,5 +61,24 @@
         renderPDF();
     </script>
 <script src="reader_nav.js"></script>
+
+<script>
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const file = params.get('file') || '';
+  const downloadBtn = document.getElementById('downloadBtn');
+  const backBtn = document.getElementById('backToCatalogBtn');
+  const topBtn = document.getElementById('scrollTopBtn');
+
+  if (downloadBtn && file) {
+    downloadBtn.href = file;
+    const parts = file.split('/');
+    downloadBtn.setAttribute('download', parts[parts.length - 1] || 'file.pdf');
+  }
+  if (backBtn) backBtn.addEventListener('click', () => history.back());
+  if (topBtn) topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+})();
+</script>
+
 </body>
 </html>
