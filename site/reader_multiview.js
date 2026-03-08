@@ -1,4 +1,18 @@
 (function () {
+  const STORAGE_KEY = "digitalbook_reader_multiview_state";
+  function loadSavedState() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    } catch {
+      return {};
+    }
+  }
+  function saveState(partial) {
+    try {
+      const current = loadSavedState();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...current, ...partial }));
+    } catch {}
+  }
   const params = new URLSearchParams(window.location.search);
   const file = params.get("file");
   if (!file || !window.pdfjsLib) return;
@@ -6,13 +20,14 @@
   window.pdfjsLib.GlobalWorkerOptions.workerSrc =
     "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.js";
 
+  const saved = loadSavedState();
   const state = {
     pdf: null,
-    mode: 1,
+    mode: Number(saved.mode) || 1,
     startPage: 1,
     scale: 1.2,
-    fitWidth: true,
-    scrollMode: false
+    fitWidth: typeof saved.fitWidth === "boolean" ? saved.fitWidth : true,
+    scrollMode: typeof saved.scrollMode === "boolean" ? saved.scrollMode : false
   };
 
   function qs(sel, root = document) {
@@ -144,6 +159,7 @@
     qsa("[data-mode]").forEach((btn) => {
       btn.addEventListener("click", async () => {
         state.mode = Number(btn.dataset.mode);
+        saveState({ mode: state.mode });
         if (state.startPage > state.pdf.numPages) state.startPage = 1;
         await renderCurrentSpread();
       });
@@ -173,6 +189,7 @@
     if (fit) {
       fit.addEventListener("click", async () => {
         state.fitWidth = !state.fitWidth;
+        saveState({ fitWidth: state.fitWidth });
         fit.classList.toggle("active", state.fitWidth);
         await renderCurrentSpread();
       });
@@ -182,6 +199,7 @@
     if (scrollBtn) {
       scrollBtn.addEventListener("click", async () => {
         state.scrollMode = !state.scrollMode;
+        saveState({ scrollMode: state.scrollMode });
         scrollBtn.classList.toggle("active", state.scrollMode);
         await renderCurrentSpread();
       });
@@ -193,9 +211,51 @@
     }
   }
 
+  function bindKeyboardShortcuts() {
+    window.addEventListener("keydown", async (e) => {
+      const tag = (document.activeElement && document.activeElement.tagName) || "";
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+
+      const prev = qs("#mvPrevBtn");
+      const next = qs("#mvNextBtn");
+      const fit = qs("#mvFitBtn");
+      const scrollBtn = qs("#mvScrollModeBtn");
+      const mode1 = qs('[data-mode="1"]');
+      const mode2 = qs('[data-mode="2"]');
+      const mode3 = qs('[data-mode="3"]');
+
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        prev && prev.click();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        next && next.click();
+      } else if (e.key === "1") {
+        e.preventDefault();
+        mode1 && mode1.click();
+      } else if (e.key === "2") {
+        e.preventDefault();
+        mode2 && mode2.click();
+      } else if (e.key === "3") {
+        e.preventDefault();
+        mode3 && mode3.click();
+      } else if (e.key.toLowerCase() === "g") {
+        e.preventDefault();
+        scrollBtn && scrollBtn.click();
+      } else if (e.key.toLowerCase() == "f") {
+        e.preventDefault();
+        fit && fit.click();
+      } else if (e.key.toLowerCase() === "p") {
+        e.preventDefault();
+        window.print();
+      }
+    });
+  }
+
   async function init() {
     ensureRoot();
     bindToolbar();
+    bindKeyboardShortcuts();
     const task = window.pdfjsLib.getDocument(file);
     state.pdf = await task.promise;
     await renderCurrentSpread();
