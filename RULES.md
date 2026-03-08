@@ -67,18 +67,20 @@
 
 
 ## מצב פריסת Pages
-- עודכן: 2026-03-08 08:18:21
-- מקור הפריסה: GitHub Actions workflow
-- נוצר workflow: .github/workflows/pages.yml
-- היעד: פריסה של root artifact
-- reader.html: ממתין לאימות אחרי ריצת workflow
-- compare.html: ממתין לאימות אחרי ריצת workflow
+- עודכן: 2026-03-08 08:26:26
+- מקור פריסה: GitHub Actions
+- artifact לפריסה: site/
+- index.html נפרס מתוך site/
+- reader.html אמור להיפרס מתוך site/
+- compare.html אמור להיפרס מתוך site/
+
+
 
 
 
 
 ## מצב מערכת אוטומטי
-- עודכן: 2026-03-08 08:18:21
+- עודכן: 2026-03-08 08:26:26
 - מספר PDFs: 15
 - root/index.html: yes
 - root/reader.html: yes

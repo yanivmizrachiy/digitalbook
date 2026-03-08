@@ -24,17 +24,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Ensure publish files exist at root
+      - name: Ensure publish files exist in site
         run: |
-          test -f index.html
-          test -f app.js
-          test -f styles.css
-          test -f manifest.webmanifest
-          test -f reader.html
-          test -f compare.html
-          test -d generated
-          test -d pdf || true
-          touch .nojekyll
+          test -f site/index.html
+          test -f site/reader.html
+          test -f site/compare.html
+          test -f site/generated/chapters.json
+          test -d site/pdf
+          touch site/.nojekyll
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -42,7 +39,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: ./site
 
       - name: Deploy to GitHub Pages
         id: deployment
