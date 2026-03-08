@@ -80,6 +80,13 @@ https://yanivmizrachiy.github.io/digitalbook/
 - אין לתאר את app.js כמנוע דף הבית הפעיל עד אימות חי מפורש
 
 
+## מצב אימות reader
+- דוח אימות נשמר: STATE/reader_validation.md
+- קבצים שנמצאו תקינים ל-reader: 15
+- קבצים חסרים ל-reader: 0
+- מנוע האימות בוצע מול site/generated/chapters.json
+
+
 ## מצב מערכת אוטומטי
 - עודכן:  + "TS" + 
 - commit אחרון:  + "LAST_COMMIT" + 
