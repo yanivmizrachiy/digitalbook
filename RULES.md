@@ -28,8 +28,10 @@ https://yanivmizrachiy.github.io/digitalbook/
 - אין דמו: המידע נבנה אוטומטית מהקבצים הקיימים
 
 
+
+
 ## מצב מערכת אוטומטי
-- עודכן: 2026-03-08 09:10:19
+- עודכן: 2026-03-08 10:53:24
 - מספר PDFs: 15
 - root/index.html: yes
 - root/reader.html: yes
