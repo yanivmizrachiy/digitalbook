@@ -1,3 +1,10 @@
+# 📘 DigitalBook — RULES (Source of Truth)
+
+## עיקרון על
+הקובץ הזה משקף רק מצב אמיתי שנבדק בפועל.
+אין דמו.
+אין תיאור של יכולת שלא אומתה.
+
 # DIGITALBOOK — RULES.md
 Last verified: 2026-03-08T09:07:36+02:00
 
@@ -30,12 +37,43 @@ https://yanivmizrachiy.github.io/digitalbook/
 
 
 
+## מצב פריסה חי
+- עודכן: 2026-03-08 12:16:31
+- root/index.html: True
+- root/reader.html: True
+- root/compare.html: True
+- root/app.js: False
+- root/styles.css: False
+- root/manifest.webmanifest: False
+
+
+## מה בוצע ואומת ✅
+- ריפו GitHub פעיל
+- אתר GitHub Pages פעיל
+- root/index.html נבדק מקומית
+- root/reader.html נבדק מקומית
+- root/compare.html נבדק מקומית
+- generated/chapters.json נבנה מחדש מתוך PDF אמיתיים
+- מספר קבצי PDF המחוברים כרגע לספר: 0
+- RULES.md מסונכרן כמקור אמת
+- נוצר דוח מצב אמיתי: STATE/latest_health_report.md
+
+## מה נשאר לעשות
+1. לאמת live שהדף הראשי נטען עם app.js, styles.css ו-manifest.webmanifest
+2. לאמת בפועל דפדוף עמודים בתוך כמה PDF שונים
+3. לאמת בפועל מעבר לקובץ הבא/הקודם
+4. לאמת בפועל שכפתור הורדה עובד לכל קובץ
+5. לטפל רק אחר כך בשיפורי UI/אנימציה שלא פוגעים ביציבות
+6. להסיר או למזג קבצי PDF כפולים רק אחרי דוח כפילויות מאומת
+
+
+
 ## מצב מערכת אוטומטי
-- עודכן: 2026-03-08 10:53:24
+- עודכן: 2026-03-08 12:56:48
 - מספר PDFs: 15
 - root/index.html: yes
 - root/reader.html: yes
 - root/compare.html: yes
-- root/app.js: no
-- root/styles.css: no
-- root/manifest.webmanifest: no
+- root/app.js: yes
+- root/styles.css: yes
+- root/manifest.webmanifest: yes
