@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DigitalBook QA</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #eef4ff;
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    h1 {
+      margin: 0 0 10px 0;
+      font-size: 30px;
+    }
+    .meta {
+      opacity: .8;
+      margin-bottom: 22px;
+    }
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .qa-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 12px;
+      padding: 10px 14px;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 700;
+    }
+    .qa-btn-secondary {
+      background: #334155;
+    }
+    .list {
+      margin: 0;
+      padding-right: 20px;
+      line-height: 1.8;
+    }
+    code {
+      background: rgba(255,255,255,0.08);
+      padding: 2px 6px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>DigitalBook — QA חי</h1>
+    <div class="meta">עודכן: 2026-03-08 23:36:39</div>
+
+    <div class="card">
+      <h2>בדיקות Reader מהירות</h2>
+      <div class="row">
+        
+    <a class="qa-btn" href="reader.html?file=pdf/2026_03_06_110241(1).pdf&mode=1" target="_blank">מצב עמוד 1</a>
+    <a class="qa-btn" href="reader.html?file=pdf/2026_03_06_110241(1).pdf&mode=2" target="_blank">מצב 2 עמודים</a>
+    <a class="qa-btn" href="reader.html?file=pdf/2026_03_06_110241(1).pdf&mode=3" target="_blank">מצב 3 עמודים</a>
+    <a class="qa-btn" href="reader.html?file=pdf/2026_03_06_110241(1).pdf&scroll=1" target="_blank">גלילה רציפה</a>
+    <a class="qa-btn" href="reader.html?file=pdf/2026_03_06_110241(1).pdf&mode=2&fit=0" target="_blank">2 עמודים בלי fit</a>
+    
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>בדיקות Compare והורדה</h2>
+      <div class="row">
+        <a class="qa-btn qa-btn-secondary" href="compare.html?file1=pdf/2026_03_06_110241(1).pdf&file2=pdf/maagar_z.pdf" target="_blank">בדיקת Compare</a>
+        <a class="qa-btn qa-btn-secondary" href="pdf/2026_03_06_110241(1).pdf" target="_blank">הורדת PDF לדוגמה</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>צ'קליסט בדיקה ידני</h2>
+      <ul class="list">
+        <li>לבדוק שמצב עמוד 1 נוח</li>
+        <li>לבדוק שמצב 2 עמודים נוח</li>
+        <li>לבדוק שמצב 3 עמודים נוח</li>
+        <li>לבדוק שגלילה רציפה נוחה</li>
+        <li>לבדוק שכפתור ההדפסה מוציא תוצאה איכותית</li>
+        <li>לבדוק שקיצורי המקלדת עובדים נוח</li>
+        <li>לבדוק ש-compare מציג שני קבצים טוב</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>מצב טכני נוכחי</h2>
+      <ul class="list">
+        <li>מנוע הבית החי: <code>site/index.html + site/catalog_v2.js</code></li>
+        <li>מנוע reader החי: <code>site/reader.html + site/reader_multiview.js</code></li>
+        <li>קטלוג חי: <code>site/generated/chapters.json</code></li>
+        <li>מספר קבצים חיים: <code>15</code></li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
