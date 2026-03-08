@@ -18,13 +18,12 @@
 ## מה בוצע ואומת ✅
 - ריפו GitHub פעיל ומסונכרן
 - אתר חי ב-GitHub Pages
-- site/index.html קיים
-- site/reader.html קיים
-- site/compare.html קיים
-- extract_meta.py קיים
-- site/generated/chapters.json קיים
-- קיימים 15 קובצי PDF אמיתיים תחת site/pdf
-- תוקנה בעיית נתיבים ב-chapters.json
+- קיימים 15 קובצי PDF אמיתיים
+- תוקנה בעיית הנתיבים ב-chapters.json
+- הוגדר hook אוטומטי בטוח מסוג pre-commit לעדכון RULES.md
+- בוצעה בדיקה והשלמה של קבצי publish ב-root
+- דוח מצב אחרון נכתב ל-STATE/latest_smart_fix.md
+
   - לפני: pdf\...
   - אחרי: pdf/...
 - אומת שלכל 15 קובצי ה-PDF יש התאמה תקינה ב-chapters.json
@@ -51,14 +50,12 @@
 ---
 
 ## מה נשאר לעשות
-1. לאמת בפועל שה-reader עובד לכל 15 הקבצים
-2. לאמת בפועל שהורדה עובדת מתוך הממשק
-3. לאמת בפועל ש-compare עובד
-4. לבדוק אם stealth ו-night mode באמת פעילים בממשק
-5. לנקות קבצים מיותרים ולא מנוהלים מהריפו
-6. לייצב סופית את מבנה האתר והקבצים
+1. לאמת סופית ש-reader.html חי באתר
+2. לאמת סופית ש-compare.html חי באתר
+3. לאמת ידנית את פעולת compare בממשק
+4. לאמת ידנית את פעולת stealth ו-night mode
+5. לנקות קבצים לא מנוהלים/מיותרים
 
----
 
 ## דרך עבודה מחייבת
 כל שינוי מחייב:
@@ -68,8 +65,13 @@
 4. commit
 5. push
 
+
 ## מצב מערכת אוטומטי
-- עודכן: 2026-03-08 08:01:53
-- commit אחרון: 5ecd6d2
-- הודעה: Test RULES auto-update hook
+- עודכן: 2026-03-08 08:07:49
 - מספר PDFs: 15
+- root/index.html: yes
+- root/reader.html: yes
+- root/compare.html: yes
+- root/app.js: no
+- root/styles.css: no
+- root/manifest.webmanifest: no

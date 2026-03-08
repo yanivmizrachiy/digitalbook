@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Sovereign Dual-View Sync</title>
+    <style>
+        body { margin: 0; background: #020408; color: white; font-family: sans-serif; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        .toolbar { height: 60px; background: rgba(30, 41, 59, 0.9); display: flex; align-items: center; padding: 0 20px; gap: 15px; border-bottom: 1px solid #334155; }
+        .view-container { display: flex; flex: 1; gap: 4px; background: #1e293b; overflow: hidden; }
+        iframe { flex: 1; border: none; background: white; }
+        .nav-button { background: #6366f1; border: none; color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <button class="nav-button" onclick="location.href='index.html'">🔙 חזרה</button>
+        <div style="margin-right: auto; opacity: 0.7;">סנכרון גלילה פעיל 🟢</div>
+    </div>
+    <div class="view-container">
+        <iframe id="left-view"></iframe>
+        <iframe id="right-view"></iframe>
+    </div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const f1 = document.getElementById('left-view');
+        const f2 = document.getElementById('right-view');
+        f1.src = 'reader.html?file=' + params.get('file1');
+        f2.src = 'reader.html?file=' + params.get('file2');
+
+        function sync() {
+            try {
+                const win1 = f1.contentWindow;
+                const win2 = f2.contentWindow;
+                win1.document.getElementById('viewer-container').onscroll = () => {
+                    win2.document.getElementById('viewer-container').scrollTop = win1.document.getElementById('viewer-container').scrollTop;
+                };
+                win2.document.getElementById('viewer-container').onscroll = () => {
+                    win1.document.getElementById('viewer-container').scrollTop = win2.document.getElementById('viewer-container').scrollTop;
+                };
+            } catch(e) {}
+        }
+        setInterval(sync, 1000);
+    </script>
+</body>
+</html>

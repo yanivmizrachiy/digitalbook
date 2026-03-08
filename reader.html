@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Sovereign Reader v46</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <style>
+        body { margin: 0; background: #0f172a; color: white; font-family: sans-serif; overflow: hidden; }
+        .toolbar { height: 60px; background: rgba(30, 41, 59, 0.9); display: flex; align-items: center; padding: 0 20px; gap: 15px; border-bottom: 1px solid #334155; }
+        .nav-button { background: #334155; border: none; color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .night-btn { background: #4f46e5; }
+        #viewer-container { height: calc(100vh - 60px); overflow: auto; display: flex; justify-content: center; padding: 20px; transition: 0.3s; }
+        canvas { box-shadow: 0 0 50px rgba(0,0,0,0.5); margin-bottom: 20px; transition: filter 0.3s; }
+        .dark-pdf { filter: invert(0.9) hue-rotate(180deg); }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <button class="nav-button" onclick="location.href='index.html'">🔙 חזרה</button>
+        <button class="nav-button night-btn" onclick="toggleNight()">🌙 מצב לילה</button>
+        <button class="nav-button" onclick="window.print()">🖨️ הדפסה</button>
+        <span id="file-name" style="margin-right: auto; opacity: 0.7;"></span>
+    </div>
+    <div id="viewer-container"><div id="pdf-viewer"></div></div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const fileName = urlParams.get('file');
+        document.getElementById('file-name').textContent = fileName.split('/').pop();
+        
+        let pdfDoc = null, scale = 1.5;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+        async function renderPDF() {
+            pdfDoc = await pdfjsLib.getDocument(fileName).promise;
+            const container = document.getElementById('pdf-viewer');
+            container.innerHTML = '';
+            for (let i = 1; i <= pdfDoc.numPages; i++) {
+                const page = await pdfDoc.getPage(i);
+                const viewport = page.getViewport({ scale });
+                const canvas = document.createElement('canvas');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                container.appendChild(canvas);
+                await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+            }
+        }
+        function toggleNight() {
+            document.querySelectorAll('canvas').forEach(c => c.classList.toggle('dark-pdf'));
+            document.getElementById('viewer-container').style.background = 
+                document.getElementById('viewer-container').style.background === 'rgb(255, 255, 255)' ? '#0f172a' : '#0f172a';
+        }
+        renderPDF();
+    </script>
+</body>
+</html>
