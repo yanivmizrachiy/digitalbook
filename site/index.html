@@ -1,97 +1,176 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigitalBook | Sovereign v45</title>
+    <title>DigitalBook | Sovereign Command</title>
+    <link rel="manifest" href="manifest.json">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         body { background: #020408; color: #f8fafc; font-family: 'Assistant', sans-serif; transition: 0.5s; overflow-x: hidden; }
         #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; }
-        .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.05); }
-        .neon-glow:hover { box-shadow: 0 0 25px rgba(99, 102, 241, 0.4); border-color: #6366f1; }
+        .glass { background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.05); }
+        .glass-sticky { background: rgba(2, 4, 8, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(99,102,241,0.2); }
+        .neon-glow:hover { box-shadow: 0 0 25px rgba(99, 102, 241, 0.4); border-color: #6366f1; transform: translateY(-3px); }
         .selected-card { border: 2px solid #6366f1 !important; box-shadow: 0 0 30px rgba(99, 102, 241, 0.6); transform: scale(0.98); }
-        .diff-קל { color: #4ade80; background: rgba(74, 222, 128, 0.1); border: 1px solid rgba(74, 222, 128, 0.3); }
-        .diff-בינוני { color: #facc15; background: rgba(250, 204, 21, 0.1); border: 1px solid rgba(250, 204, 21, 0.3); }
-        .diff-מאתגר { color: #f87171; background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.3); }
-        .stealth-mode .difficulty-badge, .stealth-mode .page-count { display: none !important; }
+        .diff-קל { color: #4ade80; } .diff-בינוני { color: #facc15; } .diff-מאתגר { color: #f87171; }
+        .list-row { display: grid; grid-template-columns: 2fr 1fr 1fr 0.5fr 1fr; align-items: center; padding: 12px 24px; border-radius: 12px; margin-bottom: 8px; font-size: 14px; }
+        .list-row:hover { background: rgba(99, 102, 241, 0.1); border-color: #6366f1; }
+        .stealth-mode .difficulty-badge, .stealth-mode .page-count, .stealth-mode .analytics-row { display: none !important; }
+        
+        /* Tactical Buttons */
+        .btn-sovereign { background: linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(79,70,229,0.05) 100%); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; }
+        .btn-sovereign:hover { background: linear-gradient(135deg, rgba(99,102,241,0.3) 0%, rgba(79,70,229,0.15) 100%); border-color: rgba(99,102,241,0.5); box-shadow: 0 0 20px rgba(99,102,241,0.3), inset 0 1px 0 rgba(255,255,255,0.2); transform: translateY(-2px); color: #fff; }
+        .btn-sovereign:active { transform: translateY(1px) scale(0.95); box-shadow: 0 0 10px rgba(99,102,241,0.2); }
+        .btn-primary { background: rgba(99, 102, 241, 0.8); border-color: #818cf8; }
+        .btn-primary:hover { background: rgba(99, 102, 241, 1); box-shadow: 0 0 25px rgba(99,102,241,0.6); }
+
+        @keyframes cascade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-item { animation: cascade 0.5s ease-out forwards; opacity: 0; }
     </style>
 </head>
-<body class="p-6 md:p-12">
+<body class="pb-12">
     <div id="particles-js"></div>
-    <div class="max-w-7xl mx-auto relative">
-        <header class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
-            <h1 class="text-6xl font-black italic tracking-tighter cursor-pointer" onclick="location.reload()">DIGITAL<span class="text-indigo-500">BOOK</span></h1>
-            <div class="flex gap-2 flex-wrap justify-center glass p-2 rounded-2xl">
-                <button id="compare-btn" onclick="toggleCompareMode()" class="p-3 rounded-xl hover:bg-indigo-500/20" title="השוואת קבצים (Shift+Click)">⚖️</button>
-                <button onclick="toggleStealth()" class="p-3 rounded-xl hover:bg-indigo-500/20" title="מצב סטודנט">🕶️</button>
-                <button onclick="sortData('date')" class="px-5 py-2 rounded-xl text-[10px] font-bold">🕒 חדש</button>
-                <input type="text" id="search" placeholder="חפש חומר..." class="bg-white/5 p-3 rounded-xl w-48 outline-none text-sm focus:ring-2 focus:ring-indigo-500">
-            </div>
-        </header>
 
+    <div class="sticky top-0 z-50 glass-sticky px-6 py-4 md:px-12 mb-8 shadow-lg">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-4xl font-black italic tracking-tighter cursor-pointer text-white" onclick="location.reload()">DIGITAL<span class="text-indigo-500">BOOK</span></h1>
+                <h2 id="greeting" class="text-sm font-medium text-indigo-300 tracking-wide mt-1"></h2>
+            </div>
+            <div class="flex gap-3 flex-wrap justify-center items-center">
+                <button onclick="toggleView()" class="btn-sovereign p-3 rounded-xl" title="החלף תצוגה (רשימה/רשת)">📑 <span class="hidden md:inline text-xs font-bold opacity-80">תצוגה</span></button>
+                <button id="compare-btn" onclick="toggleCompareMode()" class="btn-sovereign p-3 rounded-xl" title="מצב השוואה (Shift+Click)">⚖️ <span class="hidden md:inline text-xs font-bold opacity-80">השוואה</span></button>
+                <button onclick="toggleStealth()" class="btn-sovereign p-3 rounded-xl" title="מצב סטודנט (הסתרת נתונים)">🕶️ <span class="hidden md:inline text-xs font-bold opacity-80">סטודנט</span></button>
+                <input type="text" id="search" placeholder="חיפוש חומר..." class="bg-white/5 border border-white/10 p-3 rounded-xl w-48 outline-none text-sm focus:ring-2 focus:ring-indigo-500 transition-all text-white placeholder-gray-400 shadow-inner">
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-12 relative">
+        <div class="analytics-row grid grid-cols-3 gap-4 mb-10">
+            <div class="glass p-5 rounded-3xl text-center relative overflow-hidden group">
+                <div class="text-4xl font-black text-white mb-1" id="stat-total">0</div>
+                <div class="text-xs font-bold text-indigo-400 uppercase tracking-widest">סה"כ נכסים</div>
+            </div>
+            <div class="glass p-5 rounded-3xl text-center relative overflow-hidden group">
+                <div class="text-4xl font-black text-white mb-1" id="stat-alg">0</div>
+                <div class="text-xs font-bold text-emerald-400 uppercase tracking-widest">אלגברה</div>
+            </div>
+            <div class="glass p-5 rounded-3xl text-center relative overflow-hidden group">
+                <div class="text-4xl font-black text-white mb-1" id="stat-geo">0</div>
+                <div class="text-xs font-bold text-amber-400 uppercase tracking-widest">גיאומטריה</div>
+            </div>
+        </div>
+
+        <div class="flex gap-3 mb-10 overflow-x-auto pb-4 no-scrollbar p-2 max-w-4xl mx-auto justify-start md:justify-center">
+            <button onclick="sortData('date')" class="btn-sovereign btn-primary px-6 py-2.5 rounded-full text-xs font-bold text-white">🕒 הכי חדש</button>
+            <div class="w-px h-6 bg-white/20 self-center mx-1"></div>
+            <button onclick="render(allData)" class="btn-sovereign px-6 py-2.5 rounded-full text-xs font-bold text-gray-300">הכל</button>
+            <button onclick="filterByGrade('ז')" class="btn-sovereign px-6 py-2.5 rounded-full text-xs font-bold text-emerald-400">שכבת ז'</button>
+            <button onclick="filterByGrade('ח')" class="btn-sovereign px-6 py-2.5 rounded-full text-xs font-bold text-emerald-400">שכבת ח'</button>
+            <button onclick="filterByGrade('ט')" class="btn-sovereign px-6 py-2.5 rounded-full text-xs font-bold text-emerald-400">שכבת ט'</button>
+        </div>
+
+        <div id="grid-header" class="hidden list-row glass font-bold mb-4 opacity-60">
+            <div>שם החוברת / דף העבודה</div><div>נושא הליבה</div><div>שכבת גיל</div><div>היקף</div><div>רמת אתגר</div>
+        </div>
         <div id="grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8"></div>
     </div>
 
     <script>
-        particlesJS('particles-js', { "particles": { "number": { "value": 40 }, "color": { "value": "#6366f1" }, "opacity": { "value": 0.2 }, "move": { "enable": true, "speed": 1 } } });
+        const h = new Date().getHours();
+        let g = 'לילה טוב';
+        if(h >= 5 && h < 12) g = 'בוקר טוב';
+        else if(h >= 12 && h < 17) g = 'צהריים טובים';
+        else if(h >= 17 && h < 22) g = 'ערב טוב';
+        document.getElementById('greeting').innerText = g + ', יניב.';
+
+        particlesJS('particles-js', { "particles": { "number": { "value": 30 }, "color": { "value": "#6366f1" }, "opacity": { "value": 0.15 }, "size": { "value": 2 }, "move": { "enable": true, "speed": 0.8 } } });
         
         let allData = [];
         let selectedForCompare = [];
+        let currentView = 'grid';
 
         async function load() {
-            const r = await fetch('generated/chapters.json?v=' + Date.now());
-            const d = await r.json();
-            allData = d.items;
+            try {
+                const r = await fetch('generated/chapters.json?v=' + Date.now());
+                const d = await r.json();
+                allData = d.items || [];
+                document.getElementById('stat-total').innerText = allData.length;
+                document.getElementById('stat-alg').innerText = allData.filter(i => i.subject === 'אלגברה').length;
+                document.getElementById('stat-geo').innerText = allData.filter(i => i.subject === 'גיאומטריה').length;
+                sortData('date');
+            } catch (e) { console.error("Data load error:", e); }
+        }
+
+        window.toggleView = function() {
+            currentView = currentView === 'grid' ? 'list' : 'grid';
+            document.getElementById('grid-header').classList.toggle('hidden', currentView === 'grid');
+            document.getElementById('grid').className = currentView === 'grid' ? "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8" : "flex flex-col";
             render(allData);
-        }
-
-        function handleCardClick(url, event) {
-            if (event.shiftKey) {
-                event.preventDefault();
-                if (selectedForCompare.includes(url)) {
-                    selectedForCompare = selectedForCompare.filter(u => u !== url);
-                } else if (selectedForCompare.length < 2) {
-                    selectedForCompare.push(url);
-                }
-                render(allData);
-            } else {
-                window.location.href = 'reader.html?file=' + url;
-            }
-        }
-
-        function toggleCompareMode() {
-            if (selectedForCompare.length === 2) {
-                window.location.href = compare.html?file1=\&file2=\;
-            } else {
-                alert('בחר 2 קבצים באמצעות Shift + לחיצה');
-            }
-        }
-
-        function render(items) {
-            const grid = document.getElementById('grid');
-            grid.innerHTML = items.map(i => {
-                const isSelected = selectedForCompare.includes(i.url);
-                return 
-                <div class="glass p-8 rounded-3xl cursor-pointer neon-glow transition-all group \" 
-                     onclick="handleCardClick('\', event)">
-                    <div class="text-[11px] font-bold mb-4 flex justify-between items-center opacity-70">
-                        <span>\ | \</span>
-                        <span class="page-count">📄 \</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-6">\</h3>
-                    <div class="difficulty-badge inline-block text-[10px] font-black px-4 py-1.5 rounded-full diff-\">\</div>
-                </div>
-            }).join('');
-        }
-
-        function toggleStealth() { document.body.classList.toggle('stealth-mode'); }
-        document.getElementById('search').oninput = (e) => {
-            const v = e.target.value.toLowerCase();
-            render(allData.filter(i => i.title.toLowerCase().includes(v)));
         };
 
+        window.render = function(items) {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = items.map((i, index) => {
+                const isSelected = selectedForCompare.includes(i.url);
+                const delay = (index * 0.05).toFixed(2); 
+                
+                if (currentView === 'grid') {
+                    const isNew = (new Date() - new Date(i.date)) / (1000 * 60 * 60 * 24) < 7;
+                    const newTag = isNew ? `<span class="bg-indigo-500 text-white text-[9px] px-2 py-0.5 rounded mr-2">חדש</span>` : '';
+                    const tagsHtml = (i.tags || []).map(t => `<span onclick="event.stopPropagation(); filterByTag('${t}')" class="bg-white/5 hover:bg-indigo-500/40 text-[10px] px-2.5 py-1 rounded-md ml-1.5 opacity-80 cursor-pointer">#${t}</span>`).join('');
+                    
+                    return `
+                        <div class="glass p-8 rounded-[2rem] cursor-pointer neon-glow transition-all group animate-item ${isSelected ? 'selected-card' : ''}" style="animation-delay: ${delay}s" onclick="handleCardClick('${i.url}', event)">
+                            <div class="text-[11px] font-bold mb-5 flex justify-between items-center opacity-60">
+                                <span class="tracking-wide text-indigo-200">${i.subject} | ${i.level}</span>
+                                <span class="page-count bg-white/10 px-2 py-1 rounded-lg">📄 ${i.pages}</span>
+                            </div>
+                            <h3 class="text-2xl font-black mb-6 leading-tight group-hover:text-indigo-400 transition-colors">${newTag}${i.title}</h3>
+                            <div class="flex flex-wrap mb-6">${tagsHtml}</div>
+                            <div class="difficulty-badge inline-block text-[11px] font-black px-4 py-1.5 rounded-xl diff-${i.difficulty}">${i.difficulty}</div>
+                        </div>`;
+                } else {
+                    return `
+                        <div class="glass list-row cursor-pointer transition-all animate-item ${isSelected ? 'selected-card' : ''}" style="animation-delay: ${delay}s" onclick="handleCardClick('${i.url}', event)">
+                            <div class="font-bold text-lg">${i.title}</div>
+                            <div class="opacity-70 text-sm text-indigo-200">${i.subject}</div>
+                            <div class="opacity-70 text-sm">${i.level}</div>
+                            <div class="page-count opacity-70 text-sm">${i.pages} דפים</div>
+                            <div class="difficulty-badge font-black diff-${i.difficulty}">${i.difficulty}</div>
+                        </div>`;
+                }
+            }).join('');
+        };
+
+        window.handleCardClick = function(url, event) {
+            if (event.shiftKey) {
+                event.preventDefault();
+                if (selectedForCompare.includes(url)) selectedForCompare = selectedForCompare.filter(u => u !== url);
+                else if (selectedForCompare.length < 2) selectedForCompare.push(url);
+                render(allData);
+            } else window.location.href = 'reader.html?file=' + url;
+        };
+
+        window.toggleCompareMode = function() {
+            if (selectedForCompare.length === 2) window.location.href = 'compare.html?file1=' + selectedForCompare[0] + '&file2=' + selectedForCompare[1];
+            else alert('בחר 2 קבצים עם Shift + לחיצה כדי להשוות.');
+        };
+
+        window.toggleStealth = function() { document.body.classList.toggle('stealth-mode'); };
+        window.sortData = function(key) { render([...allData].sort((a, b) => b[key] - a[key])); };
+        window.filterByGrade = function(g) { render(allData.filter(i => i.level.includes(g))); };
+        window.filterByTag = function(t) { render(allData.filter(x => x.tags && x.tags.includes(t))); };
+
+        document.getElementById('search').oninput = (e) => {
+            const v = e.target.value.toLowerCase();
+            render(allData.filter(i => i.title.toLowerCase().includes(v) || (i.tags && i.tags.some(t => t.toLowerCase().includes(v)))));
+        };
+
+        if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
         load();
     </script>
 </body>
