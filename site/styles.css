@@ -219,3 +219,42 @@
   }
 }
 
+
+/* DigitalBook embedded QA flow */
+.qa-entry-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 14px 0;
+}
+
+.qa-entry-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: #7c3aed;
+  color: #fff !important;
+  font-weight: 800;
+  border-radius: 12px;
+  padding: 10px 16px;
+}
+
+.project-status-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 16px auto 8px auto;
+  padding: 10px 14px;
+  width: fit-content;
+  max-width: 95%;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-weight: 700;
+}
+
+.qa-back-btn {
+  background: #7c3aed !important;
+}
+
