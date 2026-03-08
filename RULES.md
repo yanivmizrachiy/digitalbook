@@ -51,21 +51,27 @@ https://yanivmizrachiy.github.io/digitalbook/
 
 
 ## מה בוצע ואומת ✅
-- ריפו GitHub פעיל
-- אתר GitHub Pages פעיל
-- root/index.html נבדק מקומית
-- root/reader.html נבדק מקומית
-- root/compare.html נבדק מקומית
-- generated/chapters.json נבנה מחדש מתוך PDF אמיתיים
-- מספר קבצי PDF המחוברים כרגע לספר: 0
-- RULES.md מסונכרן כמקור אמת
-- נוצר דוח מצב אמיתי: STATE/latest_health_report.md
+- ריפו GitHub פעיל ומסונכרן
+- GitHub Pages חי
+- מנוע הבית החי זוהה ואומת: site/index.html + site/catalog_v2.js
+- reader חי ואומת
+- compare חי ואומת ברמת נתיבי קלט
+- הקטלוג החי מסונכרן עם site/pdf
+- קיימים 15 קבצים חיים בקטלוג הפעיל
+- DOWNLOAD_OK_COUNT = 15
+- DOWNLOAD_MISS_COUNT = 0
+- COMPARE_READY = YES
+- הוטמע reader multiview שלב א: 1 / 2 / 3 עמודים + הדפסה + fit-to-width
+- הוטמע reader multiview שלב ב: גלילה רציפה + שיפור מסכים רחבים
+- הוטמע reader UX שלב ג: שמירת מצב + קיצורי מקלדת
+- נשמרו דוחות מצב ב-STATE/
+
 
 ## מה נשאר לעשות
-1. לבדוק ידנית בדפדפן שמצבי 1 / 2 / 3 נשמרים בין רענונים
-2. לבדוק ידנית שקיצורי המקלדת עובדים נוח
-3. לבדוק ידנית שמצב גלילה רציפה נשמר
-4. להחליט אם צריך שלב נוסף או שהקורא הגיע למצב סופי
+1. לבצע בדיקה ידנית בדפדפן לפי STATE/manual_qa_checklist.md
+2. לאשר שהחוויה נוחה באמת במצבי 1 / 2 / 3 / גלילה רציפה
+3. לאשר שהדפסה איכותית
+4. רק אחרי בדיקה ידנית להחליט אם בכלל צריך שלב נוסף
 
 
 ## מצב מנוע חי אמיתי
@@ -129,11 +135,11 @@ https://yanivmizrachiy.github.io/digitalbook/
 
 
 ## מצב נעילה סופי
-- עודכן: 2026-03-08 23:24:48
-- פיתוח המנוע החי הושלם וננעל
-- נשמר דוח קבלה: STATE/final_acceptance_status.md
-- נותר רק אימות ידני בדפדפן למצבי 1 / 2 / 3 / גלילה רציפה / הדפסה
-- אין להוסיף מנוע נוסף או לעבוד כפול לפני אימות ידני
+- עודכן: 2026-03-08 23:29:04
+- פיתוח המערכת החיה הושלם
+- המנוע החי הנוכחי ננעל כמנוע אמת
+- אין להוסיף מנוע נוסף או לעבוד כפול לפני צורך אמיתי
+- נשמר checklist ידני: STATE/manual_qa_checklist.md
 
 
 ## מצב reader UX - שלב ג
@@ -143,6 +149,7 @@ https://yanivmizrachiy.github.io/digitalbook/
 - נשמר מצב גלילה רציפה ב-localStorage
 - נוספו קיצורי מקלדת ל-reader
 - דוח נשמר: STATE/reader_phase_c_report.md
+
 
 
 ## מצב מערכת אוטומטי
