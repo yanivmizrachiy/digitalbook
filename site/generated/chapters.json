@@ -1,154 +1,158 @@
-{
-  "items": [
-    {
-      "title": "2026_03_06_110241(1)",
-      "url": "pdf/2026_03_06_110241(1).pdf",
-      "level": "כללי",
-      "subject": "כללי",
-      "tags": [],
-      "pages": 13,
-      "difficulty": "בינוני",
-      "date": 1772789378514.7954
-    },
-    {
-      "title": "maagar_z",
-      "url": "pdf/maagar_z.pdf",
-      "level": "כללי",
-      "subject": "כללי",
-      "tags": [],
-      "pages": 92,
-      "difficulty": "בינוני",
-      "date": 1770845834315.2693
-    },
-    {
-      "title": "rebuilt_page1",
-      "url": "pdf/rebuilt_page1.pdf",
-      "level": "כללי",
-      "subject": "כללי",
-      "tags": [],
-      "pages": 1,
-      "difficulty": "בינוני",
-      "date": 1770086513275.727
-    },
-    {
-      "title": "rebuilt_pages_1_2",
-      "url": "pdf/rebuilt_pages_1_2.pdf",
-      "level": "כללי",
-      "subject": "כללי",
-      "tags": [],
-      "pages": 2,
-      "difficulty": "בינוני",
-      "date": 1770091657219.731
-    },
-    {
-      "title": "דף פעיל פורים (1)",
-      "url": "pdf/דף פעיל פורים (1).pdf",
-      "level": "כללי",
-      "subject": "כללי",
-      "tags": [],
-      "pages": 1,
-      "difficulty": "בינוני",
-      "date": 1772546748640.1843
-    },
-    {
-      "title": "דף פעיל פורים",
-      "url": "pdf/דף פעיל פורים.pdf",
-      "level": "כללי",
-      "subject": "כללי",
-      "tags": [],
-      "pages": 1,
-      "difficulty": "בינוני",
-      "date": 1772456287484.1526
-    },
-    {
-      "title": "חידון פתגמים וביטויים משפחתי (1) (1)",
-      "url": "pdf/חידון פתגמים וביטויים משפחתי (1) (1).pdf",
-      "level": "כללי",
-      "subject": "כללי",
-      "tags": [],
-      "pages": 28,
-      "difficulty": "בינוני",
-      "date": 1770220198319.05
-    },
-    {
-      "title": "חידון פתגמים וביטויים משפחתי (1) (2)",
-      "url": "pdf/חידון פתגמים וביטויים משפחתי (1) (2).pdf",
-      "level": "כללי",
-      "subject": "כללי",
-      "tags": [],
-      "pages": 28,
-      "difficulty": "בינוני",
-      "date": 1770220236970.159
-    },
-    {
-      "title": "חידון פתגמים וביטויים משפחתי (1)",
-      "url": "pdf/חידון פתגמים וביטויים משפחתי (1).pdf",
-      "level": "כללי",
-      "subject": "כללי",
-      "tags": [],
-      "pages": 28,
-      "difficulty": "בינוני",
-      "date": 1770220193533.277
-    },
-    {
-      "title": "יחס-פרופ-קנה מידה-לתלמידים 1-רמה ב- 8-3-0107-2013-2014",
-      "url": "pdf/יחס-פרופ-קנה מידה-לתלמידים 1-רמה ב- 8-3-0107-2013-2014.pdf",
-      "level": "כללי",
-      "subject": "גיאומטריה",
-      "tags": [],
-      "pages": 7,
-      "difficulty": "בינוני",
-      "date": 1771448266353.3743
-    },
-    {
-      "title": "כיתה ח - יחס פרופורציה וקנה מידה - דפי סיכום לתלמידים 1 - רמה א - טופס 8-3-0106-2013-2014",
-      "url": "pdf/כיתה ח - יחס פרופורציה וקנה מידה - דפי סיכום לתלמידים 1 - רמה א - טופס 8-3-0106-2013-2014.pdf",
-      "level": "כללי",
-      "subject": "גיאומטריה",
-      "tags": [],
-      "pages": 9,
-      "difficulty": "בינוני",
-      "date": 1771448072467.9514
-    },
-    {
-      "title": "לוח פעיל לפורים 1 (1)",
-      "url": "pdf/לוח פעיל לפורים 1 (1).pdf",
-      "level": "כללי",
-      "subject": "כללי",
-      "tags": [],
-      "pages": 1,
-      "difficulty": "בינוני",
-      "date": 1772546801720.9578
-    },
-    {
-      "title": "לוח פעיל לפורים 1",
-      "url": "pdf/לוח פעיל לפורים 1.pdf",
-      "level": "כללי",
-      "subject": "כללי",
-      "tags": [],
-      "pages": 1,
-      "difficulty": "בינוני",
-      "date": 1772455351919.3665
-    },
-    {
-      "title": "מאגר ז",
-      "url": "pdf/מאגר ז.pdf",
-      "level": "כללי",
-      "subject": "כללי",
-      "tags": [],
-      "pages": 92,
-      "difficulty": "בינוני",
-      "date": 1770845834315.2693
-    },
-    {
-      "title": "מטלת_סיכום_RAY",
-      "url": "pdf/מטלת_סיכום_RAY.pdf",
-      "level": "כללי",
-      "subject": "כללי",
-      "tags": [],
-      "pages": 1,
-      "difficulty": "בינוני",
-      "date": 1772441614989.3503
-    }
-  ]
-}
+[
+  {
+    "title": "2026 03 06 110241(1)",
+    "url": "pdf/2026_03_06_110241(1).pdf",
+    "thumbnail": "",
+    "pages": 0,
+    "category": "",
+    "grade": "",
+    "subject": "",
+    "tags": []
+  },
+  {
+    "title": "maagar z",
+    "url": "pdf/maagar_z.pdf",
+    "thumbnail": "",
+    "pages": 0,
+    "category": "",
+    "grade": "",
+    "subject": "",
+    "tags": [
+      "ז"
+    ]
+  },
+  {
+    "title": "rebuilt page1",
+    "url": "pdf/rebuilt_page1.pdf",
+    "thumbnail": "",
+    "pages": 0,
+    "category": "",
+    "grade": "",
+    "subject": "",
+    "tags": [
+      "ט"
+    ]
+  },
+  {
+    "title": "rebuilt pages 1 2",
+    "url": "pdf/rebuilt_pages_1_2.pdf",
+    "thumbnail": "",
+    "pages": 0,
+    "category": "",
+    "grade": "",
+    "subject": "",
+    "tags": [
+      "ט"
+    ]
+  },
+  {
+    "title": "דף פעיל פורים (1)",
+    "url": "pdf/דף פעיל פורים (1).pdf",
+    "thumbnail": "",
+    "pages": 0,
+    "category": "",
+    "grade": "",
+    "subject": "",
+    "tags": []
+  },
+  {
+    "title": "דף פעיל פורים",
+    "url": "pdf/דף פעיל פורים.pdf",
+    "thumbnail": "",
+    "pages": 0,
+    "category": "",
+    "grade": "",
+    "subject": "",
+    "tags": []
+  },
+  {
+    "title": "חידון פתגמים וביטויים משפחתי (1) (1)",
+    "url": "pdf/חידון פתגמים וביטויים משפחתי (1) (1).pdf",
+    "thumbnail": "",
+    "pages": 0,
+    "category": "",
+    "grade": "",
+    "subject": "",
+    "tags": []
+  },
+  {
+    "title": "חידון פתגמים וביטויים משפחתי (1) (2)",
+    "url": "pdf/חידון פתגמים וביטויים משפחתי (1) (2).pdf",
+    "thumbnail": "",
+    "pages": 0,
+    "category": "",
+    "grade": "",
+    "subject": "",
+    "tags": []
+  },
+  {
+    "title": "חידון פתגמים וביטויים משפחתי (1)",
+    "url": "pdf/חידון פתגמים וביטויים משפחתי (1).pdf",
+    "thumbnail": "",
+    "pages": 0,
+    "category": "",
+    "grade": "",
+    "subject": "",
+    "tags": []
+  },
+  {
+    "title": "יחס-פרופ-קנה מידה-לתלמידים 1-רמה ב- 8-3-0107-2013-2014",
+    "url": "pdf/יחס-פרופ-קנה מידה-לתלמידים 1-רמה ב- 8-3-0107-2013-2014.pdf",
+    "thumbnail": "",
+    "pages": 0,
+    "category": "",
+    "grade": "",
+    "subject": "",
+    "tags": []
+  },
+  {
+    "title": "כיתה ח - יחס פרופורציה וקנה מידה - דפי סיכום לתלמידים 1 - רמה א - טופס 8-3-0106-2013-2014",
+    "url": "pdf/כיתה ח - יחס פרופורציה וקנה מידה - דפי סיכום לתלמידים 1 - רמה א - טופס 8-3-0106-2013-2014.pdf",
+    "thumbnail": "",
+    "pages": 0,
+    "category": "",
+    "grade": "",
+    "subject": "",
+    "tags": []
+  },
+  {
+    "title": "לוח פעיל לפורים 1 (1)",
+    "url": "pdf/לוח פעיל לפורים 1 (1).pdf",
+    "thumbnail": "",
+    "pages": 0,
+    "category": "",
+    "grade": "",
+    "subject": "",
+    "tags": []
+  },
+  {
+    "title": "לוח פעיל לפורים 1",
+    "url": "pdf/לוח פעיל לפורים 1.pdf",
+    "thumbnail": "",
+    "pages": 0,
+    "category": "",
+    "grade": "",
+    "subject": "",
+    "tags": []
+  },
+  {
+    "title": "מאגר ז",
+    "url": "pdf/מאגר ז.pdf",
+    "thumbnail": "",
+    "pages": 0,
+    "category": "",
+    "grade": "",
+    "subject": "",
+    "tags": []
+  },
+  {
+    "title": "מטלת סיכום RAY",
+    "url": "pdf/מטלת_סיכום_RAY.pdf",
+    "thumbnail": "",
+    "pages": 0,
+    "category": "",
+    "grade": "",
+    "subject": "",
+    "tags": []
+  }
+]

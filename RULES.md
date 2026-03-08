@@ -19,8 +19,17 @@ https://yanivmizrachiy.github.io/digitalbook/
 ## מצב
 המערכת חיה ומסונכרנת עם GitHub.
 
+## שדרוג V3 — Auto Book Engine
+- נוסף scripts/rebuild_book.py
+- נוצר מחדש site/generated/chapters.json מתוך site/pdf
+- מספר קבצי PDF שזוהו: 15
+- מספר thumbnails שזוהו: 0
+- המנוע משתמש בנתיבים אמיתיים מתוך site/
+- אין דמו: המידע נבנה אוטומטית מהקבצים הקיימים
+
+
 ## מצב מערכת אוטומטי
-- עודכן: 2026-03-08 09:07:36
+- עודכן: 2026-03-08 09:10:19
 - מספר PDFs: 15
 - root/index.html: yes
 - root/reader.html: yes
