@@ -68,8 +68,9 @@ https://yanivmizrachiy.github.io/digitalbook/
 
 
 
+
 ## מצב מערכת אוטומטי
-- עודכן: 2026-03-08 12:56:48
+- עודכן: 2026-03-08 12:58:17
 - מספר PDFs: 15
 - root/index.html: yes
 - root/reader.html: yes
