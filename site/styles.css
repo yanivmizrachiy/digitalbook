@@ -190,3 +190,32 @@
   }
 }
 
+
+/* DigitalBook multiview phase B */
+.reader-multiview-viewport.mv-scroll-mode {
+  display: flex !important;
+  flex-direction: column;
+  gap: 18px;
+  grid-template-columns: none !important;
+}
+
+.reader-multiview-viewport.mv-scroll-mode .reader-multiview-card {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 1400px) {
+  .reader-multiview-root {
+    padding: 18px;
+  }
+
+  .reader-multiview-viewport:not(.mv-scroll-mode) {
+    gap: 18px;
+  }
+
+  .reader-multiview-card {
+    padding: 14px;
+  }
+}
+

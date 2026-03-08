@@ -11,7 +11,8 @@
     mode: 1,
     startPage: 1,
     scale: 1.2,
-    fitWidth: true
+    fitWidth: true,
+    scrollMode: false
   };
 
   function qs(sel, root = document) {
@@ -40,6 +41,7 @@
           <button type="button" id="mvPrevBtn" class="reader-mv-btn">⬅ קודם</button>
           <button type="button" id="mvNextBtn" class="reader-mv-btn">הבא ➡</button>
           <button type="button" id="mvFitBtn" class="reader-mv-btn">התאמה לרוחב</button>
+          <button type="button" id="mvScrollModeBtn" class="reader-mv-btn">גלילה רציפה</button>
           <button type="button" id="mvPrintBtn" class="reader-mv-btn">🖨 הדפסה</button>
         </div>
         <div class="reader-multiview-meta">
@@ -76,7 +78,8 @@
     }
     if (info && state.pdf) {
       const end = Math.min(state.startPage + state.mode - 1, state.pdf.numPages);
-      info.textContent = `מצב תצוגה: ${state.mode} | עמודים ${state.startPage}-${end} מתוך ${state.pdf.numPages}`;
+      const modeLabel = state.scrollMode ? 'גלילה רציפה' : `תצוגת ${state.mode}`;
+      info.textContent = `${modeLabel} | עמודים ${state.startPage}-${end} מתוך ${state.pdf.numPages}`;
     }
   }
 
@@ -116,11 +119,20 @@
     if (!viewport || !state.pdf) return;
 
     viewport.innerHTML = "";
-    viewport.style.gridTemplateColumns = `repeat(${state.mode}, minmax(0, 1fr))`;
 
-    const last = Math.min(state.startPage + state.mode - 1, state.pdf.numPages);
-    for (let p = state.startPage; p <= last; p++) {
-      await renderPageToCanvas(p, viewport);
+    if (state.scrollMode) {
+      viewport.classList.add("mv-scroll-mode");
+      viewport.style.gridTemplateColumns = "1fr";
+      for (let p = 1; p <= state.pdf.numPages; p++) {
+        await renderPageToCanvas(p, viewport);
+      }
+    } else {
+      viewport.classList.remove("mv-scroll-mode");
+      viewport.style.gridTemplateColumns = `repeat(${state.mode}, minmax(0, 1fr))`;
+      const last = Math.min(state.startPage + state.mode - 1, state.pdf.numPages);
+      for (let p = state.startPage; p <= last; p++) {
+        await renderPageToCanvas(p, viewport);
+      }
     }
 
     updateToolbar();
@@ -140,6 +152,7 @@
     const prev = qs("#mvPrevBtn");
     const next = qs("#mvNextBtn");
     const fit = qs("#mvFitBtn");
+    const scrollBtn = qs("#mvScrollModeBtn");
     const printBtn = qs("#mvPrintBtn");
 
     if (prev) {
@@ -164,6 +177,15 @@
         await renderCurrentSpread();
       });
       fit.classList.toggle("active", state.fitWidth);
+    }
+
+    if (scrollBtn) {
+      scrollBtn.addEventListener("click", async () => {
+        state.scrollMode = !state.scrollMode;
+        scrollBtn.classList.toggle("active", state.scrollMode);
+        await renderCurrentSpread();
+      });
+      scrollBtn.classList.toggle("active", state.scrollMode);
     }
 
     if (printBtn) {
