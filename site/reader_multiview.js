@@ -15,19 +15,26 @@
   }
   const params = new URLSearchParams(window.location.search);
   const file = params.get("file");
+  const modeParam = params.get("mode");
+  const scrollParam = params.get("scroll");
+  const fitParam = params.get("fit");
   if (!file || !window.pdfjsLib) return;
 
   window.pdfjsLib.GlobalWorkerOptions.workerSrc =
     "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.js";
 
   const saved = loadSavedState();
+  const initialMode = [1,2,3].includes(Number(modeParam)) ? Number(modeParam) : (Number(saved.mode) || 1);
+  const initialScroll = scrollParam === "1" ? true : (scrollParam === "0" ? false : (typeof saved.scrollMode === "boolean" ? saved.scrollMode : false));
+  const initialFit = fitParam === "1" ? true : (fitParam == "0" ? false : (typeof saved.fitWidth === "boolean" ? saved.fitWidth : true));
+
   const state = {
     pdf: null,
-    mode: Number(saved.mode) || 1,
+    mode: initialMode,
     startPage: 1,
     scale: 1.2,
-    fitWidth: typeof saved.fitWidth === "boolean" ? saved.fitWidth : true,
-    scrollMode: typeof saved.scrollMode === "boolean" ? saved.scrollMode : false
+    fitWidth: initialFit,
+    scrollMode: initialScroll
   };
 
   function qs(sel, root = document) {
