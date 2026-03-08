@@ -61,3 +61,132 @@
   }
 }
 
+
+/* DigitalBook multiview phase A */
+.reader-multiview-root {
+  margin: 14px 0 18px 0;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.reader-multiview-toolbar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+  margin-bottom: 14px;
+}
+
+.reader-multiview-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.reader-multiview-meta {
+  grid-column: 1 / -1;
+}
+
+.reader-multiview-title {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.reader-multiview-info {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.reader-mv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #1d4ed8;
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 9px 14px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.reader-mv-btn.active {
+  outline: 2px solid rgba(255,255,255,0.65);
+  outline-offset: 1px;
+}
+
+.reader-multiview-viewport {
+  display: grid;
+  gap: 14px;
+  width: 100%;
+  align-items: start;
+}
+
+.reader-multiview-card {
+  background: rgba(255,255,255,0.04);
+  border-radius: 16px;
+  padding: 10px;
+  overflow: auto;
+}
+
+.reader-multiview-page-label {
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.reader-multiview-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+  margin: 0 auto;
+}
+
+.mv-hidden-legacy {
+  display: none !important;
+}
+
+@media (max-width: 1000px) {
+  .reader-multiview-toolbar {
+    grid-template-columns: 1fr;
+  }
+  .reader-multiview-viewport {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media print {
+  .reader-multiview-root,
+  .reader-top-actions,
+  .compare-top-bar,
+  .reader-multiview-toolbar,
+  .reader-mv-btn,
+  .reader-action-btn,
+  .btn,
+  button {
+    display: none !important;
+  }
+
+  .reader-multiview-viewport {
+    display: block !important;
+  }
+
+  .reader-multiview-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border: 0 !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 0 12px 0 !important;
+  }
+
+  .reader-multiview-canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
