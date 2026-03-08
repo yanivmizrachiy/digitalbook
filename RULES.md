@@ -108,8 +108,16 @@
 - נשמר שימוש בנתונים אמיתיים מתוך generated/chapters.json
 
 
+## שדרוג V2.2 — Compare חכם
+- שודרג site/compare.html
+- נוסף Compare V2 עם בחירת שני קבצים אמיתיים
+- נוספה פתיחה צד-לצד דרך reader.html
+- נוספו כפתורי הורדה ופתיחה לכל צד
+- נשמרה התאימות ל-generated/chapters.json
+
+
 ## מצב מערכת אוטומטי
-- עודכן: 2026-03-08 08:59:44
+- עודכן: 2026-03-08 09:02:26
 - מספר PDFs: 15
 - root/index.html: yes
 - root/reader.html: yes
