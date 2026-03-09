@@ -258,3 +258,60 @@
   background: #7c3aed !important;
 }
 
+
+/* DigitalBook mobile reader controls fix */
+@media (max-width: 700px) {
+  .reader-top-actions,
+  .reader-multiview-toolbar,
+  .compare-top-bar {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    align-items: stretch !important;
+    justify-items: stretch !important;
+  }
+
+  .reader-multiview-group,
+  .compare-actions {
+    display: contents !important;
+  }
+
+  .reader-action-btn,
+  .reader-mv-btn,
+  .qa-back-btn,
+  .compare-actions .reader-action-btn {
+    width: 100% !important;
+    min-height: 42px !important;
+    padding: 10px 8px !important;
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+    white-space: normal !important;
+    text-align: center !important;
+    border-radius: 10px !important;
+  }
+
+  .reader-multiview-meta,
+  .compare-title,
+  .project-status-bar {
+    grid-column: 1 / -1 !important;
+  }
+
+  .reader-multiview-title {
+    font-size: 18px !important;
+  }
+
+  .reader-multiview-info {
+    font-size: 13px !important;
+  }
+
+  .compare-title {
+    margin-bottom: 6px !important;
+    text-align: center !important;
+  }
+
+  .project-status-bar {
+    width: 100% !important;
+    border-radius: 14px !important;
+  }
+}
+
