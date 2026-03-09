@@ -68,9 +68,11 @@ https://yanivmizrachiy.github.io/digitalbook/
 
 
 ## מה נשאר לעשות
-1. לבדוק ידנית מהנייד ומהמחשב שסידור הכפתורים נוח באמת
-2. לאשר שה-reader וה-compare מרגישים ברורים יותר
-3. רק אם יישאר כאב UX אמיתי לבצע תיקון נוסף נקודתי
+1. לפתוח qa.html מהנייד
+2. לבדוק חזותית reader
+3. לבדוק חזותית compare
+4. לבדוק הדפסה ידנית
+5. לאשר סיום
 
 
 ## מצב מנוע חי אמיתי
@@ -187,6 +189,13 @@ https://yanivmizrachiy.github.io/digitalbook/
 - שופרו sticky toolbars
 - שופר UX לנייד ולמסכים רחבים
 - נשמר דוח: STATE/deep_buttons_ux_report.md
+
+
+## מצב אימות חי סופי
+- עודכן: 2026-03-09 09:35:12
+- נשמר דוח: STATE/final_live_verify.md
+- בוצעה בדיקת live ל-home / qa / reader / compare / catalog / pdf
+- נשאר רק QA ידני חזותי מהנייד
 
 
 ## מצב מערכת אוטומטי
